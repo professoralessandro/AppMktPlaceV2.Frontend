@@ -1,0 +1,27 @@
+<div style="margin-top: 50px; z-index: 999999999999999;" class="align-items-center flex-column text-center">
+  <div class="modal-header">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <img style="margin-top: -5%; margin-left: 100%;" src="assets/img/icons/alerta.svg" width="150" height="150" alt="Erro">
+        <br>
+      </div>
+    </div>
+  </div>
+  <div class="moda-body">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br>
+        <h4 [innerHTML]='this.label'></h4>
+        <br>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button type="button" class="btn btn-lightning rounded-0 mb-2 mr-2" (click)="message.siFn()">Confirmar</button>
+        <button type="button" class="btn btn-outline-lightning rounded-0 mb-2" (click)="message.noFn()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

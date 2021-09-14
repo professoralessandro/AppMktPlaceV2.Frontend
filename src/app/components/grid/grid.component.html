@@ -1,0 +1,66 @@
+<div class="card-body">
+  <div class="table-responsive-md">
+    <div class="table-responsive-md">
+      <div *ngIf="this.title != ''" class="card-title mb-1 p-3">
+        <h5>{{ this.title }}</h5>
+      </div>
+      <table class="table table-striped" *ngIf="this.gridService.isExistsData">
+        <thead>
+          <tr>
+            <th *ngFor="let item of this.gridService.gridBind.gridTitles" scope="col">
+              <a (click)="this.gridService.sortBy(item.atributteName)" style="color: black;" class="link">{{ item.title }}</a>
+            </th>
+            <th *ngIf="this.gridService.isExistsActions" scope="col">
+              Ações
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of this.gridService.gridBind.gridBodyAttibutes">
+            <td *ngFor="let items1 of item.titles">{{ items1 }}</td>
+            <!-- ACTIONS -->
+            <td *ngIf="this.gridService.isExistsActions">
+              <button *ngFor="let items3 of item.actions"
+                [ngClass]=" items3.title === 'edit'
+                    ? 'btn btn-sm btn-outline-lightning rounded-0 mr-2'
+                    : 'btn btn-sm btn-outline-lightning rounded-0'" (click)="actions(items3)" [disabled]="items3.disabled">
+                <i [ngClass]=" items3.title === 'edit' ? 'far fa-edit' : 'far fa-trash-alt'"></i>
+              </button>
+            </td>
+            <!-- ACTIONS -->
+          </tr>
+        </tbody>
+      </table>
+      <!-- MSG GRID IS EMPITY -->
+      <div class="table-responsive-md" *ngIf="!this.gridService.isExistsData">
+        <div class="card-title mb-1 p-3">
+          <h5>Não existem dados a serem exibidos!</h5>
+        </div>
+      </div>
+      <!-- MSG GRID IS EMPITY -->
+      <!-- PAGINATOR -->
+      <nav aria-label="..." style="float: left;">
+        <ul class="pagination">
+          <li [ngClass]="this.previusPage === 0 ? 'page-item disabled' : 'page-item'">
+            <a class="btn btn-outline-lightning rounded-0 mb-2 page-link" (click)="paginate(this.currentPage - 1, 10)">{{previusLabel}}</a>
+          </li>
+          <li *ngIf="this.previusPage > 0" class="page-item"><a class="btn btn-outline-lightning rounded-0 mb-2 page-link" (click)="paginate(this.currentPage, 10, $event)">{{this.previusPage}}</a></li>
+          <li class="page-item active">
+            <span class="page-link" style="background-color: #5b6582;">
+              {{this.currentPage}}
+            </span>
+          </li>
+          <li class="page-item">
+            <a [ngClass]="!this.gridService.isExistsData ? 'btn btn-outline-lightning rounded-0 mb-2 page-link page-item disabled' : 'btn btn-outline-lightning rounded-0 mb-2 page-link page-item'" (click)="paginate(this.currentPage, 10, $event)">{{this.nextPage}}</a></li>
+          <li class="page-item" [ngClass]="!this.gridService.isExistsData ? 'page-item disabled' : 'page-item'">
+            <a class="btn btn-outline-lightning rounded-0 mb-2 page-link" (click)="paginate(this.currentPage + 1, 10)">{{nextLabel}}</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- PAGINATOR -->
+    </div>
+    <div class="view-source mb-3" style="float: right;">
+      <button  routerLink={{this.gridService.routeRegister}} class="btn btn-lightning rounded-0 mb-2 mr-2"><i class="fa fa-plus"></i> Novo</button>
+    </div>
+  </div>
+</div>

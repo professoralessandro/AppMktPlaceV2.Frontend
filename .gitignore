@@ -1,0 +1,48 @@
+# Created by https:\\www.toptal.com\developers\gitignore\api\angular
+# Edit at https:\\www.toptal.com\developers\gitignore?templates=angular
+
+### Angular ###
+## Angular ##
+# compiled output
+/dist/*
+/tmp/*
+/app/**/*.js
+/app/**/*.js.map
+
+# dependencies
+/node_modules/*
+/bower_components/*
+/node_modules
+/bower_components
+
+# IDEs and editors
+/.idea/*
+/.vscode/*
+/.vs/*
+/.idea
+/.vscode
+/.vs
+
+# misc
+/.sass-cache/*
+/connect.lock/*
+/coverage/*
+/libpeerconnection.log/*
+/npm-debug.*
+/testem.*
+/typings/*
+/demo/*
+/demo
+
+# System Files
+/.DS_Store/
+#/src/environments/environment.*
+#/src/environments/environment.prod.*
+/.editorconfig
+/.dockerignore
+/docker-compose.yml
+/Dockerfile
+/entrypoint.sh
+/src/environments/environment.prod.*
+
+# End of https:\\www.toptal.com\developers\gitignore\api\angular
