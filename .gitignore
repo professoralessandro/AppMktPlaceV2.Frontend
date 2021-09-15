@@ -44,5 +44,6 @@
 /Dockerfile
 /entrypoint.sh
 /src/environments/environment.prod.*
+/deployment.*
 
 # End of https:\\www.toptal.com\developers\gitignore\api\angular
