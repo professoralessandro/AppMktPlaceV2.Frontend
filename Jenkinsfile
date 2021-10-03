@@ -23,13 +23,7 @@ pipeline {
     
     stage('Replacing Artefacts') {
       steps {
-        bat 'xcopy /S /E /Y "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//Environments//frontend-mkt-dev//Docker"  "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//DEV-frontend-marketing-place" '
-      }
-    }
-    
-    stage('Replacing Environment') {
-      steps {
-        bat 'xcopy /S /E /Y "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//Environments//frontend-mkt-dev//Environments"  "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//DEV-frontend-marketing-place//src//environments" '
+        bat 'xcopy /S /E /Y "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//PROD-artefacts-marketing-place//Environments//frontend-mkt-dev"  "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//PROD-frontend-marketing-place" '
       }
     }
     
@@ -39,7 +33,7 @@ pipeline {
       }
     }
 	 
-	stage('Stoping Docker Compose') {
+    stage('Stoping Docker Compose') {
       steps {
         bat 'docker-compose down'
       }
