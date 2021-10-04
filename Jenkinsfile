@@ -23,7 +23,7 @@ pipeline {
     
     stage('Replacing Artefacts') {
       steps {
-        bat 'xcopy /S /E /Y "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//Environments//frontend-mkt-dev//Docker"  "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//DEV-frontend-marketing-place" '
+        bat 'xcopy /S /E /Y "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//DEV-artefacts-marketing-place//Environments//frontend-mkt-dev"  "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//DEV-frontend-marketing-place" '
       }
     }
     
