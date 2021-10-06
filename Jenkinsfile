@@ -1,13 +1,12 @@
 pipeline {
+
+  environment {
+    Envronment = "${env.Envronment}";
+  }
+
   agent any
     
   stages {
-        
-    stage('Cloning Git') {
-      steps {
-        git branch: '$Branch', url: 'https://github.com/professoralessandro/frontend-ap-marketing-place'
-      }
-    }
     
     stage('Install Npm') {
        steps {
@@ -23,7 +22,7 @@ pipeline {
     
     stage('Replacing Artefacts') {
       steps {
-        bat 'xcopy /S /E /Y "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//PROD-artefacts-marketing-place//Environments//frontend-mkt-dev"  "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//PROD-frontend-marketing-place" '
+        bat 'xcopy /S /E /Y "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//'+ Envronment +'-artefacts-marketing-place//Environments//frontend-mkt-dev"  "C://Windows//SysWOW64//config//systemprofile//AppData//Local//Jenkins.jenkins//workspace//'+ Envronment +'-frontend-marketing-place" '
       }
     }
     
@@ -33,11 +32,11 @@ pipeline {
       }
     }
 	 
-    stage('Stoping Docker Compose') {
-      steps {
-        bat 'docker-compose down'
-      }
-    }
+	  // stage('Stoping Docker Compose') {
+    //   steps {
+    //     bat 'docker-compose down'
+    //   }
+    // }
 
     stage('Deploy Project Docker and Starting Docker Compose') {
        steps {
