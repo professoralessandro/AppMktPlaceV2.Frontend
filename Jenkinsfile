@@ -32,11 +32,11 @@ pipeline {
       }
     }
 	 
-	  // stage('Stoping Docker Compose') {
-    //   steps {
-    //     bat 'docker-compose down'
-    //   }
-    // }
+	  stage('Stoping Docker Compose') {
+      steps {
+        bat 'docker-compose down'
+      }
+    }
 
     stage('Deploy Project Docker and Starting Docker Compose') {
        steps {
