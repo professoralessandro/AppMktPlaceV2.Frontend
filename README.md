@@ -25,4 +25,4 @@ Navigate to `http://localhost:4200/`. The app will automatically reload if you c
 Mohamed Azouaoui
 
 ## License
-This code is released under the MIT license.
+This code is released under the MIT license
