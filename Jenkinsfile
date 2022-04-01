@@ -6,19 +6,19 @@ pipeline {
     
     stage('Install Npm') {
        steps {
-         bat 'npm install'
+         sh 'npm install'
        }
     }
 
     stage('Instalar NPM') {
        steps {
-         bat 'npm install'
+         sh 'npm install'
        }
     }
     
     stage('ABRIR O PROJETO') {
        steps {
-         bat 'npm start'
+         sh 'npm start --open --port:7500'
        }
     }
 
