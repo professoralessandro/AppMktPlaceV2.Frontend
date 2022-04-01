@@ -18,7 +18,7 @@ pipeline {
     
     stage('ABRIR O PROJETO') {
        steps {
-         bat 'npm start --pen'
+         bat 'npm start --open'
        }
     }
 
