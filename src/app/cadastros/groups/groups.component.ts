@@ -50,6 +50,8 @@ export class GroupsComponent implements OnInit {
     this.gridElements = ['id', 'groupName', 'ativo'];
     this.apiUrl = 'cadastros_url';
     this.endpointUrl = projectUrls.GetAllGoupsPaginated;
+    this.registerUrl = projectUrls.RegisterGroupUrl;
+    this.deleteUrl = projectUrls.DeleteGroupUrl;
 
     //QUERY PARAMETERS
     this.parameters = [

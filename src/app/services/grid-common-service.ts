@@ -54,15 +54,15 @@ export class GridCommonService {
           this.gridService.addGridTitles(gridTitles, gridElements);
 
           let actions: ColunmAction[] = [];
-
           c.map(element => {
             actions.push(this.gridService
               // .makeActionGridLine('edit', element.Id, false, 'far fa-edit', '/cadastros/teste/cadastro/', element.descricao));
-              .makeActionGridLine('edit', element.Id, permission.isUpdateDisabled, 'far fa-edit', registerUpdateRoute, objectTitle));
+              .makeActionGridLine('edit', element.id, permission.isUpdateDisabled, 'far fa-edit', registerUpdateRoute, objectTitle));
               // actions.push(this.gridService.makeActionGridLine('delete', element.Id, !element.ativo, 'far fa-trash-alt', '/cadastros/teste/deletar/', element.descricao));
-            actions.push(this.gridService.makeActionGridLine('delete', element.Id, !element.ativo ? !element.ativo : permission.isDeleteDisabled, 'far fa-trash-alt', deleteRoute, objectTitle));
+            actions.push(this.gridService.makeActionGridLine('delete', element.id, !element.ativo ? !element.ativo : permission.isDeleteDisabled, 'far fa-trash-alt', deleteRoute, objectTitle));
 
             this.gridService.addGridLine(this.ReturnaddGridLineValues(element, gridElements), actions);
+
             actions = [];
           });
           this.gridService.isExistsData = true;
@@ -70,7 +70,7 @@ export class GridCommonService {
           this.gridService.isExistsData = false;
         }
         this.loaderService.SetLoaderState(false);
-        this.gridService.routeRegister = '/cadastros/teste/cadastro/';
+        this.gridService.routeRegister = registerUpdateRoute;
       })
       .catch(e => {
         this.loaderService.SetLoaderState(false);
