@@ -30,7 +30,7 @@ export class InsertGroupsComponent implements OnInit {
     this.router.paramMap.subscribe((params) => {
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.isNew = false;
-        this.title = 'Editar tipos de dados';
+        this.title = 'Editar grupos';
         this.titleButton = this.title.split(' ')[0];
         this.parameters = [
           {parameter: 'groupId', value: params.get('id')}
@@ -41,11 +41,11 @@ export class InsertGroupsComponent implements OnInit {
             this.model = c;
           })
           .catch(e => {
-            this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o tipo de dado.', false);
+            this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o grupo.', false);
           });
       } else {
         this.isNew = true;
-        this.title = 'Cadastrar tipos de dados';
+        this.title = 'Cadastrar grupos';
         this.titleButton = this.title.split(' ')[0] === 'Cadastrar' ? 'Salvar' : '';
         this.model.ativo = true;
       }

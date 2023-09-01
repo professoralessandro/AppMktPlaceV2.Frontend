@@ -34,7 +34,6 @@ public ngOnInit(): void {
       this.service.getAll('cadastros_url', 'Group/GetById', this.parameters)
       .toPromise()
       .then(c => {
-        // this.grupo = c[0];
         this.grupo = c;
         this.label = `Tem certerza que deseja deletar o item ${this.grupo.groupName} ?`;
       })
@@ -66,7 +65,7 @@ private destroyComponent(): void {
 }
 
 public deletar(): void {
-  this.service.delete('cadastros_url', 'Group', this.grupo.grupoId)
+  this.service.delete('cadastros_url', 'Group', this.grupo.id)
   .toPromise()
   .then(c => {
     this.commonService.responseActionWithNavigation

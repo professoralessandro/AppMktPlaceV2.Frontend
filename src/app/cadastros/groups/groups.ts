@@ -1,5 +1,5 @@
 export class Groups {
-  public grupoId?: string;
+  public id?: string;
   public groupName: string;
   public usuarioInclusaoId: string;
   public usuarioUltimaAlteracaoId?: string;
