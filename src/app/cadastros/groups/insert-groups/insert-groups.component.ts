@@ -4,7 +4,7 @@ import { QueryParameter } from 'src/app/models/query-parameter';
 import { HttpCommonService } from 'src/app/services/app-http-service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
-import { SystemParameterEnum } from 'src/app/Enums/system-parameters-enum';
+import { SystemParameterEnum } from 'src/app/Enums/system-parameters.enum';
 
 @Component({
   selector: 'app-insert-groups',
