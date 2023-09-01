@@ -1,7 +1,7 @@
 import { ColunmAction } from './colunn-action';
 
 export class GridBody {
-  public id: number;
+  public id: number | string;
   public order: number;
   public titles: string[];
   public tooltip: string[];

@@ -2,9 +2,15 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false,
-  cadastros_url: 'http://localhost:7210'
+export const projectUrls = {
+  GetAllGoups: 'group/getall',
+  GetAllGoupsPaginated: 'group/paginated',
+  GetAllUsers: 'group/getall',
+  GetAllGoupsUsersPaginated: 'group/paginated',
+  RegisterGroupUrl: '/cadastros/teste/cadastro/',
+  DeleteGroupUrl: '/cadastros/teste/deletar/',
+  RegisterUserUrl: '/cadastros/teste/cadastro/',
+  DeleteUserUrl: '/cadastros/teste/deletar/',
 };
 
 /*

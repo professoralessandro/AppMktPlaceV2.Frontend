@@ -1,13 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TiposConfiguracoesService } from 'src/app/cadastros/tipos-configuracoes/tipos-configuracoes.service';
-import { TiposDadosService } from 'src/app/cadastros/tipos-dados/tipos-dados.service';
-import { TiposDocumentosService } from 'src/app/cadastros/tipos-documentos/tipos-documentos.service';
-import { TiposLancamentosService } from 'src/app/cadastros/tipos-lancamentos/tipos-lancamentos.service';
-import { TiposTelefonesService } from 'src/app/cadastros/tipos-telefones/tipos-telefones.service';
-import { TiposWorkflowsService } from 'src/app/cadastros/tipos-workflows/tipos-workflows.service';
 import { CommonService } from 'src/app/services/common.service';
 import { GridService } from './grid.service';
+import { QueryParameter } from 'src/app/models/query-parameter';
+import { GridCommonService } from 'src/app/services/grid-common-service';
 
 @Component({
   selector: 'app-grid',
@@ -25,16 +21,20 @@ export class GridComponent implements OnInit, OnDestroy {
   public nextPage: number;
   public previusPage: number;
 
+  // PAGINATION PARAMETERS
+  public titleGrid = 'Busca por grupos';
+  public gridTitle = 'Grupos';
+  public id: string;
+  public descricao: string;
+  public ativo: boolean;
+  public pageNumber: number = 1;
+  public rownpPage: number = 10;
+
   constructor(
     private route: Router,
     private commonService: CommonService,
     public gridService: GridService,
-    private tiposTelefonesService: TiposTelefonesService,
-    private tiposConfiguracoesService: TiposConfiguracoesService,
-    private tiposDocumentosService: TiposDocumentosService,
-    private tiposLancamentosService: TiposLancamentosService,
-    private tiposWorkflowsService: TiposWorkflowsService,
-    private tiposDadosService: TiposDadosService
+    private gridCommonService: GridCommonService,
   ) { }
 
   public ngOnInit(): void {
@@ -55,30 +55,39 @@ export class GridComponent implements OnInit, OnDestroy {
     this.gridService.destroyAtributtes();
   }
 
-  public paginate(page: number, rowspPage: number = 10, event?: any): void {
+  public paginate(pageNumber: number, rowspPage: number = 10, event?: any): void {
     if (!this.commonService.isNullOrUndefined(event)) {
       this.currentPage = Number(event.target.innerText);
-      page = this.currentPage;
+      pageNumber = this.currentPage;
     } else {
-      this.currentPage = page;
+      this.currentPage = pageNumber;
     }
-    this.nextPage = (page + 1);
-    this.previusPage = (page - 1);
+    this.nextPage = (pageNumber + 1);
+    this.previusPage = (pageNumber - 1);
     const model = this.gridService.model;
     this.gridService.initializeAtributtes();
 
-    if (this.gridService.model.toLocaleLowerCase() === 'tipostelefones') {
-      this.tiposTelefonesService.searchPaginated(page, rowspPage);
-    } else if (this.gridService.model.toLocaleLowerCase() === 'tiposconfiguracoes') {
-      this.tiposConfiguracoesService.searchPaginated(page, rowspPage);
-    } else if (this.gridService.model.toLocaleLowerCase() === 'tiposdocumentos') {
-      this.tiposDocumentosService.searchPaginated(page, rowspPage);
-    } else if (this.gridService.model.toLocaleLowerCase() === 'tiposlancamentos') {
-      this.tiposLancamentosService.searchPaginated(page, rowspPage);
-    } else if (this.gridService.model.toLocaleLowerCase() === 'tiposworkflows') {
-      this.tiposWorkflowsService.searchPaginated(page, rowspPage);
-    } else if (this.gridService.model.toLocaleLowerCase() === 'tiposdados') {
-      this.tiposDadosService.searchPaginated(page, rowspPage);
-    }
+    var parameters = this.getParameters();
+
+    // SETAR O VALOR 
+    parameters.forEach(param => {
+      if (param.parameter === 'pageNumber') {
+        param.value = pageNumber;
+      }
+
+      if (param.parameter === 'rowspPage') {
+        param.value = rowspPage;
+      }
+    });
+
+    this.gridCommonService.setSetParameters(parameters, true);
+  }
+
+  public searchPaginated(parameters: QueryParameter[], model: string, apiUrl: string, endpointUrl: string, objectTitle: string, registerUpdateRoute: string, deleteRoute: string, gridTitles :string[], gridElements :string[]) {
+    this.gridCommonService.searchPaginated(parameters, model, apiUrl, endpointUrl, objectTitle, registerUpdateRoute, deleteRoute, gridTitles, gridElements);
+  }
+
+  private getParameters() : QueryParameter[] {
+    return this.gridCommonService.parameters;
   }
 }

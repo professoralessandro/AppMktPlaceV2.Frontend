@@ -97,7 +97,8 @@ export class GridService {
   ): void {
     this.countGridLine++;
     const gridBody = new GridBody();
-    gridBody.id = Number(columnValue[0]);
+    gridBody.id = columnValue[0]
+    // gridBody.id = Number(columnValue[0]);
     gridBody.order = this.countGridLine;
     gridBody.titles = columnValue;
     gridBody.tooltip = columnToolTip;
@@ -110,7 +111,7 @@ export class GridService {
 
   public makeActionGridLine(
     title: string,
-    objectId: number,
+    objectId: number | string,
     disabled: boolean,
     icon: string,
     routeNavigation?: string,

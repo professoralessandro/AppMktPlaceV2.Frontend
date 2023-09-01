@@ -24,7 +24,7 @@ export class HttpCommonService {
       return this.http.post<any>(`${environment[api_url]}/api/${endPoint}/`, model);
     }
 
-    delete(api_url: string, endPoint: string, id: number) {
+    delete(api_url: string, endPoint: string, id: number | string) {
       return this.http.delete<void>(`${environment[api_url]}/api/${endPoint}?id=${id}`);
     }
 

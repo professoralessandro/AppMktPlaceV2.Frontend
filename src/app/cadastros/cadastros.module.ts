@@ -9,7 +9,7 @@ import { CadastrosTiposConfiguracoesComponent } from './tipos-configuracoes/cada
 import { DeletarTiposTelefonesComponent } from './tipos-telefones/deletar-tipos-telefones/deletar-tipos-telefones.component';
 // tslint:disable-next-line:max-line-length
 import { DeletarTiposConfiguracoesComponent } from './tipos-configuracoes/deletar-tipos-configuracoes/deletar-tipos-configuracoes.component';
-import { TiposConfiguracoesRoutingModule } from './tipos-configuracoes/tipos-telefones.routing';
+import { TiposConfiguracoesRoutingModule } from './tipos-configuracoes/tipos-configuracoes.routing';
 import { TiposTelefonesComponent } from './tipos-telefones/tipos-telefones.component';
 import { GridComponent } from '../components/grid/grid.component';
 import { CompTitleComponent } from '../components/comp-title/comp-title.component';
@@ -34,6 +34,10 @@ import { DeletarTipoWorkflowComponent } from './tipos-workflows/deletar-tipo-wor
 import { CadastrarTipoWorkflowComponent } from './tipos-workflows/cadastrar-tipo-workflow/cadastrar-tipo-workflow.component';
 import { TiposWorkflowsRoutingModule } from './tipos-workflows/tipos-workflows.routing';
 import { TiposDadosRoutingModule } from './tipos-dados/tipos-dados.routing';
+import { GroupsComponent } from './groups/groups.component';
+import { InsertGroupsComponent } from './groups/insert-groups/insert-groups.component';
+import { DeleteGroupsComponent } from './groups/delete-groups/delete-groups.component';
+import { GroupsRoutingModule } from './groups/groups.routing';
 
 
 @NgModule({
@@ -61,6 +65,9 @@ import { TiposDadosRoutingModule } from './tipos-dados/tipos-dados.routing';
     DeletarTipoDadoComponent,
     DeletarTipoWorkflowComponent,
     CadastrarTipoWorkflowComponent,
+    GroupsComponent,
+    InsertGroupsComponent,
+    DeleteGroupsComponent,
   ],
   imports: [
     CommonModule,
@@ -72,6 +79,7 @@ import { TiposDadosRoutingModule } from './tipos-dados/tipos-dados.routing';
     TiposParametrosRoutingModule,
     TiposWorkflowsRoutingModule,
     TiposDadosRoutingModule,
+    GroupsRoutingModule,
     RouterModule,
     NgxMaskModule.forRoot(),
   ]

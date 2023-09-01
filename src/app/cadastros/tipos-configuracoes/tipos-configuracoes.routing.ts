@@ -6,10 +6,10 @@ import { DeletarTiposConfiguracoesComponent } from './deletar-tipos-configuracoe
 import { TiposConfiguracoesComponent } from './tipos-configuracoes.component';
 
 const routes: Routes = [
-  { path: 'teste', component: TiposConfiguracoesComponent },
-  { path: 'teste/cadastro', component: CadastrosTiposConfiguracoesComponent },
-  { path: 'teste/cadastro/:id', component: CadastrosTiposConfiguracoesComponent },
-  { path: 'teste/deletar/:id', component: DeletarTiposConfiguracoesComponent }
+  { path: 'tipos-configuracoes', component: TiposConfiguracoesComponent },
+  { path: 'tipos-configuracoes/cadastro', component: CadastrosTiposConfiguracoesComponent },
+  { path: 'tipos-configuracoes/cadastro/:id', component: CadastrosTiposConfiguracoesComponent },
+  { path: 'tipos-configuracoes/deletar/:id', component: DeletarTiposConfiguracoesComponent }
 ];
 
 @NgModule({
