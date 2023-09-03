@@ -6,10 +6,10 @@ import { InsertGroupsComponent } from './insert-groups/insert-groups.component';
 import { DeleteGroupsComponent } from './delete-groups/delete-groups.component';
 
 const routes: Routes = [
-  { path: 'teste', component: GroupsComponent },
-  { path: 'teste/cadastro', component: InsertGroupsComponent },
-  { path: 'teste/cadastro/:id', component: InsertGroupsComponent },
-  { path: 'teste/deletar/:id', component: DeleteGroupsComponent }
+  { path: 'grupo', component: GroupsComponent },
+  { path: 'grupo/cadastro', component: InsertGroupsComponent },
+  { path: 'grupo/cadastro/:id', component: InsertGroupsComponent },
+  { path: 'grupo/deletar/:id', component: DeleteGroupsComponent }
 ];
 
 @NgModule({

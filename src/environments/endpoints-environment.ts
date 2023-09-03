@@ -5,10 +5,10 @@
 export const projectUrls = {
   GetAllGoups: 'group/getall',
   GetAllGoupsPaginated: 'group/paginated',
-  GetAllUsers: 'group/getall',
-  GetAllGoupsUsersPaginated: 'group/paginated',
   RegisterGroupUrl: '/cadastros/teste/cadastro/',
   DeleteGroupUrl: '/cadastros/teste/deletar/',
+  GetAllUsers: 'user/getall',
+  GetAllUsersPaginated: 'user/paginated',
   RegisterUserUrl: '/cadastros/teste/cadastro/',
   DeleteUserUrl: '/cadastros/teste/deletar/',
 };

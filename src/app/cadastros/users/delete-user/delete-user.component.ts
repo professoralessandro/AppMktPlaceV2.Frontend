@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Groups } from '../groups';
+import { User } from '../user';
 import { QueryParameter } from 'src/app/models/query-parameter';
 import { HttpCommonService } from 'src/app/services/app-http-service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
-  selector: 'app-delete-groups',
-  templateUrl: './delete-groups.component.html',
-  styleUrls: ['./delete-groups.component.scss']
+  selector: 'app-delete-user',
+  templateUrl: './delete-user.component.html',
+  styleUrls: ['./delete-user.component.scss']
 })
-export class DeleteGroupsComponent implements OnInit {
+export class DeleteUserComponent implements OnInit {
   // ATRIBUTTES
   public title: string;
   private rotaAnterior: string;
   private parameters: QueryParameter[];
   public label: string;
-  private grupo: Groups;
+  private usuario: User;
 
   constructor(
     private service: HttpCommonService,
@@ -29,16 +29,16 @@ export class DeleteGroupsComponent implements OnInit {
     this.router.paramMap.subscribe((params) => {
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.parameters = [
-          { parameter: 'groupId', value: params.get('id') }
+          { parameter: 'UserId', value: params.get('id') }
         ];
-        this.service.getAll('cadastros_url', 'Group/GetById', this.parameters)
+        this.service.getAll('cadastros_url', 'user/getbyid', this.parameters)
           .toPromise()
           .then(c => {
-            this.grupo = c;
-            this.label = `Tem certerza que deseja deletar o item ${this.grupo.groupName} ?`;
+            this.usuario = c;
+            this.label = `Tem certerza que deseja deletar o item ${this.usuario.nome} ?`;
           })
           .catch(e => {
-            this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o grupo.', false);
+            this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o usuário.', false);
           });
       }
     });
@@ -49,11 +49,11 @@ export class DeleteGroupsComponent implements OnInit {
   }
 
   private initializeComponent(): void {
-    this.title = 'Deletar grupo';
+    this.title = 'Deletar usuário';
     this.label = '';
     this.rotaAnterior = './cadastros/teste';
     this.parameters = [];
-    this.grupo = new Groups();
+    this.usuario = new User();
   }
 
   private destroyComponent(): void {
@@ -61,15 +61,15 @@ export class DeleteGroupsComponent implements OnInit {
     this.label = null;
     this.rotaAnterior = null;
     this.parameters = null;
-    this.grupo = null;
+    this.usuario = null;
   }
 
   public deletar(): void {
-    this.service.delete('cadastros_url', 'Group', this.grupo.id)
+    this.service.delete('cadastros_url', 'user', this.usuario.id)
       .toPromise()
       .then(c => {
         this.commonService.responseActionWithNavigation
-          (this.rotaAnterior, `Grupo<br>${this.grupo.groupName}<br>Deletado com sucesso.`, true);
+          (this.rotaAnterior, `Usuário<br>${this.usuario.nome}<br>Deletado com sucesso.`, true);
       })
       .catch(e => {
         this.commonService.responseActionWithNavigation(this.rotaAnterior, e.error, false);

@@ -38,6 +38,10 @@ import { GroupsComponent } from './groups/groups.component';
 import { InsertGroupsComponent } from './groups/insert-groups/insert-groups.component';
 import { DeleteGroupsComponent } from './groups/delete-groups/delete-groups.component';
 import { GroupsRoutingModule } from './groups/groups.routing';
+import { UsersComponent } from './users/users.component';
+import { DeleteUserComponent } from './users/delete-user/delete-user.component';
+import { UpdateUserComponent } from './users/update-user/update-user.component';
+import { UserRoutingModule } from './users/user.routing';
 
 
 @NgModule({
@@ -68,6 +72,9 @@ import { GroupsRoutingModule } from './groups/groups.routing';
     GroupsComponent,
     InsertGroupsComponent,
     DeleteGroupsComponent,
+    UsersComponent,
+    DeleteUserComponent,
+    UpdateUserComponent,
   ],
   imports: [
     CommonModule,
@@ -80,6 +87,7 @@ import { GroupsRoutingModule } from './groups/groups.routing';
     TiposWorkflowsRoutingModule,
     TiposDadosRoutingModule,
     GroupsRoutingModule,
+    UserRoutingModule,
     RouterModule,
     NgxMaskModule.forRoot(),
   ]
