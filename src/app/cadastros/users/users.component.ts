@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoaderService } from 'src/app/components/loader/loader.service';
 import { QueryParameter } from 'src/app/models/query-parameter';
+import { CommonService } from 'src/app/services/common.service';
 import { GridCommonService } from 'src/app/services/grid-common-service';
 import { projectUrls } from 'src/environments/endpoints-environment';
 
@@ -31,7 +32,8 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private loaderService: LoaderService,
-    private gridService: GridCommonService
+    private gridService: GridCommonService,
+    private commonService: CommonService
     ) { }
 
   public ngOnInit(): void {
@@ -80,15 +82,15 @@ export class UsersComponent implements OnInit {
   public search() {
     //QUERY PARAMETERS
     this.parameters = [
-      {parameter: 'id', value: this.id},
-      {parameter: 'nome', value: this.nome},
-      {parameter: 'nmrDocumento', value: this.nmrDocumento},
-      {parameter: 'email', value: this.email},
-      {parameter: 'ativo', value: this.ativo},
+      {parameter: 'id', value: this.commonService.isNullOrUndefined(this.id) ? null : this.id },
+      {parameter: 'nome', value: this.commonService.isNullOrUndefined(this.nome) ? null : this.nome},
+      {parameter: 'nmrDocumento', value: this.commonService.isNullOrUndefined(this.nmrDocumento) ? null : this.nmrDocumento},
+      {parameter: 'email', value: this.commonService.isNullOrUndefined(this.email) ? null : this.email},
+      {parameter: 'ativo', value: this.commonService.isNullOrUndefined(this.ativo) ? null : this.ativo},
       {parameter: 'pageNumber', value: this.pageNumber},
       {parameter: 'rowspPage', value: this.rownpPage}
     ];
-
+    debugger;
     // SETAR VALORES DO GRID
     this.gridService.setSetParameters(this.parameters, true);
   }
