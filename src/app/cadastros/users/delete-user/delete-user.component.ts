@@ -65,7 +65,7 @@ export class DeleteUserComponent implements OnInit {
   }
 
   public deletar(): void {
-    this.service.delete('cadastros_url', 'user', this.usuario.id)
+    this.service.delete('cadastros_url', 'user', this.usuario.identifier)
       .toPromise()
       .then(c => {
         this.commonService.responseActionWithNavigation

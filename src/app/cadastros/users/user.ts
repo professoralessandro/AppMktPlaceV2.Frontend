@@ -1,7 +1,7 @@
 import { TipoDocumentoEnum } from "src/app/Enums/tipo-documento.enum";
 
 export class User {
-    public id?: string;
+    public identifier?: string;
     public userName: string;
     public nmrDocumento: string;
     public tipoDocumento: TipoDocumentoEnum | string;
@@ -23,7 +23,7 @@ export class User {
     public ativo: boolean;
 
     public User() {
-        this.id = '';
+        this.identifier = '';
         this.userName = '';
         this.nmrDocumento = '';
         // this.tipoDocumento = '';

@@ -6,10 +6,10 @@ import { DeletarTipoDadoComponent } from './deletar-tipo-dado/deletar-tipo-dado.
 import { TiposDadosComponent } from './tipos-dados.component';
 
 const routes: Routes = [
-  { path: 'tiposdados', component: TiposDadosComponent },
-  { path: 'tiposdados/cadastro', component: CadastrarTipoDadoComponent },
-  { path: 'tiposdados/cadastro/:id', component: CadastrarTipoDadoComponent },
-  { path: 'tiposdados/deletar/:id', component: DeletarTipoDadoComponent }
+  { path: 'tiposdados-teste', component: TiposDadosComponent },
+  { path: 'tiposdados-teste/cadastro', component: CadastrarTipoDadoComponent },
+  { path: 'tiposdados-teste/cadastro/:id', component: CadastrarTipoDadoComponent },
+  { path: 'tiposdados-teste/deletar/:id', component: DeletarTipoDadoComponent }
 ];
 
 @NgModule({

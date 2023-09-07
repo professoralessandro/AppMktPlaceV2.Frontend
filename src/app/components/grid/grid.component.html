@@ -7,9 +7,17 @@
             <table class="table table-striped" *ngIf="this.gridService.isExistsData">
                 <thead>
                     <tr>
+                        <!-- REMOVIDAS ACOES DO GRID PERIODICAMENTE -->
+                        <!--                         
                         <th *ngFor="let item of this.gridService.gridBind.gridTitles" scope="col">
                             <a (click)="this.gridService.sortBy(item.atributteName)" style="color: black;" class="link">{{ item.title }}</a>
                         </th>
+                         -->
+                         
+                        <th *ngFor="let item of this.gridService.gridBind.gridTitles" scope="col">
+                            <a style="color: black;" class="link">{{ item.title }}</a>
+                        </th>
+                        
                         <th *ngIf="this.gridService.isExistsActions" scope="col">
                             Ações
                         </th>

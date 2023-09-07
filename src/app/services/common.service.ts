@@ -43,7 +43,7 @@ export class CommonService {
   }
 
   public isNullOrUndefined(value: any): boolean {
-    if (value === null || value === undefined || value.toString() === 'undefined') {
+    if (value === null || value === undefined || value.toString() === 'undefined' || value.toString() === 'null') {
       return true;
     } else {
       return false;

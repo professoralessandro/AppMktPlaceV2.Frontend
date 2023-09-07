@@ -52,14 +52,14 @@ export class GridCommonService {
           this.gridService.gridBind.gridObjectBinded = c;
           // ADICIONAR GRID TITLES ATTRIBUTES E ATRIBUTOS DINAMICOS
           this.gridService.addGridTitles(gridTitles, gridElements);
-
+          debugger;
           let actions: ColunmAction[] = [];
           c.map(element => {
             actions.push(this.gridService
               // .makeActionGridLine('edit', element.Id, false, 'far fa-edit', '/cadastros/teste/cadastro/', element.descricao));
-              .makeActionGridLine('edit', element.id, permission.isUpdateDisabled, 'far fa-edit', registerUpdateRoute, objectTitle));
+              .makeActionGridLine('edit', element.identifier, permission.isUpdateDisabled, 'far fa-edit', registerUpdateRoute, objectTitle));
               // actions.push(this.gridService.makeActionGridLine('delete', element.Id, !element.ativo, 'far fa-trash-alt', '/cadastros/teste/deletar/', element.descricao));
-            actions.push(this.gridService.makeActionGridLine('delete', element.id, !element.ativo ? !element.ativo : permission.isDeleteDisabled, 'far fa-trash-alt', deleteRoute, objectTitle));
+            actions.push(this.gridService.makeActionGridLine('delete', element.identifier, !element.ativo ? !element.ativo : permission.isDeleteDisabled, 'far fa-trash-alt', deleteRoute, objectTitle));
 
             this.gridService.addGridLine(this.ReturnaddGridLineValues(element, gridElements), actions);
 

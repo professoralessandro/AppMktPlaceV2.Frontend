@@ -47,12 +47,12 @@ export class GroupsComponent implements OnInit {
     this.gridTitle = 'Grupos';
     this.title = 'Busca de grupos';
     this.gridTitles = ['#', 'Descrição', 'Ativo'];
-    this.gridElements = ['id', 'groupName', 'ativo'];
+    this.gridElements = ['identifier', 'groupName', 'ativo'];
     this.apiUrl = 'cadastros_url';
     this.endpointUrl = projectUrls.GetAllGoupsPaginated;
     this.registerUrl = projectUrls.RegisterGroupUrl;
     this.deleteUrl = projectUrls.DeleteGroupUrl;
-
+    debugger;
     //QUERY PARAMETERS
     this.parameters = [
       {parameter: 'id', value: this.id},

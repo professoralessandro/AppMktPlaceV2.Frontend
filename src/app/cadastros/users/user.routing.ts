@@ -6,10 +6,10 @@ import { UpdateUserComponent } from './update-user/update-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 
 const routes: Routes = [
-  { path: 'teste', component: UsersComponent },
-  { path: 'teste/cadastro', component: UpdateUserComponent },
-  { path: 'teste/cadastro/:id', component: UpdateUserComponent },
-  { path: 'teste/deletar/:id', component: DeleteUserComponent }
+  { path: 'user', component: UsersComponent },
+  { path: 'user/cadastro', component: UpdateUserComponent },
+  { path: 'user/cadastro/:id', component: UpdateUserComponent },
+  { path: 'user/deletar/:id', component: DeleteUserComponent }
 ];
 
 @NgModule({

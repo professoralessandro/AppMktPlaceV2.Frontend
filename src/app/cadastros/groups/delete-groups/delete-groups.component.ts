@@ -65,7 +65,7 @@ export class DeleteGroupsComponent implements OnInit {
   }
 
   public deletar(): void {
-    this.service.delete('cadastros_url', 'Group', this.grupo.id)
+    this.service.delete('cadastros_url', 'Group', this.grupo.identifier)
       .toPromise()
       .then(c => {
         this.commonService.responseActionWithNavigation
