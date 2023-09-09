@@ -90,7 +90,6 @@ export class UsersComponent implements OnInit {
       {parameter: 'pageNumber', value: this.pageNumber},
       {parameter: 'rowspPage', value: this.rownpPage}
     ];
-    debugger;
     // SETAR VALORES DO GRID
     this.gridService.setSetParameters(this.parameters, true);
   }

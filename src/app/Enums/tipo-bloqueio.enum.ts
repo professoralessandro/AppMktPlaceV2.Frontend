@@ -8,3 +8,12 @@ export enum TipoBloqueioEnum
     BloqueioPreventivo = 4,
     BloqueioDefinitivo = 5,
 }
+
+export const TipoDocumentoMapping = {
+    [TipoBloqueioEnum.BloqueioUsuario]: "Usuario",
+    [TipoBloqueioEnum.BloqueioProduto]: "Produto",
+    [TipoBloqueioEnum.BloqueioServico]: "Serviço",
+    [TipoBloqueioEnum.BloqueioPagamento]: "Pagamento",
+    [TipoBloqueioEnum.BloqueioPreventivo]: "Preventivo",
+    [TipoBloqueioEnum.BloqueioDefinitivo]: "Definitivo",
+}

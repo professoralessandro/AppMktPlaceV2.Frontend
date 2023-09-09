@@ -42,6 +42,10 @@ import { UsersComponent } from './users/users.component';
 import { DeleteUserComponent } from './users/delete-user/delete-user.component';
 import { UpdateUserComponent } from './users/update-user/update-user.component';
 import { UserRoutingModule } from './users/user.routing';
+import { BlockComponent } from './block/block.component';
+import { InsertBlockComponent } from './block/insert-block/insert-block.component';
+import { DeleteBlockComponent } from './block/delete-block/delete-block.component';
+import { BlockRoutingModule } from './block/block.routing';
 
 
 @NgModule({
@@ -75,6 +79,9 @@ import { UserRoutingModule } from './users/user.routing';
     UsersComponent,
     DeleteUserComponent,
     UpdateUserComponent,
+    BlockComponent,
+    InsertBlockComponent,
+    DeleteBlockComponent,
   ],
   imports: [
     CommonModule,
@@ -88,6 +95,7 @@ import { UserRoutingModule } from './users/user.routing';
     TiposDadosRoutingModule,
     GroupsRoutingModule,
     UserRoutingModule,
+    BlockRoutingModule,
     RouterModule,
     NgxMaskModule.forRoot(),
   ]

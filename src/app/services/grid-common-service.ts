@@ -6,6 +6,7 @@ import { AlertModalService } from '../components/alert-modal/alert-modal.service
 import { GridService } from '../components/grid/grid.service';
 import { ColunmAction } from '../components/grid/colunn-action';
 import { ActionPermissions } from '../models/action-permissions';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,6 @@ export class GridCommonService {
       this.gridService.model = model;
       this.loaderService.SetLoaderState(true);
 
-      // TODO: GET THE URL API AND URL ENDPOINT
       this.service.getAll(apiUrl, endpointUrl, this.parameters)
       .toPromise()
       .then(c => {
@@ -52,7 +52,7 @@ export class GridCommonService {
           this.gridService.gridBind.gridObjectBinded = c;
           // ADICIONAR GRID TITLES ATTRIBUTES E ATRIBUTOS DINAMICOS
           this.gridService.addGridTitles(gridTitles, gridElements);
-          debugger;
+
           let actions: ColunmAction[] = [];
           c.map(element => {
             actions.push(this.gridService
@@ -82,6 +82,12 @@ export class GridCommonService {
       let gridValues: string[] = [];
 
       gridElements.forEach(element => {
+        // VALIDACAO DE O OBJETO E UM TIPO DATA PARA FORMACACAO
+        if (typeof(elements[element]) === 'string') {
+          if (this.ValidateStringDate(elements[element])) {
+            elements[element] = new DatePipe('en-US').transform(elements[element], 'dd/MM/yyyy  HH:mm:ss');
+          }
+        }
         gridValues.push(elements[element].toString());
       });
 
@@ -110,6 +116,21 @@ export class GridCommonService {
       if (loadGrid) {
         // EVETIVAR BUSCA
         await this.searchPaginated(this.parameters, this.model, this.apiUrl, this.endpointUrl, this.model, this.registerUpdateRoute, this.deleteRoute, this.gridTitles, this.gridElements);
+      }
+    }
+
+    // METODO QUE VALIDA SE A DATA E VALIDA
+    private ValidateStringDate(value): boolean {
+      try{
+        var data = new Date(value);
+        if (data.toString().toLocaleLowerCase() === 'invalid date') {
+          return false;
+        }
+        return true;
+      }
+      catch
+      {
+        return false;
       }
     }
 }

@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { TipoBloqueioEnum } from 'src/app/Enums/tipo-bloqueio.enum';
 import { LoaderService } from 'src/app/components/loader/loader.service';
-import { GridCommonService } from 'src/app/services/grid-common-service';
 import { QueryParameter } from 'src/app/models/query-parameter';
+import { GridCommonService } from 'src/app/services/grid-common-service';
 import { projectUrls } from 'src/environments/endpoints-environment';
 
 @Component({
-  selector: 'app-groups',
-  templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.scss']
+  selector: 'app-block',
+  templateUrl: './block.component.html',
+  styleUrls: ['./block.component.scss']
 })
-export class GroupsComponent implements OnInit {
-
-  public title = 'Busca por grupos';
-  public gridTitle = 'Grupos';
-  public model = 'Groups';
+export class BlockComponent implements OnInit {
+  public title = 'Busca por block';
+  public gridTitle = 'Bloqueio';
+  public model = 'Block';
   public id: string;
+  public itemBloqueadoId: string;
   public descricao: string;
   public ativo: boolean;
+  public isBloqueiaAcesso: boolean;
   public parameters: QueryParameter[];
   public pageNumber: number = 1;
   public rownpPage: number = 10;
@@ -26,6 +28,9 @@ export class GroupsComponent implements OnInit {
   public endpointUrl: string;
   public registerUrl: string;
   public deleteUrl: string;
+
+  public blockTypes = Object.values(TipoBloqueioEnum).filter(c => typeof(c) == 'string');
+  public tipoBloqueio: string;
 
   constructor(
     private loaderService: LoaderService,
@@ -44,18 +49,21 @@ export class GroupsComponent implements OnInit {
 
     this.loaderService.SetLoaderState(true);
 
-    this.gridTitle = 'Grupos';
-    this.title = 'Busca de grupos';
-    this.gridTitles = ['#', 'Descrição', 'Ativo'];
-    this.gridElements = ['identifier', 'groupName', 'ativo'];
+    this.gridTitle = 'Bloqueio';
+    this.title = 'Busca de block';
+    this.gridTitles = ['Descrição', 'Tipo de bloqueio', 'Ativo', 'Data inicio', 'Data fim'];
+    this.gridElements = ['nomeBloqueio', 'tipoBloqueio', 'ativo', 'dataInicio', 'dataFim'];
     this.apiUrl = 'cadastros_url';
-    this.endpointUrl = projectUrls.GetAllGoupsPaginated;
+    this.endpointUrl = projectUrls.GetAllBlockPaginated;
     this.registerUrl = projectUrls.RegisterGroupUrl;
     this.deleteUrl = projectUrls.DeleteGroupUrl;
     //QUERY PARAMETERS
     this.parameters = [
       {parameter: 'id', value: this.id},
-      {parameter: 'descricao', value: this.descricao},
+      {parameter: 'nomeBloqueio', value: this.descricao},
+      {parameter: 'itemBloqueadoId', value: this.itemBloqueadoId},
+      {parameter: 'tipoBloqueio', value: this.tipoBloqueio},
+      {parameter: 'isBloqueiaAcesso', value: this.isBloqueiaAcesso},
       {parameter: 'ativo', value: this.ativo},
       {parameter: 'pageNumber', value: this.pageNumber},
       {parameter: 'rowspPage', value: this.rownpPage}
@@ -78,13 +86,31 @@ export class GroupsComponent implements OnInit {
     this.rownpPage = 10;
     this.parameters = [
       {parameter: 'id', value: this.id},
-      {parameter: 'descricao', value: this.descricao},
+      {parameter: 'nomeBloqueio', value: this.descricao},
+      {parameter: 'itemBloqueadoId', value: this.itemBloqueadoId},
+      {parameter: 'tipoBloqueio', value: this.tipoBloqueio},
+      {parameter: 'isBloqueiaAcesso', value: this.isBloqueiaAcesso},
       {parameter: 'ativo', value: this.ativo},
       {parameter: 'pageNumber', value: this.pageNumber},
       {parameter: 'rowspPage', value: this.rownpPage}
     ];
-
     // SETAR VALORES DO GRID
     this.gridService.setSetParameters(this.parameters, true);
+  }
+
+  public ReturnDescriptionBlockType(blockTypes) : string {
+    if (blockTypes === 0) {
+      return "Usuario";
+    } else if (blockTypes === 1) {
+      return "Produto";
+    } else if (blockTypes === 2) {
+      return "Serviço";
+    } else if (blockTypes === 3) {
+      return "Pagamento";
+    } else if (blockTypes === 4) {
+      return "Preventivo";
+    } else {
+      return "Definitivo";
+    }
   }
 }

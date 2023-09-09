@@ -26,7 +26,6 @@ export class User {
         this.identifier = '';
         this.userName = '';
         this.nmrDocumento = '';
-        // this.tipoDocumento = '';
         this.senha = '';
         this.nome = '';
         this.dataNascimento = new Date();

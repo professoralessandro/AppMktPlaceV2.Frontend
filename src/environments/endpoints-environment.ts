@@ -11,6 +11,8 @@ export const projectUrls = {
   GetAllUsersPaginated: 'user/paginated',
   RegisterUserUrl: '/cadastros/teste/cadastro/',
   DeleteUserUrl: '/cadastros/teste/deletar/',
+  GetAllBlock: 'block/getall',
+  GetAllBlockPaginated: 'block/paginated',
 };
 
 /*
