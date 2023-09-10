@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AlertModalService } from '../components/alert-modal/alert-modal.service';
 import { LoaderService } from '../components/loader/loader.service';
 import { QueryParameter } from '../models/query-parameter';
+import { FormaPagamentoEnum } from '../Enums/forma-pagamento.enum';
+import { TipoBloqueioEnum, TipoDocumentoMapping } from '../Enums/tipo-bloqueio.enum';
 
 
 
@@ -84,5 +86,14 @@ export class CommonService {
     this.route.navigate([route]).then(e => {
       this.loaderService.SetLoaderState(false);
     });
+  }
+
+  public ReturnEnumObjectByName(value: string, position: number): any {
+    switch(value.toLocaleLowerCase()) {
+      case 'blockTypeEnum'.toLocaleLowerCase():
+      return TipoDocumentoMapping[position];
+      default:
+      return null;
+    }
   }
 }

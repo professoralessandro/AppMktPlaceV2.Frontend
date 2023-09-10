@@ -10,10 +10,10 @@ export enum TipoBloqueioEnum
 }
 
 export const TipoDocumentoMapping = {
-    [TipoBloqueioEnum.BloqueioUsuario]: "Usuario",
+    [TipoBloqueioEnum.BloqueioUsuario]: "Usuário",
     [TipoBloqueioEnum.BloqueioProduto]: "Produto",
     [TipoBloqueioEnum.BloqueioServico]: "Serviço",
     [TipoBloqueioEnum.BloqueioPagamento]: "Pagamento",
     [TipoBloqueioEnum.BloqueioPreventivo]: "Preventivo",
-    [TipoBloqueioEnum.BloqueioDefinitivo]: "Definitivo",
+    [TipoBloqueioEnum.BloqueioDefinitivo]: "Definitivo"
 }

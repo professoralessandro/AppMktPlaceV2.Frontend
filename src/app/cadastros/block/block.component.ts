@@ -51,8 +51,8 @@ export class BlockComponent implements OnInit {
 
     this.gridTitle = 'Bloqueio';
     this.title = 'Busca de block';
-    this.gridTitles = ['Descrição', 'Tipo de bloqueio', 'Ativo', 'Data inicio', 'Data fim'];
-    this.gridElements = ['nomeBloqueio', 'tipoBloqueio', 'ativo', 'dataInicio', 'dataFim'];
+    this.gridTitles = ['Tipo de bloqueio', 'Id Item Bloqueiado', 'Data inicio', 'Data fim'];
+    this.gridElements = ['blockTypeEnum', 'itemBloqueadoId', 'dataInicio', 'dataFim'];
     this.apiUrl = 'cadastros_url';
     this.endpointUrl = projectUrls.GetAllBlockPaginated;
     this.registerUrl = projectUrls.RegisterGroupUrl;
@@ -68,7 +68,7 @@ export class BlockComponent implements OnInit {
       {parameter: 'pageNumber', value: this.pageNumber},
       {parameter: 'rowspPage', value: this.rownpPage}
     ];
-
+    
     // SETAR VALORES DO GRID
     this.gridService.setGridServiceValues(this.model, this.gridTitles, this.gridElements, this.apiUrl, this.endpointUrl, this.parameters, this.registerUrl, this.deleteUrl, true);
   }

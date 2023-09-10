@@ -7,6 +7,7 @@ import { GridService } from '../components/grid/grid.service';
 import { ColunmAction } from '../components/grid/colunn-action';
 import { ActionPermissions } from '../models/action-permissions';
 import { DatePipe } from '@angular/common';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,8 @@ export class GridCommonService {
       private service: HttpCommonService,
       private loaderService: LoaderService,
       private alertService: AlertModalService,
-      private gridService: GridService
+      private gridService: GridService,
+      private commonService: CommonService
     ) { }
 
     //BUSCA PAGINADA
@@ -83,6 +85,10 @@ export class GridCommonService {
 
       gridElements.forEach(element => {
         // VALIDACAO DE O OBJETO E UM TIPO DATA PARA FORMACACAO
+        if (element.toLocaleLowerCase().indexOf('enum') > -1) {
+          elements[element] = this.commonService.ReturnEnumObjectByName(element, elements[element]);
+        }
+
         if (typeof(elements[element]) === 'string') {
           if (this.ValidateStringDate(elements[element])) {
             elements[element] = new DatePipe('en-US').transform(elements[element], 'dd/MM/yyyy  HH:mm:ss');

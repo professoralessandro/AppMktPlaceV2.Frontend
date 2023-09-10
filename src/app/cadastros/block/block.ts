@@ -2,8 +2,8 @@ import { TipoBloqueioEnum } from "src/app/Enums/tipo-bloqueio.enum";
 
 export class Block {
   public identifier?: string;
-  public tipoDocumento: TipoBloqueioEnum | string;
-  public ItemBloqueadoId: string;
+  public blockTypeEnum: TipoBloqueioEnum | string;
+  public itemBloqueadoId: string;
   public nomeBloqueio: string;
   public isBloqueiaAcesso: boolean;
   public dataInicio?: Date;
@@ -16,7 +16,7 @@ export class Block {
 
   public Block() {
     this.identifier = '';
-    this.ItemBloqueadoId = '';
+    this.itemBloqueadoId = '';
     this.nomeBloqueio = '';
     this.isBloqueiaAcesso = false;
     this.dataInicio = null;
