@@ -13,6 +13,7 @@ export class Block {
   public dataInclusao: Date;
   public dataUltimaAlteracao?: Date;
   public ativo: boolean;
+  public blockdItemDescription: string;
 
   public Block() {
     this.identifier = '';
@@ -26,5 +27,6 @@ export class Block {
     this.dataInclusao = new Date();
     this.dataUltimaAlteracao = null;
     this.ativo = false;
+    this.blockdItemDescription = '';
   }
 }

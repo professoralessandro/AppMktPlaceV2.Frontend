@@ -51,8 +51,8 @@ export class BlockComponent implements OnInit {
 
     this.gridTitle = 'Bloqueio';
     this.title = 'Busca de block';
-    this.gridTitles = ['Tipo de bloqueio', 'Id Item Bloqueiado', 'Data inicio', 'Data fim'];
-    this.gridElements = ['blockTypeEnum', 'itemBloqueadoId', 'dataInicio', 'dataFim'];
+    this.gridTitles = ['Tipo de bloqueio', 'Descricao do item', 'Data inicio', 'Data fim'];
+    this.gridElements = ['blockTypeEnum', 'blockdItemDescription', 'dataInicio', 'dataFim'];
     this.apiUrl = 'cadastros_url';
     this.endpointUrl = projectUrls.GetAllBlockPaginated;
     this.registerUrl = projectUrls.RegisterGroupUrl;
