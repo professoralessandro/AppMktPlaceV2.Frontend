@@ -43,7 +43,7 @@ export class UpdateUserComponent implements OnInit {
         this.parameters = [
           {parameter: 'userId', value: params.get('id')}
         ];
-        this.service.getAll('cadastros_url', 'user/getbyid', this.parameters)
+        this.service.getSingle('cadastros_url', 'user/getbyid', this.parameters)
           .toPromise()
           .then(c => {
             this.model = c;

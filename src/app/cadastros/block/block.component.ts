@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TipoBloqueioEnum } from 'src/app/Enums/tipo-bloqueio.enum';
+import { TipoBloqueioMapping } from 'src/app/Enums/tipo-bloqueio.enum';
 import { LoaderService } from 'src/app/components/loader/loader.service';
 import { QueryParameter } from 'src/app/models/query-parameter';
+import { CommonService } from 'src/app/services/common.service';
 import { GridCommonService } from 'src/app/services/grid-common-service';
 import { projectUrls } from 'src/environments/endpoints-environment';
 
@@ -29,12 +30,13 @@ export class BlockComponent implements OnInit {
   public registerUrl: string;
   public deleteUrl: string;
 
-  public blockTypes = Object.values(TipoBloqueioEnum).filter(c => typeof(c) == 'string');
+  public blockTypes = Object.values(TipoBloqueioMapping).filter(c => typeof(c) == 'string');
   public tipoBloqueio: string;
 
   constructor(
     private loaderService: LoaderService,
-    private gridService: GridCommonService
+    private gridService: GridCommonService,
+    private commonService: CommonService
     ) { }
 
   public ngOnInit(): void {
@@ -84,11 +86,12 @@ export class BlockComponent implements OnInit {
     //QUERY PARAMETERS
     this.pageNumber = 1;
     this.rownpPage = 10;
+
     this.parameters = [
       {parameter: 'id', value: this.id},
       {parameter: 'nomeBloqueio', value: this.descricao},
       {parameter: 'itemBloqueadoId', value: this.itemBloqueadoId},
-      {parameter: 'tipoBloqueio', value: this.tipoBloqueio},
+      {parameter: 'tipoBloqueio', value: this.commonService.isNullOrUndefined(this.tipoBloqueio) ? undefined : this.commonService.ReturnValueMyEnumDescription('tipobloqueioenum', this.tipoBloqueio)},
       {parameter: 'isBloqueiaAcesso', value: this.isBloqueiaAcesso},
       {parameter: 'ativo', value: this.ativo},
       {parameter: 'pageNumber', value: this.pageNumber},
@@ -96,21 +99,5 @@ export class BlockComponent implements OnInit {
     ];
     // SETAR VALORES DO GRID
     this.gridService.setSetParameters(this.parameters, true);
-  }
-
-  public ReturnDescriptionBlockType(blockTypes) : string {
-    if (blockTypes === 0) {
-      return "Usuario";
-    } else if (blockTypes === 1) {
-      return "Produto";
-    } else if (blockTypes === 2) {
-      return "Serviço";
-    } else if (blockTypes === 3) {
-      return "Pagamento";
-    } else if (blockTypes === 4) {
-      return "Preventivo";
-    } else {
-      return "Definitivo";
-    }
   }
 }

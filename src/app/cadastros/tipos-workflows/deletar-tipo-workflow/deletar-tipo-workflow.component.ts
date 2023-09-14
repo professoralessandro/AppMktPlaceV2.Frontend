@@ -30,10 +30,10 @@ public ngOnInit(): void {
       this.parameters = [
         {parameter: 'id', value: Number(params.get('id'))}
       ];
-      this.service.getAll('cadastros_url', 'TiposWorkflows', this.parameters)
+      this.service.getSingle('cadastros_url', 'TiposWorkflows', this.parameters)
       .toPromise()
       .then(c => {
-        this.tipoWorkflow = c[0];
+        this.tipoWorkflow = c;
         this.label = `Tem certerza que deseja deletar o item ${this.tipoWorkflow.descricao} ?`;
       })
       .catch(e => {

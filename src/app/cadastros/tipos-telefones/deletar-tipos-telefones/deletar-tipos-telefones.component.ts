@@ -31,10 +31,10 @@ export class DeletarTiposTelefonesComponent implements OnInit, OnDestroy {
         this.parameters = [
           {parameter: 'id', value: Number(params.get('id'))}
         ];
-        this.service.getAll('cadastros_url', 'TiposTelefones', this.parameters)
+        this.service.getSingle('cadastros_url', 'TiposTelefones', this.parameters)
         .toPromise()
         .then(c => {
-          this.tipoTelefone = c[0];
+          this.tipoTelefone = c;
           this.label = `Tem certerza que deseja deletar o item ${this.tipoTelefone.descricao} ?`;
         })
         .catch(e => {

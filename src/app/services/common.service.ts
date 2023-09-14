@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { AlertModalService } from '../components/alert-modal/alert-modal.service';
 import { LoaderService } from '../components/loader/loader.service';
 import { QueryParameter } from '../models/query-parameter';
-import { FormaPagamentoEnum } from '../Enums/forma-pagamento.enum';
-import { TipoBloqueioEnum, TipoDocumentoMapping } from '../Enums/tipo-bloqueio.enum';
+import { TipoBloqueioMapping } from '../Enums/tipo-bloqueio.enum';
+import { TipoDocumentoMapping } from '../Enums/tipo-documento.enum';
 
 
 
@@ -88,10 +88,23 @@ export class CommonService {
     });
   }
 
-  public ReturnEnumObjectByName(value: string, position: number): any {
+  public ReturnEnumObjectByName(value: string, position): any {
     switch(value.toLocaleLowerCase()) {
       case 'blockTypeEnum'.toLocaleLowerCase():
       return TipoDocumentoMapping[position];
+      case 'TipoBloqueioEnum'.toLocaleLowerCase():
+      return TipoBloqueioMapping[position];
+      default:
+      return null;
+    }
+  }
+
+  public ReturnValueMyEnumDescription(value: string, member) {
+    switch(value.toLocaleLowerCase()) {
+      case 'blockTypeEnum'.toLocaleLowerCase():
+        return Object.values(TipoDocumentoMapping).filter(c => typeof(c) == 'string').indexOf(member);
+      case 'TipoBloqueioEnum'.toLocaleLowerCase():
+        return Object.values(TipoBloqueioMapping).filter(c => typeof(c) == 'string').indexOf(member)
       default:
       return null;
     }

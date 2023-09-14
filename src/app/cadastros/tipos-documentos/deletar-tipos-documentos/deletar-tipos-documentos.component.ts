@@ -31,10 +31,10 @@ export class DeletarTiposDocumentosComponent implements OnInit, OnDestroy {
         this.parameters = [
           {parameter: 'id', value: Number(params.get('id'))}
         ];
-        this.service.getAll('cadastros_url', 'TiposDocumentos', this.parameters)
+        this.service.getSingle('cadastros_url', 'TiposDocumentos', this.parameters)
         .toPromise()
         .then(c => {
-          this.tipoDocumento = c[0];
+          this.tipoDocumento = c;
           this.label = `Tem certerza que deseja deletar o item ${this.tipoDocumento.descricao} ?`;
         })
         .catch(e => {

@@ -31,10 +31,10 @@ public ngOnInit(): void {
       this.parameters = [
         {parameter: 'id', value: Number(params.get('id'))}
       ];
-      this.service.getAll('cadastros_url', 'TiposDados', this.parameters)
+      this.service.getSingle('cadastros_url', 'TiposDados', this.parameters)
       .toPromise()
       .then(c => {
-        this.tipodado = c[0];
+        this.tipodado = c;
         this.label = `Tem certerza que deseja deletar o item ${this.tipodado.descricao} ?`;
       })
       .catch(e => {
