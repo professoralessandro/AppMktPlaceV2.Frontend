@@ -89,24 +89,28 @@ export class CommonService {
   }
 
   public ReturnEnumObjectByName(value: string, position): any {
-    switch(value.toLocaleLowerCase()) {
+    switch (value.toLocaleLowerCase()) {
+      case 'TipoDocumentoEnum'.toLocaleLowerCase():
+        return TipoDocumentoMapping[position];
       case 'blockTypeEnum'.toLocaleLowerCase():
-      return TipoDocumentoMapping[position];
-      case 'TipoBloqueioEnum'.toLocaleLowerCase():
-      return TipoBloqueioMapping[position];
+        return TipoBloqueioMapping[position];
       default:
-      return null;
+        return null;
     }
   }
 
   public ReturnValueMyEnumDescription(value: string, member) {
-    switch(value.toLocaleLowerCase()) {
+    switch (value.toLocaleLowerCase()) {
+      case 'TipoDocumentoEnum'.toLocaleLowerCase():
+        return Object.values(TipoDocumentoMapping).filter(c => typeof (c) == 'string').indexOf(member);
       case 'blockTypeEnum'.toLocaleLowerCase():
-        return Object.values(TipoDocumentoMapping).filter(c => typeof(c) == 'string').indexOf(member);
-      case 'TipoBloqueioEnum'.toLocaleLowerCase():
-        return Object.values(TipoBloqueioMapping).filter(c => typeof(c) == 'string').indexOf(member)
+        return Object.values(TipoBloqueioMapping).filter(c => typeof (c) == 'string').indexOf(member)
       default:
-      return null;
+        return null;
     }
+  }
+
+  public ReturnModalMessagErrorSuccess(messege: string, isSucsess: boolean = true) {
+    this.alertService.showAlert(messege, isSucsess ? 'success' : 'error');
   }
 }

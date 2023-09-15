@@ -6,8 +6,8 @@ export class Block {
   public itemBloqueadoId: string;
   public nomeBloqueio: string;
   public isBloqueiaAcesso: boolean;
-  public dataInicio?: Date;
-  public DataFim?: Date;
+  public dataInicio?: string | Date ;
+  public dataFim?: string | Date;
   public usuarioInclusaoId: string;
   public usuarioUltimaAlteracaoId?: string;
   public dataInclusao: Date;
@@ -21,7 +21,7 @@ export class Block {
     this.nomeBloqueio = '';
     this.isBloqueiaAcesso = false;
     this.dataInicio = null;
-    this.DataFim = null;
+    this.dataFim = null;
     this.usuarioInclusaoId = '';
     this.usuarioUltimaAlteracaoId = '';
     this.dataInclusao = new Date();

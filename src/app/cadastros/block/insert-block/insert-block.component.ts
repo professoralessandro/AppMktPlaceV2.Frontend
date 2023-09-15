@@ -5,7 +5,8 @@ import { QueryParameter } from 'src/app/models/query-parameter';
 import { HttpCommonService } from 'src/app/services/app-http-service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
-import { TipoBloqueioEnum, TipoBloqueioMapping } from 'src/app/Enums/tipo-bloqueio.enum';
+import { TipoBloqueioMapping } from 'src/app/Enums/tipo-bloqueio.enum';
+import { SelectParameter } from 'src/app/models/select-parameter';
 
 @Component({
   selector: 'app-insert-block',
@@ -19,9 +20,10 @@ export class InsertBlockComponent implements OnInit {
   public titleButton: string;
   public parameters: QueryParameter[];
   private rotaAnterior: string;
-  public itensToBlock: string[] = [];
+  public itensToBlock: SelectParameter[] = [];
+  public itemToBlockId: string;
 
-  public blockTypes = Object.values(TipoBloqueioMapping).filter(c => typeof(c) == 'string');
+  public blockTypes = Object.values(TipoBloqueioMapping).filter(c => typeof (c) == 'string');
   public blockTypesString: string[] = [];
 
   public constructor(
@@ -38,14 +40,16 @@ export class InsertBlockComponent implements OnInit {
         this.title = 'Editar bloqueio';
         this.titleButton = this.title.split(' ')[0];
         this.parameters = [
-          {parameter: 'blockId', value: params.get('id')}
+          { parameter: 'blockId', value: params.get('id') }
         ];
         this.service.getSingle('cadastros_url', 'Block/GetById', this.parameters)
           .toPromise()
           .then(c => {
             this.model = c;
-            this.model.blockTypeEnum = this.commonService.ReturnEnumObjectByName('tipobloqueioenum' ,this.model.blockTypeEnum);
-            debugger;
+            this.model.dataInicio = this.model.dataInicio.toString().split("T")[0];
+            this.model.dataFim = this.model.dataFim.toString().split("T")[0];
+            this.model.blockTypeEnum = this.commonService.ReturnEnumObjectByName('blockTypeEnum', this.model.blockTypeEnum);
+            this.LoadItemToBlockOption();
           })
           .catch(e => {
             this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o grupo.', false);
@@ -81,6 +85,12 @@ export class InsertBlockComponent implements OnInit {
   }
 
   public async incluir() {
+
+    if (this.model.itemBloqueadoId === '00000000-0000-0000-0000-000000000000' || this.commonService.isNullOrUndefined(this.model.itemBloqueadoId)) {
+      this.commonService.ReturnModalMessagErrorSuccess('Item para ser bloqueado e invalido.', false);
+      return;
+    }
+    this.model.blockTypeEnum = this.commonService.ReturnValueMyEnumDescription('blockTypeEnum', this.model.blockTypeEnum);
     if (this.isNew) {
       this.model.usuarioInclusaoId = new SystemParameterEnum().systemUser;
       this.model.dataInclusao = new Date();
@@ -95,6 +105,7 @@ export class InsertBlockComponent implements OnInit {
     } else {
       this.model.usuarioUltimaAlteracaoId = new SystemParameterEnum().systemUser;
       this.model.dataUltimaAlteracao = new Date();
+
       this.service.edit('cadastros_url', 'block', this.model)
         .toPromise()
         .then(c => {
@@ -111,31 +122,30 @@ export class InsertBlockComponent implements OnInit {
   }
 
   public onChange() {
-    debugger;
-    var item = this.commonService.ReturnValueMyEnumDescription('tipobloqueioenum', this.model.blockTypeEnum);
-    debugger;
+    this.LoadItemToBlockOption();
+  }
 
-    if (item === 0) {
-      this.parameters = [
-        {parameter: 'BlockTypeEnum', value: item}
-      ];
-      
-      this.service.getAll('cadastros_url', 'block/getitemtoblockbytype', this.parameters)
-            .toPromise()
-            .then(c => {
-              debugger;
-              this.itensToBlock = [];
-              c.forEach(element => {
-                debugger;
-                this.itensToBlock.push(element.ItemId);
-              });
-              // this.model.blockTypeEnum = this.commonService.ReturnEnumObjectByName('tipobloqueioenum' ,this.model.blockTypeEnum);
-              debugger;
-            })
-            .catch(e => {
-              this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o grupo.', false);
-            });
-    }
-    
+  private LoadItemToBlockOption() {
+    var item = this.commonService.ReturnValueMyEnumDescription('blockTypeEnum', this.model.blockTypeEnum);
+
+    this.parameters = [
+      { parameter: 'BlockTypeEnum', value: item }
+    ];
+
+    this.service.getAll('cadastros_url', 'block/getitemtoblockbytype', this.parameters)
+      .toPromise()
+      .then(c => {
+        this.itensToBlock = [];
+        if (c.length > 0) {
+          this.itensToBlock = c;
+        } else {
+          this.itensToBlock = [
+            { parameter: '00000000-0000-0000-0000-000000000000', value: 'Item Desconhecido' }
+          ];
+        }
+      })
+      .catch(e => {
+        this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o grupo.', false);
+      })
   }
 }

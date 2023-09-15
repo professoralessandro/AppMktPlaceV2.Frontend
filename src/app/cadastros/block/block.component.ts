@@ -70,7 +70,7 @@ export class BlockComponent implements OnInit {
       {parameter: 'pageNumber', value: this.pageNumber},
       {parameter: 'rowspPage', value: this.rownpPage}
     ];
-    
+
     // SETAR VALORES DO GRID
     this.gridService.setGridServiceValues(this.model, this.gridTitles, this.gridElements, this.apiUrl, this.endpointUrl, this.parameters, this.registerUrl, this.deleteUrl, true);
   }
@@ -83,6 +83,10 @@ export class BlockComponent implements OnInit {
   }
 
   public search() {
+    this.LoadGridComponent();
+  }
+
+  public LoadGridComponent() {
     //QUERY PARAMETERS
     this.pageNumber = 1;
     this.rownpPage = 10;

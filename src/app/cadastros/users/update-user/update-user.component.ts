@@ -51,7 +51,7 @@ export class UpdateUserComponent implements OnInit {
             this.model.sexo = this.ReturnSexoDescription(this.model.sexo);
             this.model.estadoCivil = this.ReturnEstadoCivilDescription(this.model.estadoCivil);
             this.replayPassWord = this.model.senha;
-            this.model.dataNascimento = this.model.dataNascimento.toString().replace("T00:00:00", "");
+            this.model.dataNascimento = this.model.dataNascimento.toString().split("T")[0];
           })
           .catch(e => {
             this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o usuário.', false);

@@ -1,48 +1,79 @@
 <div class="col-md-12 col-lg-12 mb-4 align-items-stretch">
-    <app-comp-title [title]="this.title"></app-comp-title>
-      <div class="card border-0 rounded-0 h-100">
-        <div class="card-body">
-          <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Bloqueio</label>
-              <input maxlength="150" type="text" class="form-control rounded-0"
-                placeholder="Informe o Grupo" [(ngModel)]="this.model.nomeBloqueio" [ngModelOptions]="{ standalone: true }"/>
-              <small id="configuração" class="form-text text-muted">Informe uma descrição para o cadastro.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputBlockType">Tipo de bloqueio</label>
-                <select [(ngModel)]="this.model.blockTypeEnum" [ngModelOptions]="{ standalone: true }" class="custom-select" name="state_raw" id="state_raw" required>
-                    <option [value]="undefined" selected>Selecione...</option>
-                    <option [value]="blockType" *ngFor="let blockType of this.blockTypes"> {{ blockType }}</option>
-                </select>
-                <small id="BlockType" class="form-text text-muted">Informe o tipo do documento para o cadastro.</small>
-            </div>
-
-            <!-- TODO: ADICIONAR CHAMADA COM OS ITENS A SEREM SELECIONADOS -->
-            <div class="form-group">
-              <label for="exampleInputBlockType">Tipo de bloqueio</label>
-              <select [(ngModel)]="this.model.blockTypeEnum" [ngModelOptions]="{ standalone: true }" (change)="onChange()" class="custom-select" name="state_raw" id="state_raw" required>
-                  <option [value]="undefined" selected>Selecione...</option>
-                  <option [value]="blockType" *ngFor="let blockType of this.blockTypes"> {{ blockType }}</option>
-              </select>
-              <small id="ItemBlockType" class="form-text text-muted">Informe o tipo do documento para o cadastro.</small>
-            </div>
-
-            <div class="custom-control custom-checkbox my-1 mr-sm-2 mb-3">
-              <input type="checkbox" class="custom-control-input"
-                id="customControlInline" [(ngModel)]="this.model.ativo" [ngModelOptions]="{ standalone: true }" />
-              <label class="custom-control-label" for="customControlInline">Ativo</label>
-            </div>
-
-            <!-- BUTTONS -->
-            <button type="button" class="btn btn-lightning rounded-0 mb-2 mr-2" (click)="incluir()">
-              {{this.titleButton}}
-            </button>
-            <button type="button" class="btn btn-outline-lightning rounded-0 mb-2" (click)="navigateToBack()">
-              Cancelar
-            </button>
-          </form>
+  <app-comp-title [title]="this.title"></app-comp-title>
+  <div class="card border-0 rounded-0 h-100">
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputTituloBloqueio">Título do Bloqueio</label>
+          <input maxlength="100" type="text" class="form-control rounded-0" placeholder="Informe o título do bloqueio"
+            [(ngModel)]="this.model.nomeBloqueio" [ngModelOptions]="{ standalone: true }" />
+          <small id="TituloBloqueio" class="form-text text-muted">Informe um titulo para o cadastro.</small>
         </div>
+
+        <div class="form-group">
+          <label for="exampleInputBlockType">Tipo de bloqueio</label>
+          <select [(ngModel)]="this.model.blockTypeEnum" [ngModelOptions]="{ standalone: true }" (change)="onChange()"
+            class="custom-select" name="state_raw" id="state_raw" required>
+            <option [value]="undefined" selected>Selecione...</option>
+            <option [value]="blockType" *ngFor="let blockType of this.blockTypes"> {{ blockType }}</option>
+          </select>
+          <small id="ItemBlockType" class="form-text text-muted">Informe o tipo do documento para o cadastro.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputBlockType">Item que deseja bloquear</label>
+          <select [(ngModel)]="this.model.itemBloqueadoId" [ngModelOptions]="{ standalone: true }" class="custom-select"
+            name="state_raw" id="state_raw" required>
+            <option [value]="undefined" selected>Selecione...</option>
+            <option [value]="itemToBlock.key" *ngFor="let itemToBlock of this.itensToBlock"> {{ itemToBlock.value }}
+            </option>
+          </select>
+          <small id="BlockType" class="form-text text-muted">Informe o tipo do documento para o cadastro.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputdataInicio">Data de início</label>
+          <input type="date" class="form-control rounded-0"
+            placeholder="Informe a data de início" [(ngModel)]="this.model.dataInicio" [ngModelOptions]="{ standalone: true }"/>
+          <small id="dataInicio" class="form-text text-muted">Informe a data de inicio do bloqueio.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputDataFinal">Data final</label>
+          <input type="date" class="form-control rounded-0"
+            placeholder="Informe a data de fim" [(ngModel)]="this.model.dataFim" [ngModelOptions]="{ standalone: true }"/>
+          <small id="dataFinal" class="form-text text-muted">Informe a data de fim do bloqueio.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputDescricao">Descrição do bloqueio (detalhes)</label>
+          <textarea class="form-control rounded-0" placeholder="Informe a descrição"
+            [(ngModel)]="this.model.blockdItemDescription" [ngModelOptions]="{ standalone: true }">
+            {{this.model.blockdItemDescription}}
+          </textarea>
+          <small id="configuração" class="form-text text-muted">Informe uma descrição para o cadastro.</small>
+        </div>
+
+        <div class="custom-control custom-checkbox my-1 mr-sm-2 mb-3">
+          <input type="checkbox" class="custom-control-input" id="customControlIsBloqueiaAcesso" [(ngModel)]="this.model.isBloqueiaAcesso"
+            [ngModelOptions]="{ standalone: true }" />
+          <label class="custom-control-label" for="customControlIsBloqueiaAcesso">Bloqueia Acesso ?</label>
+        </div>
+
+        <div class="custom-control custom-checkbox my-1 mr-sm-2 mb-3">
+          <input type="checkbox" class="custom-control-input" id="customControlInline" [(ngModel)]="this.model.ativo"
+            [ngModelOptions]="{ standalone: true }" />
+          <label class="custom-control-label" for="customControlInline">Ativo</label>
+        </div>
+
+        <!-- BUTTONS -->
+        <button type="button" class="btn btn-lightning rounded-0 mb-2 mr-2" (click)="incluir()">
+          {{this.titleButton}}
+        </button>
+        <button type="button" class="btn btn-outline-lightning rounded-0 mb-2" (click)="navigateToBack()">
+          Cancelar
+        </button>
+      </form>
     </div>
+  </div>
 </div>

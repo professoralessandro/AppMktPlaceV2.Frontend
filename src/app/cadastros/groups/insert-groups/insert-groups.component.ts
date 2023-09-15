@@ -35,13 +35,10 @@ export class InsertGroupsComponent implements OnInit {
         this.parameters = [
           {parameter: 'groupId', value: params.get('id')}
         ];
-        debugger;
         this.service.getSingle('cadastros_url', 'Group/GetById', this.parameters)
           .toPromise()
           .then(c => {
-            debugger;
             this.model = c;
-            debugger;
           })
           .catch(e => {
             this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o grupo.', false);
