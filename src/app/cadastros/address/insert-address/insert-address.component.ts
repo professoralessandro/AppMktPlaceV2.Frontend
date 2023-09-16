@@ -37,7 +37,7 @@ export class InsertAddressComponent implements OnInit {
     this.router.paramMap.subscribe((params) => {
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.isNew = false;
-        this.title = 'Editar address';
+        this.title = 'Editar endereço';
         this.titleButton = this.title.split(' ')[0];
         this.parameters = [
           {parameter: 'addressId', value: params.get('id')}

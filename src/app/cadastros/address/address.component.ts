@@ -13,8 +13,8 @@ import { projectUrls } from 'src/environments/endpoints-environment';
 })
 export class AddressComponent implements OnInit {
 
-  public title = 'Busca por address';
-  public gridTitle = 'Address';
+  public title = 'Busca por endereço';
+  public gridTitle = 'Endereço';
   public model = 'Address';
   public id: string;
   public usuario: string;
@@ -52,7 +52,7 @@ export class AddressComponent implements OnInit {
 
     this.loaderService.SetLoaderState(true);
 
-    this.gridTitle = 'Address';
+    this.gridTitle = 'Endereço';
     this.title = 'Busca de address';
     this.gridTitles = ['Usuario', 'Tipo de endereço', 'Logradouro', 'Ativo'];
     this.gridElements = ['usuario', 'addressTypeEnum', 'logradouro', 'ativo'];
