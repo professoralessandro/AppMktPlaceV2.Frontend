@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Block } from '../block';
 import { QueryParameter } from 'src/app/models/query-parameter';
+import { Delivery } from '../delivery';
 import { HttpCommonService } from 'src/app/services/app-http-service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
-  selector: 'app-delete-block',
-  templateUrl: './delete-block.component.html',
-  styleUrls: ['./delete-block.component.scss']
+  selector: 'app-delete-delivery',
+  templateUrl: './delete-delivery.component.html',
+  styleUrls: ['./delete-delivery.component.scss']
 })
-export class DeleteBlockComponent implements OnInit {
+export class DeleteDeliveryComponent implements OnInit {
   // ATRIBUTTES
   public title: string;
   private rotaAnterior: string;
   private parameters: QueryParameter[];
   public label: string;
-  private block: Block;
+  private delivery: Delivery;
 
   constructor(
     private service: HttpCommonService,
@@ -29,16 +29,16 @@ export class DeleteBlockComponent implements OnInit {
     this.router.paramMap.subscribe((params) => {
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.parameters = [
-          { parameter: 'blockId', value: params.get('id') }
+          { parameter: 'deliveryId', value: params.get('id') }
         ];
-        this.service.getSingle('cadastros_url', 'block/getbyid', this.parameters)
+        this.service.getSingle('cadastros_url', 'delivery/getbyid', this.parameters)
           .toPromise()
           .then(c => {
-            this.block = c;
-            this.label = `Tem certerza que deseja deletar o item ${this.block.nomeBloqueio} ?`;
+            this.delivery = c;
+            this.label = `Tem certerza que deseja deletar o item ${this.delivery.nomeRecebedor} ?`;
           })
           .catch(e => {
-            this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o block.', false);
+            this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o delivery.', false);
           });
       }
     });
@@ -49,11 +49,11 @@ export class DeleteBlockComponent implements OnInit {
   }
 
   private initializeComponent(): void {
-    this.title = 'Deletar block';
+    this.title = 'Deletar delivery';
     this.label = '';
     this.rotaAnterior = './cadastros/teste';
     this.parameters = [];
-    this.block = new Block();
+    this.delivery = new Delivery();
   }
 
   private destroyComponent(): void {
@@ -61,15 +61,15 @@ export class DeleteBlockComponent implements OnInit {
     this.label = null;
     this.rotaAnterior = null;
     this.parameters = null;
-    this.block = null;
+    this.delivery = null;
   }
 
   public deletar(): void {
-    this.service.delete('cadastros_url', 'block', this.block.identifier)
+    this.service.delete('cadastros_url', 'delivery', this.delivery.identifier)
       .toPromise()
       .then(c => {
         this.commonService.responseActionWithNavigation
-          (this.rotaAnterior, `Item<br>${this.block.nomeBloqueio}<br>Deletado com sucesso.`, true);
+          (this.rotaAnterior, `Item<br>${this.delivery.nomeRecebedor}<br>Deletado com sucesso.`, true);
       })
       .catch(e => {
         this.commonService.responseActionWithNavigation(this.rotaAnterior, e.error, false);

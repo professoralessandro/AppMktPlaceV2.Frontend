@@ -43,7 +43,6 @@ export class GridCommonService {
 
       this.gridService.initializeAtributtes();
 
-      // VERIFICAR AONDE USA ISSO
       this.gridService.model = model;
       this.loaderService.SetLoaderState(true);
 
@@ -52,15 +51,14 @@ export class GridCommonService {
       .then(c => {
         if (c.length > 0) {
           this.gridService.gridBind.gridObjectBinded = c;
-          // ADICIONAR GRID TITLES ATTRIBUTES E ATRIBUTOS DINAMICOS
+
           this.gridService.addGridTitles(gridTitles, gridElements);
 
           let actions: ColunmAction[] = [];
           c.map(element => {
             actions.push(this.gridService
-              // .makeActionGridLine('edit', element.Id, false, 'far fa-edit', '/cadastros/teste/cadastro/', element.descricao));
               .makeActionGridLine('edit', element.identifier, permission.isUpdateDisabled, 'far fa-edit', registerUpdateRoute, objectTitle));
-              // actions.push(this.gridService.makeActionGridLine('delete', element.Id, !element.ativo, 'far fa-trash-alt', '/cadastros/teste/deletar/', element.descricao));
+
             actions.push(this.gridService.makeActionGridLine('delete', element.identifier, !element.ativo ? !element.ativo : permission.isDeleteDisabled, 'far fa-trash-alt', deleteRoute, objectTitle));
 
             this.gridService.addGridLine(this.ReturnaddGridLineValues(element, gridElements), actions);
@@ -99,7 +97,6 @@ export class GridCommonService {
             elements[element] = new DatePipe('en-US').transform(elements[element], 'dd/MM/yyyy  HH:mm:ss');
           }
         }
-        // ERRO APARENTEMENTE AQUI
 
         gridValues.push(elements[element].toString());
       });

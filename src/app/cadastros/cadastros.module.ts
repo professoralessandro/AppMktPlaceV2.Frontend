@@ -46,6 +46,14 @@ import { BlockComponent } from './block/block.component';
 import { InsertBlockComponent } from './block/insert-block/insert-block.component';
 import { DeleteBlockComponent } from './block/delete-block/delete-block.component';
 import { BlockRoutingModule } from './block/block.routing';
+import { DeliveryComponent } from './delivery/delivery.component';
+import { InsertDeliveryComponent } from './delivery/insert-delivery/insert-delivery.component';
+import { DeleteDeliveryComponent } from './delivery/delete-delivery/delete-delivery.component';
+import { AddressComponent } from './address/address.component';
+import { InsertAddressComponent } from './address/insert-address/insert-address.component';
+import { DeleteAddressComponent } from './address/delete-address/delete-address.component';
+import { AddressRoutingModule } from './address/address.routing';
+import { DeliveryRoutingModule } from './delivery/delivery.routing';
 
 
 @NgModule({
@@ -82,6 +90,12 @@ import { BlockRoutingModule } from './block/block.routing';
     BlockComponent,
     InsertBlockComponent,
     DeleteBlockComponent,
+    DeliveryComponent,
+    InsertDeliveryComponent,
+    DeleteDeliveryComponent,
+    AddressComponent,
+    InsertAddressComponent,
+    DeleteAddressComponent,
   ],
   imports: [
     CommonModule,
@@ -96,6 +110,8 @@ import { BlockRoutingModule } from './block/block.routing';
     GroupsRoutingModule,
     UserRoutingModule,
     BlockRoutingModule,
+    AddressRoutingModule,
+    DeliveryRoutingModule,
     RouterModule,
     NgxMaskModule.forRoot(),
   ]

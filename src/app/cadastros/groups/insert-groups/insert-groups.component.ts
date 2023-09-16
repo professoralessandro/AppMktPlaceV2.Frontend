@@ -76,9 +76,7 @@ export class InsertGroupsComponent implements OnInit {
   public async incluir() {
     if (this.isNew) {
       this.model.usuarioInclusaoId = new SystemParameterEnum().systemUser;
-      // this.model.usuarioUltimaAlteracaoId = new SystemParameterEnum().systemUser;
       this.model.dataInclusao = new Date();
-      // this.model.dataUltimaAlteracao = new Date();
       this.service.insert('cadastros_url', 'group', this.model)
         .toPromise()
         .then(c => {

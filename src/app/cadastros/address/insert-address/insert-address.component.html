@@ -1,0 +1,114 @@
+<div class="col-md-12 col-lg-12 mb-4 align-items-stretch">
+    <app-comp-title [title]="this.title"></app-comp-title>
+    <div class="card border-0 rounded-0 h-100">
+        <div class="card-body">
+            <form>
+
+                <div class="form-group">
+                    <label for="exampleInputUsuario">Usuario</label>
+                    <select [(ngModel)]="this.model.usuarioId" [ngModelOptions]="{ standalone: true }"
+                        class="custom-select" name="state_raw" id="state_raw" required>
+                        <option [value]="undefined" selected>Selecione...</option>
+                        <option [value]="user.key" *ngFor="let user of this.usersSelect"> {{ user.value }}
+                        </option>
+                    </select>
+                    <small id="BlockType" class="form-text text-muted">Informe o tipo do documento para o
+                        cadastro.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputAddressType">*Tipo de endereço</label>
+                    <select [(ngModel)]="this.model.addressTypeEnum" [ngModelOptions]="{ standalone: true }"
+                        class="custom-select" name="state_raw" id="state_raw" required>
+                        <option [value]="undefined" selected>Selecione...</option>
+                        <option [value]="addressType" *ngFor="let addressType of this.addressTypes"> {{ addressType }}
+                        </option>
+                    </select>
+                    <small id="AddressType" class="form-text text-muted">*Informe o tipo do documento para o
+                        cadastro.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputLogradouro">*Logradouro</label>
+                    <input maxlength="50" type="text" class="form-control rounded-0" placeholder="*Informe o logradouro"
+                        [(ngModel)]="this.model.logradouro" [ngModelOptions]="{ standalone: true }" />
+                    <small id="Logradouro" class="form-text text-muted">*Informe um logradouro para o cadastro.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputNumero">*Número</label>
+                    <input maxlength="10" type="text" class="form-control rounded-0" placeholder="*Informe o número"
+                        [(ngModel)]="this.model.numero" [ngModelOptions]="{ standalone: true }" />
+                    <small id="Numero" class="form-text text-muted">*Informe um número para o cadastro.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputComplemento">Complemento</label>
+                    <input maxlength="10" type="text" class="form-control rounded-0"
+                        placeholder="*Informe um complemento" [(ngModel)]="this.model.complemento"
+                        [ngModelOptions]="{ standalone: true }" />
+                    <small id="Complemento" class="form-text text-muted">Informe um complemento para o cadastro.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputBairro">Bairro</label>
+                    <input maxlength="30" type="text" class="form-control rounded-0" placeholder="Informe o bairro"
+                        [(ngModel)]="this.model.bairro" [ngModelOptions]="{ standalone: true }" />
+                    <small id="Bairro" class="form-text text-muted">Informe um bairro para o cadastro.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputCidade">*Cidade</label>
+                    <input maxlength="30" type="text" class="form-control rounded-0" placeholder="*Informe a cidade"
+                        [(ngModel)]="this.model.cidade" [ngModelOptions]="{ standalone: true }" />
+                    <small id="Cidade" class="form-text text-muted">Informe uma cidade para o cadastro.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEstado">*Estado</label>
+                    <input maxlength="2" type="text" class="form-control rounded-0"
+                        placeholder="*Informe o estado com 2 caracteres exemplo: SP" [(ngModel)]="this.model.estado"
+                        [ngModelOptions]="{ standalone: true }" />
+                    <small id="Estado" class="form-text text-muted">*Informe o estado com 2 caracteres exemplo:
+                        SP.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputCEP">CEP</label>
+                    <input maxlength="8" type="text" class="form-control rounded-0" placeholder="Informe o CEP"
+                        [(ngModel)]="this.model.cep" [ngModelOptions]="{ standalone: true }" />
+                    <small id="cep" class="form-text text-muted">*Informe o CEP para o cadastro.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPontoReferencia">Informe um ponto de referência</label>
+                    <textarea class="form-control rounded-0" placeholder="Informe a descrição" maxlength="100"
+                        [(ngModel)]="this.model.pontoReferencia" [ngModelOptions]="{ standalone: true }">
+                      {{this.model.pontoReferencia}}
+                    </textarea>
+                    <small id="PontoReferencia" class="form-text text-muted">Informe uma ponto de referência para o
+                        cadastro.</small>
+                </div>
+
+                <div class="custom-control custom-checkbox my-1 mr-sm-2 mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customControlPrincipal"
+                        [(ngModel)]="this.model.isPrincipal" [ngModelOptions]="{ standalone: true }" />
+                    <label class="custom-control-label" for="customControlPrincipal">Principal ?</label>
+                </div>
+
+                <div class="custom-control custom-checkbox my-1 mr-sm-2 mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customControlInline"
+                        [(ngModel)]="this.model.ativo" [ngModelOptions]="{ standalone: true }" />
+                    <label class="custom-control-label" for="customControlInline">Ativo</label>
+                </div>
+
+                <button type="button" class="btn btn-lightning rounded-0 mb-2 mr-2" (click)="incluir()">
+                    {{this.titleButton}}
+                </button>
+                <button type="button" class="btn btn-outline-lightning rounded-0 mb-2" (click)="navigateToBack()">
+                    Cancelar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

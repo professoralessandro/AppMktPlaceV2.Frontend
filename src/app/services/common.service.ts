@@ -6,6 +6,7 @@ import { LoaderService } from '../components/loader/loader.service';
 import { QueryParameter } from '../models/query-parameter';
 import { TipoBloqueioMapping } from '../Enums/tipo-bloqueio.enum';
 import { TipoDocumentoMapping } from '../Enums/tipo-documento.enum';
+import { AddressTypeMapping } from '../Enums/address-type.enum';
 
 
 
@@ -94,6 +95,8 @@ export class CommonService {
         return TipoDocumentoMapping[position];
       case 'blockTypeEnum'.toLocaleLowerCase():
         return TipoBloqueioMapping[position];
+      case 'addressTypeEnum'.toLocaleLowerCase():
+        return AddressTypeMapping[position];
       default:
         return null;
     }
@@ -104,7 +107,9 @@ export class CommonService {
       case 'TipoDocumentoEnum'.toLocaleLowerCase():
         return Object.values(TipoDocumentoMapping).filter(c => typeof (c) == 'string').indexOf(member);
       case 'blockTypeEnum'.toLocaleLowerCase():
-        return Object.values(TipoBloqueioMapping).filter(c => typeof (c) == 'string').indexOf(member)
+        return Object.values(TipoBloqueioMapping).filter(c => typeof (c) == 'string').indexOf(member);
+      case 'addressTypeEnum'.toLocaleLowerCase():
+        return Object.values(AddressTypeMapping).filter(c => typeof (c) == 'string').indexOf(member);
       default:
         return null;
     }
