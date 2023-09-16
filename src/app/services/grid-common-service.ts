@@ -85,6 +85,11 @@ export class GridCommonService {
 
       gridElements.forEach(element => {
         // VALIDACAO DE O OBJETO E UM TIPO DATA PARA FORMACACAO
+        if (this.commonService.isNullOrUndefined(elements[element])) {
+          // HERE DEFINES GRID LINE VALUE NULL OR UNDEFINED HAS -
+          elements[element] = "";
+        }
+
         if (element.toLocaleLowerCase().indexOf('enum') > -1) {
           elements[element] = this.commonService.ReturnEnumObjectByName(element, elements[element]);
         }
@@ -94,6 +99,8 @@ export class GridCommonService {
             elements[element] = new DatePipe('en-US').transform(elements[element], 'dd/MM/yyyy  HH:mm:ss');
           }
         }
+        // ERRO APARENTEMENTE AQUI
+
         gridValues.push(elements[element].toString());
       });
 
