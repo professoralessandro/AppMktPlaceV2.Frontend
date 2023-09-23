@@ -6,10 +6,10 @@ import { InsertAddressComponent } from './insert-address/insert-address.componen
 import { DeleteAddressComponent } from './delete-address/delete-address.component';
 
 const routes: Routes = [
-  { path: 'teste', component: AddressComponent },
-  { path: 'teste/cadastro', component: InsertAddressComponent },
-  { path: 'teste/cadastro/:id', component: InsertAddressComponent },
-  { path: 'teste/deletar/:id', component: DeleteAddressComponent }
+  { path: 'address', component: AddressComponent },
+  { path: 'address/cadastro', component: InsertAddressComponent },
+  { path: 'address/cadastro/:id', component: InsertAddressComponent },
+  { path: 'address/deletar/:id', component: DeleteAddressComponent }
 ];
 
 @NgModule({

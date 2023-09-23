@@ -4,7 +4,9 @@ import { TipoEntregaEnum } from "src/app/Enums/tipo-entrega.enum";
 export class Delivery {
     public identifier?: string;
     public responsavelEntregaId : string;
+    public deliverymanDescription : string;
     public destinatarioId : string;
+    public receiverDescription : string;
     public deliveryTypeEnum: TipoEntregaEnum | string;
     public dataPrevistaEntrega?: Date | string;
     public dataEfetivaEnrega: Date | string;

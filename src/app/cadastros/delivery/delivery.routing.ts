@@ -6,10 +6,10 @@ import { InsertDeliveryComponent } from './insert-delivery/insert-delivery.compo
 import { DeleteDeliveryComponent } from './delete-delivery/delete-delivery.component';
 
 const routes: Routes = [
-  { path: 'delivery', component: DeliveryComponent },
-  { path: 'delivery/cadastro', component: InsertDeliveryComponent },
-  { path: 'delivery/cadastro/:id', component: InsertDeliveryComponent },
-  { path: 'delivery/deletar/:id', component: DeleteDeliveryComponent }
+  { path: 'teste', component: DeliveryComponent },
+  { path: 'teste/cadastro', component: InsertDeliveryComponent },
+  { path: 'teste/cadastro/:id', component: InsertDeliveryComponent },
+  { path: 'teste/deletar/:id', component: DeleteDeliveryComponent }
 ];
 
 @NgModule({

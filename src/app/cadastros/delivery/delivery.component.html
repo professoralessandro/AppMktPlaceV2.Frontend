@@ -1,1 +1,50 @@
-<h1>Delyvery Works<h1>
+<app-comp-title [title]="this.title"></app-comp-title>
+<div class="card border-0 rounded-0">
+    <div class="col-md-12 col-lg-12 mb-12 align-items-stretch">
+        <div class="card-title mb-1 p-3">
+            <h5>Filtro avançado de busca</h5>
+        </div>
+        <div class="card border-0 rounded-0 h-100">
+            <div class="form-group">
+                <label for="InputId">Identificador</label>
+                <input maxlength="36" [(ngModel)]="this.id" class="form-control rounded-0" id="InputDescricao"
+                    aria-describedby="emailHelp" placeholder="Informe o id">
+            </div>
+            <div class="form-group">
+                <label for="InputReceiver">Destinatário</label>
+                <input type="text" [(ngModel)]="this.destinatario" class="form-control rounded-0" id="InputReceiver"
+                    aria-describedby="InputReceiver" maxlength="100" placeholder="Informe o destinatário">
+            </div>
+            <div class="form-group">
+                <label for="InputDeliveryMan">Responsável pela entrega</label>
+                <input type="text" [(ngModel)]="this.responsavelEntrega" class="form-control rounded-0" id="InputDeliveryMan"
+                    aria-describedby="InputDeliveryMan" maxlength="100" placeholder="Informe o responsável pela entrega">
+            </div>
+            <div class="form-group">
+                <label for="InputDocumentNumber">Número documento</label>
+                <input type="text" [(ngModel)]="this.nmrDocumento" class="form-control rounded-0" id="InputDocumentNumber"
+                    aria-describedby="InputDocumentNumber" maxlength="50" placeholder="Informe o número documento">
+            </div>
+            <div class="form-group">
+                <label for="InputReceiverName">Nome do recebedor</label>
+                <input type="text" [(ngModel)]="this.nomeRecebedor" class="form-control rounded-0" id="InputReceiverName"
+                    aria-describedby="InputReceiverName" maxlength="100" placeholder="Informe o nome do recebedor">
+            </div>
+            <div class="form-group">
+                <label for="formControlActive">Ativo</label>
+                <select class="form-control rounded-0" id="formControlActive" [(ngModel)]="this.ativo">
+                    <option value="undefined" selected>Selecione...</option>
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <button (click)="search()" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-search"></i>
+                    Pesquisar</button>
+            </div>
+        </div>
+    </div>
+    <app-grid [title]="this.gridTitle" [isExistsAction]="true" [previusLabel]="'Anterior'"
+        [nextLabel]="'Próxima'"></app-grid>
+</div>

@@ -7,6 +7,7 @@ import { QueryParameter } from '../models/query-parameter';
 import { TipoBloqueioMapping } from '../Enums/tipo-bloqueio.enum';
 import { TipoDocumentoMapping } from '../Enums/tipo-documento.enum';
 import { AddressTypeMapping } from '../Enums/address-type.enum';
+import { DeliveryTypeMapping } from '../Enums/tipo-entrega.enum';
 
 
 
@@ -97,8 +98,10 @@ export class CommonService {
         return TipoBloqueioMapping[position];
       case 'addressTypeEnum'.toLocaleLowerCase():
         return AddressTypeMapping[position];
+      case 'deliveryTypeEnum'.toLocaleLowerCase():
+        return DeliveryTypeMapping[position];
       default:
-        return null;
+        return 'Unknow';
     }
   }
 

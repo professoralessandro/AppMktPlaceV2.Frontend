@@ -15,6 +15,7 @@ export const projectUrls = {
   GetAllBlockPaginated: 'block/paginated',
   GetAllUAddress: 'address/getall',
   GetAllAddressPaginated: 'address/paginated',
+  GetAllDeliveryPaginated: 'delivery/paginated',
 };
 
 /*
