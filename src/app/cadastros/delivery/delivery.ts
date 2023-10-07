@@ -13,7 +13,7 @@ export class Delivery {
     public nmrDocumento: string
     public documentTypeEnum: TipoDocumentoEnum | string;
     public nomeRecebedor: string;
-    public isEntregueTitular: boolean;
+    public isEntregaTitular: boolean;
     public usuarioInclusaoId: string;
     public usuarioUltimaAlteracaoId?: string;
     public dataInclusao: Date;

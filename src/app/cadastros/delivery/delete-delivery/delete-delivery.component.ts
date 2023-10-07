@@ -29,7 +29,7 @@ export class DeleteDeliveryComponent implements OnInit {
     this.router.paramMap.subscribe((params) => {
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.parameters = [
-          { parameter: 'deliveryId', value: params.get('id') }
+          { parameter: 'id', value: params.get('id') }
         ];
         this.service.getSingle('cadastros_url', 'delivery/getbyid', this.parameters)
           .toPromise()

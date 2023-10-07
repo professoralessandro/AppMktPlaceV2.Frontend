@@ -36,7 +36,6 @@ export class GridCommonService {
 
     //BUSCA PAGINADA
     public async searchPaginated(parameters: QueryParameter[], model: string, apiUrl: string, endpointUrl: string, objectTitle: string, registerUpdateRoute: string, deleteRoute: string, gridTitles :string[], gridElements :string[]) {
-      debugger;
       // PERMISSION RESEARCH
       var permission = new ActionPermissions();
 
@@ -51,14 +50,12 @@ export class GridCommonService {
       .toPromise()
       .then(c => {
         if (c.length > 0) {
-          debugger;
           this.gridService.gridBind.gridObjectBinded = c;
 
           this.gridService.addGridTitles(gridTitles, gridElements);
 
           let actions: ColunmAction[] = [];
           c.map(element => {
-            debugger;
             actions.push(this.gridService.makeActionGridLine('edit', element.identifier, permission.isUpdateDisabled, 'far fa-edit', registerUpdateRoute, objectTitle));
 
             actions.push(this.gridService.makeActionGridLine('delete', element.identifier, !element.ativo ? !element.ativo : permission.isDeleteDisabled, 'far fa-trash-alt', deleteRoute, objectTitle));

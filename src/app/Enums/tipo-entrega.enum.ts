@@ -6,8 +6,8 @@ export enum TipoEntregaEnum
     EntregaTeste = 9999999,
 }
 
-export const DeliveryTypeMapping = {
-    [TipoEntregaEnum.EmMaos]: "Retirada em mãos",
+export const TipoEntregaMapping = {
+    [TipoEntregaEnum.EmMaos]: "Retirada em Mãos",
     [TipoEntregaEnum.Correios]: "Correios",
     [TipoEntregaEnum.Terceiro]: "Terceiros",
 }
