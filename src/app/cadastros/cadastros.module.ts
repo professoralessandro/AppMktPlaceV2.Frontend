@@ -26,6 +26,9 @@ import { InsertAddressComponent } from './address/insert-address/insert-address.
 import { DeleteAddressComponent } from './address/delete-address/delete-address.component';
 import { AddressRoutingModule } from './address/address.routing';
 import { DeliveryRoutingModule } from './delivery/delivery.routing';
+import { ProductComponent } from './product/product.component';
+import { InsertProductComponent } from './product/insert-product/insert-product.component';
+import { DeleteProductComponent } from './product/delete-product/delete-product.component';
 
 
 @NgModule({
@@ -47,6 +50,9 @@ import { DeliveryRoutingModule } from './delivery/delivery.routing';
     AddressComponent,
     InsertAddressComponent,
     DeleteAddressComponent,
+    ProductComponent,
+    InsertProductComponent,
+    DeleteProductComponent,
   ],
   imports: [
     CommonModule,

@@ -13,9 +13,11 @@ export const projectUrls = {
   DeleteUserUrl: '/cadastros/teste/deletar/',
   GetAllBlock: 'block/getall',
   GetAllBlockPaginated: 'block/paginated',
-  GetAllUAddress: 'address/getall',
+  GetAllAddress: 'address/getall',
   GetAllAddressPaginated: 'address/paginated',
   GetAllDeliveryPaginated: 'delivery/paginated',
+  GetAllProduct: 'product/getall',
+  GetAllProductPaginated: 'product/paginated',
 };
 
 /*
