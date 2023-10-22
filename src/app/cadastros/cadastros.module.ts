@@ -26,11 +26,10 @@ import { InsertAddressComponent } from './address/insert-address/insert-address.
 import { DeleteAddressComponent } from './address/delete-address/delete-address.component';
 import { AddressRoutingModule } from './address/address.routing';
 import { DeliveryRoutingModule } from './delivery/delivery.routing';
-import { ProductComponent } from './product/product.component';
-import { InsertProductComponent } from './product/insert-product/insert-product.component';
-import { DeleteProductComponent } from './product/delete-product/delete-product.component';
-
-
+import { ProdutoRoutingModule } from './produto/produto.routing';
+import { ProdutoComponent } from './produto/produto.component';
+import { InsertProdutoComponent } from './produto/insert-produto/insert-produto.component';
+import { DeleteProdutoComponent } from './produto/delete-produto/delete-produto.component';
 @NgModule({
   declarations: [
     GridComponent,
@@ -50,9 +49,9 @@ import { DeleteProductComponent } from './product/delete-product/delete-product.
     AddressComponent,
     InsertAddressComponent,
     DeleteAddressComponent,
-    ProductComponent,
-    InsertProductComponent,
-    DeleteProductComponent,
+    ProdutoComponent,
+    InsertProdutoComponent,
+    DeleteProdutoComponent,
   ],
   imports: [
     CommonModule,
@@ -62,6 +61,7 @@ import { DeleteProductComponent } from './product/delete-product/delete-product.
     BlockRoutingModule,
     AddressRoutingModule,
     DeliveryRoutingModule,
+    ProdutoRoutingModule,
     RouterModule,
     NgxMaskModule.forRoot(),
   ]

@@ -70,7 +70,7 @@ export class InsertAddressComponent implements OnInit {
   private initializeComponent(): void {
     this.model = new Address();
     this.isNew = false;
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/testee';
     this.parameters = [];
     this.title = '';
   }

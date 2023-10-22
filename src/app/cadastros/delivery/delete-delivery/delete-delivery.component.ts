@@ -51,7 +51,7 @@ export class DeleteDeliveryComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar delivery';
     this.label = '';
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/test';
     this.parameters = [];
     this.delivery = new Delivery();
   }

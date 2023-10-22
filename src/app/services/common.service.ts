@@ -8,7 +8,6 @@ import { TipoBloqueioMapping } from '../Enums/tipo-bloqueio.enum';
 import { TipoDocumentoMapping } from '../Enums/tipo-documento.enum';
 import { AddressTypeMapping } from '../Enums/address-type.enum';
 import { TipoEntregaMapping } from '../Enums/tipo-entrega.enum';
-import { ProductTypeMapping } from '../Enums/product-type.enum';
 
 
 
@@ -101,8 +100,8 @@ export class CommonService {
         return AddressTypeMapping[position];
       case 'deliveryTypeEnum'.toLocaleLowerCase():
         return TipoEntregaMapping[position];
-      case 'producttypeenum'.toLocaleLowerCase():
-          return ProductTypeMapping[position];
+      //case 'producttypeenum'.toLocaleLowerCase():
+      //    return ProductTypeMapping[position];
       default:
         return 'Unknow';
     }
@@ -116,8 +115,8 @@ export class CommonService {
         return Object.values(TipoBloqueioMapping).filter(c => typeof (c) == 'string').indexOf(member);
       case 'addressTypeEnum'.toLocaleLowerCase():
         return Object.values(AddressTypeMapping).filter(c => typeof (c) == 'string').indexOf(member);
-      case 'producttypeenum'.toLocaleLowerCase():
-        return Object.values(ProductTypeMapping).filter(c => typeof (c) == 'string').indexOf(member);
+      //case 'producttypeenum'.toLocaleLowerCase():
+      //  return Object.values(ProductTypeMapping).filter(c => typeof (c) == 'string').indexOf(member);
       default:
         return null;
     }

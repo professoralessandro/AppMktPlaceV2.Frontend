@@ -71,7 +71,7 @@ export class InsertBlockComponent implements OnInit {
   private initializeComponent(): void {
     this.model = new Block();
     this.isNew = false;
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/testee';
     this.parameters = [];
     this.title = '';
   }

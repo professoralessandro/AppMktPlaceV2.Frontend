@@ -51,7 +51,7 @@ export class DeleteAddressComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar address';
     this.label = '';
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/testee';
     this.parameters = [];
     this.address = new Address();
   }
