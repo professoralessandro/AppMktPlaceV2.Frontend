@@ -75,7 +75,7 @@ export class InsertDeliveryComponent implements OnInit {
   private initializeComponent(): void {
     this.model = new Delivery();
     this.isNew = false;
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/test';
     this.parameters = [];
     this.title = '';
     this.service.getAll('cadastros_url', 'user/ReturnUsersToSelect')

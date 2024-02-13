@@ -60,7 +60,7 @@ export class InsertGroupsComponent implements OnInit {
   private initializeComponent(): void {
     this.model = new Groups();
     this.isNew = false;
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/test';
     this.parameters = [];
     this.title = '';
   }

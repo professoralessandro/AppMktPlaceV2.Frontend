@@ -56,10 +56,11 @@ export class GridCommonService {
 
           let actions: ColunmAction[] = [];
           c.map(element => {
+            debugger;
             actions.push(this.gridService.makeActionGridLine('edit', element.identifier, permission.isUpdateDisabled, 'far fa-edit', registerUpdateRoute, objectTitle));
 
             actions.push(this.gridService.makeActionGridLine('delete', element.identifier, !element.ativo ? !element.ativo : permission.isDeleteDisabled, 'far fa-trash-alt', deleteRoute, objectTitle));
-
+            debugger;
             this.gridService.addGridLine(this.ReturnaddGridLineValues(element, gridElements), actions);
 
             actions = [];
@@ -79,14 +80,14 @@ export class GridCommonService {
 
     private ReturnaddGridLineValues(elements: any[], gridElements:string[]): string[] {
       let gridValues: string[] = [];
-
+      debugger;
       gridElements.forEach(element => {
         // VALIDACAO DE O OBJETO E UM TIPO DATA PARA FORMACACAO
         if (this.commonService.isNullOrUndefined(elements[element])) {
           // HERE DEFINES GRID LINE VALUE NULL OR UNDEFINED HAS -
           elements[element] = "";
         }
-
+        debugger;
         if (element.toLocaleLowerCase().indexOf('enum') > -1) {
           elements[element] = this.commonService.ReturnEnumObjectByName(element, elements[element]);
         }

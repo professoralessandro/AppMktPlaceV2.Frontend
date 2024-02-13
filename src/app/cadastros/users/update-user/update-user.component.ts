@@ -76,7 +76,7 @@ export class UpdateUserComponent implements OnInit {
     this.sexoOptions = ['Masculino', 'Feminino', 'Outros'];
     this.estadoCivilOptions = ['Solteiro(a)', 'Casado(a)', 'Outros'];
     this.isNew = false;
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/test';
     this.parameters = [];
     this.title = '';
     this.model.ativo = true;

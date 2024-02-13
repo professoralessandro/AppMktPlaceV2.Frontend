@@ -51,7 +51,7 @@ export class DeleteGroupsComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar grupo';
     this.label = '';
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/test';
     this.parameters = [];
     this.grupo = new Groups();
   }

@@ -51,7 +51,7 @@ export class DeleteUserComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar usuário';
     this.label = '';
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/test';
     this.parameters = [];
     this.usuario = new User();
   }
