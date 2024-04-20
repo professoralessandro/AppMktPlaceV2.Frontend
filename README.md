@@ -40,11 +40,11 @@ npm install -g @angular/cli
 ## Quick start
 
 ```
-npm install --unsafe-perm -g node-sass
+1) npm install --unsafe-perm -g node-sass
 
-npm install --force
+2) npm install --force
 
-ng serve
+3) ng serve
 ```
 
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
