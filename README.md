@@ -42,7 +42,7 @@ npm install -g @angular/cli
 ```
 npm install --unsafe-perm -g node-sass
 
-npm install
+npm install --force
 
 ng serve
 ```
