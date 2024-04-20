@@ -11,10 +11,36 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ![lightining-screenshot](https://user-images.githubusercontent.com/25878302/58369258-33f20900-7ef8-11e9-8ff3-b277cb7ed7b4.PNG)
 
+## Requires
+
+```
+node v20.12.2
+
+npm 10.5.1
+```
+
+## Unstall Angular
+
+```
+1) Instalar o node.js para Windows 64 bits
+
+2) Baixar o Cmder, executá-lo como Administrador e rodar o comando: 
+npm install -g @angular/cli
+
+3) Ainda no Cmder, rodar o seguinte comando: npm install --save-dev 
+@angular-devkit/build-angular
+
+4) cd [path_raiz_da_app]
+
+5) ng serve
+```
+
 ## Quick start
 
 ```
-npm install 
+npm install --unsafe-perm -g node-sass
+
+npm install
 
 ng serve
 ```
@@ -22,7 +48,7 @@ ng serve
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Author
-Mohamed Azouaoui
+Alessandro dos Santos
 
 ## License
 This code is released under the MIT license
