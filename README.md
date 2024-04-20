@@ -22,15 +22,15 @@ npm 10.5.1
 ## Unstall Angular
 
 ```
-1) Instalar o node.js para Windows 64 bits
+1) install node.js x64
 
-2) Baixar o Cmder, executá-lo como Administrador e rodar o comando: 
+2) install Cmderand execute as admin and execute the command: 
 npm install -g @angular/cli
 
-3) Ainda no Cmder, rodar o seguinte comando: npm install --save-dev 
+3) and then excecute the command: npm install --save-dev 
 @angular-devkit/build-angular
 
-4) cd [path_raiz_da_app]
+4) cd [path_root_project_path]
 
 5) ng serve
 ```
