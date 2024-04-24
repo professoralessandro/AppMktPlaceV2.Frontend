@@ -22,17 +22,15 @@ npm 10.5.1
 ## Unstall Angular
 
 ```
-1) Instalar o node.js para Windows 64 bits
+1) install node.js x64
 
-2) Baixar o Cmder, executá-lo como Administrador e rodar o comando: 
+2) install Cmderand execute as admin and execute the command: 
 npm install -g @angular/cli
 
-3) cd [path_raiz_da_app]
-
-4) npm install --unsafe-perm -g node-sass
-
-5) Ainda no Cmder, rodar o seguinte comando: npm install --save-dev 
+3) and then excecute the command: npm install --save-dev 
 @angular-devkit/build-angular
+
+4) cd [path_root_project_path]
 
 5) ng serve
 ```
@@ -40,37 +38,9 @@ npm install -g @angular/cli
 ## Quick start
 
 ```
-1) npm install --unsafe-perm -g node-sass
+npm install --unsafe-perm -g node-sass
 
-2) npm install --force
-
-3) ng serve
-```
-
-Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Author
-Alessandro dos Santos
-
-## License
-This code is released under the MIT license
-# Lightning Admin Angular
-
-A mobile first design of a responsive admin template built with angular and bootstrap 
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
-
-## Demo
-[Live preview](https://azouaoui-med.github.io/lightning-admin-angular/demo/)
-
-## Screenshot
-
-![lightining-screenshot](https://user-images.githubusercontent.com/25878302/58369258-33f20900-7ef8-11e9-8ff3-b277cb7ed7b4.PNG)
-
-## Quick start
-
-```
-npm install 
+npm install
 
 ng serve
 ```
@@ -78,7 +48,7 @@ ng serve
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Author
-Mohamed Azouaoui
+Alessandro dos Santos
 
 ## License
 This code is released under the MIT license
