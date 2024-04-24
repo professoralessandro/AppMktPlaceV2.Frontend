@@ -38,7 +38,7 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
     MapsComponent,
     NotificationsComponent,
     LoaderComponent,
-    AlertModalComponent
+    AlertModalComponent,
   ],
   imports: [
     BrowserModule,

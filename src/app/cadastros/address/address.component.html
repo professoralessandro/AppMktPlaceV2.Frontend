@@ -1,0 +1,55 @@
+<app-comp-title [title]="this.title"></app-comp-title>
+<div class="card border-0 rounded-0">
+    <div class="col-md-12 col-lg-12 mb-12 align-items-stretch">
+        <div class="card-title mb-1 p-3">
+            <h5>Filtro avançado de busca</h5>
+        </div>
+        <div class="card border-0 rounded-0 h-100">
+            <div class="form-group">
+                <label for="InputId">Identificador</label>
+                <input type="text" maxlength="36" [(ngModel)]="this.id" class="form-control rounded-0" id="InputDescricao" aria-describedby="emailHelp" placeholder="Informe o id">
+            </div>
+
+            <div class="form-group">
+                <label for="InputUsuario">Usuario</label>
+                <input type="text" maxlength="100" [(ngModel)]="this.usuario" class="form-control rounded-0" id="InputDescryption" aria-describedby="emailHelp" maxlength="150" placeholder="Informe a descrição">
+            </div>
+
+            <div class="form-group">
+                <label for="InputLogradouro">Logradouro</label>
+                <input type="text" maxlength="50" [(ngModel)]="this.logradouro" class="form-control rounded-0" id="InputDescryption" aria-describedby="emailHelp" maxlength="150" placeholder="Informe a descrição">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputAddressType">Tipo de endereço</label>
+                <select [(ngModel)]="this.addressTypeEnum" [ngModelOptions]="{ standalone: true }" class="custom-select" name="state_raw" id="state_raw" required>
+                    <option [value]="undefined" selected>Selecione...</option>
+                    <option [value]="addressType" *ngFor="let addressType of this.addressTypeDescription"> {{ addressType }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="formControlPrincipal">Principal ?</label>
+                <select class="form-control rounded-0" id="formControlPrincipal" [(ngModel)]="this.ativo">
+                    <option value="undefined" selected>Selecione...</option>
+                    <option value="true">Sim</option>
+                    <option value="false">Nao</option>
+                  </select>
+            </div>
+
+            <div class="form-group">
+                <label for="formControlActive">Ativo</label>
+                <select class="form-control rounded-0" id="formControlActive" [(ngModel)]="this.ativo">
+                    <option value="undefined" selected>Selecione...</option>
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>
+                  </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <button (click)="search()" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-search"></i> Pesquisar</button>
+            </div>
+        </div>
+    </div>
+    <app-grid [title]="this.gridTitle" [isExistsAction]="true" [previusLabel]="'Anterior'" [nextLabel]="'Próxima'"></app-grid>
+</div>

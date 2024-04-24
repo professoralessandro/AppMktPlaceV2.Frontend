@@ -5,12 +5,19 @@
 export const projectUrls = {
   GetAllGoups: 'group/getall',
   GetAllGoupsPaginated: 'group/paginated',
-  GetAllUsers: 'group/getall',
-  GetAllGoupsUsersPaginated: 'group/paginated',
-  RegisterGroupUrl: '/cadastros/teste/cadastro/',
-  DeleteGroupUrl: '/cadastros/teste/deletar/',
-  RegisterUserUrl: '/cadastros/teste/cadastro/',
-  DeleteUserUrl: '/cadastros/teste/deletar/',
+  RegisterGroupUrl: '/cadastros/test/cadastro/',
+  DeleteGroupUrl: '/cadastros/test/deletar/',
+  GetAllUsers: 'user/getall',
+  GetAllUsersPaginated: 'user/paginated',
+  RegisterUserUrl: '/cadastros/test/cadastro/',
+  DeleteUserUrl: '/cadastros/test/deletar/',
+  GetAllBlock: 'block/getall',
+  GetAllBlockPaginated: 'block/paginated',
+  GetAllAddress: 'address/getall',
+  GetAllAddressPaginated: 'address/paginated',
+  GetAllDeliveryPaginated: 'delivery/paginated',
+  GetAllProduct: 'product/getall',
+  GetAllProductPaginated: 'product/paginated',
 };
 
 /*

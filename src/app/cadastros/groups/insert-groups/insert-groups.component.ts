@@ -4,7 +4,7 @@ import { QueryParameter } from 'src/app/models/query-parameter';
 import { HttpCommonService } from 'src/app/services/app-http-service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
-import { SystemParameterEnum } from 'src/app/Enums/system-parameters-enum';
+import { SystemParameterEnum } from 'src/app/Enums/system-parameters.enum';
 
 @Component({
   selector: 'app-insert-groups',
@@ -35,7 +35,7 @@ export class InsertGroupsComponent implements OnInit {
         this.parameters = [
           {parameter: 'groupId', value: params.get('id')}
         ];
-        this.service.getAll('cadastros_url', 'Group/GetById', this.parameters)
+        this.service.getSingle('cadastros_url', 'Group/GetById', this.parameters)
           .toPromise()
           .then(c => {
             this.model = c;
@@ -60,7 +60,7 @@ export class InsertGroupsComponent implements OnInit {
   private initializeComponent(): void {
     this.model = new Groups();
     this.isNew = false;
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/test';
     this.parameters = [];
     this.title = '';
   }
@@ -76,9 +76,7 @@ export class InsertGroupsComponent implements OnInit {
   public async incluir() {
     if (this.isNew) {
       this.model.usuarioInclusaoId = new SystemParameterEnum().systemUser;
-      // this.model.usuarioUltimaAlteracaoId = new SystemParameterEnum().systemUser;
       this.model.dataInclusao = new Date();
-      // this.model.dataUltimaAlteracao = new Date();
       this.service.insert('cadastros_url', 'group', this.model)
         .toPromise()
         .then(c => {

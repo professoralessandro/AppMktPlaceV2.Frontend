@@ -6,6 +6,8 @@ import { AlertModalService } from '../components/alert-modal/alert-modal.service
 import { GridService } from '../components/grid/grid.service';
 import { ColunmAction } from '../components/grid/colunn-action';
 import { ActionPermissions } from '../models/action-permissions';
+import { DatePipe } from '@angular/common';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +30,8 @@ export class GridCommonService {
       private service: HttpCommonService,
       private loaderService: LoaderService,
       private alertService: AlertModalService,
-      private gridService: GridService
+      private gridService: GridService,
+      private commonService: CommonService
     ) { }
 
     //BUSCA PAGINADA
@@ -40,27 +43,24 @@ export class GridCommonService {
 
       this.gridService.initializeAtributtes();
 
-      // VERIFICAR AONDE USA ISSO
       this.gridService.model = model;
       this.loaderService.SetLoaderState(true);
 
-      // TODO: GET THE URL API AND URL ENDPOINT
       this.service.getAll(apiUrl, endpointUrl, this.parameters)
       .toPromise()
       .then(c => {
         if (c.length > 0) {
           this.gridService.gridBind.gridObjectBinded = c;
-          // ADICIONAR GRID TITLES ATTRIBUTES E ATRIBUTOS DINAMICOS
+
           this.gridService.addGridTitles(gridTitles, gridElements);
 
           let actions: ColunmAction[] = [];
           c.map(element => {
-            actions.push(this.gridService
-              // .makeActionGridLine('edit', element.Id, false, 'far fa-edit', '/cadastros/teste/cadastro/', element.descricao));
-              .makeActionGridLine('edit', element.id, permission.isUpdateDisabled, 'far fa-edit', registerUpdateRoute, objectTitle));
-              // actions.push(this.gridService.makeActionGridLine('delete', element.Id, !element.ativo, 'far fa-trash-alt', '/cadastros/teste/deletar/', element.descricao));
-            actions.push(this.gridService.makeActionGridLine('delete', element.id, !element.ativo ? !element.ativo : permission.isDeleteDisabled, 'far fa-trash-alt', deleteRoute, objectTitle));
+            debugger;
+            actions.push(this.gridService.makeActionGridLine('edit', element.identifier, permission.isUpdateDisabled, 'far fa-edit', registerUpdateRoute, objectTitle));
 
+            actions.push(this.gridService.makeActionGridLine('delete', element.identifier, !element.ativo ? !element.ativo : permission.isDeleteDisabled, 'far fa-trash-alt', deleteRoute, objectTitle));
+            debugger;
             this.gridService.addGridLine(this.ReturnaddGridLineValues(element, gridElements), actions);
 
             actions = [];
@@ -80,8 +80,24 @@ export class GridCommonService {
 
     private ReturnaddGridLineValues(elements: any[], gridElements:string[]): string[] {
       let gridValues: string[] = [];
-
+      debugger;
       gridElements.forEach(element => {
+        // VALIDACAO DE O OBJETO E UM TIPO DATA PARA FORMACACAO
+        if (this.commonService.isNullOrUndefined(elements[element])) {
+          // HERE DEFINES GRID LINE VALUE NULL OR UNDEFINED HAS -
+          elements[element] = "";
+        }
+        debugger;
+        if (element.toLocaleLowerCase().indexOf('enum') > -1) {
+          elements[element] = this.commonService.ReturnEnumObjectByName(element, elements[element]);
+        }
+
+        if (typeof(elements[element]) === 'string') {
+          if (this.ValidateStringDate(elements[element])) {
+            elements[element] = new DatePipe('en-US').transform(elements[element], 'dd/MM/yyyy  HH:mm:ss');
+          }
+        }
+
         gridValues.push(elements[element].toString());
       });
 
@@ -110,6 +126,21 @@ export class GridCommonService {
       if (loadGrid) {
         // EVETIVAR BUSCA
         await this.searchPaginated(this.parameters, this.model, this.apiUrl, this.endpointUrl, this.model, this.registerUpdateRoute, this.deleteRoute, this.gridTitles, this.gridElements);
+      }
+    }
+
+    // METODO QUE VALIDA SE A DATA E VALIDA
+    private ValidateStringDate(value): boolean {
+      try{
+        var data = new Date(value);
+        if (data.toString().toLocaleLowerCase() === 'invalid date') {
+          return false;
+        }
+        return true;
+      }
+      catch
+      {
+        return false;
       }
     }
 }

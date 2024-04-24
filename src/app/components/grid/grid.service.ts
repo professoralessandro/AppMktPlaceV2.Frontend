@@ -144,6 +144,7 @@ export class GridService {
         // THIS PART OF CODE SORTE THE ORIGINAL ARRAY FOR ATRIBUTTE CLIKED ON HTMLGRID
         this.gridBind.gridObjectBinded.sort((a, b) => b[item].toString().localeCompare(a[item].toString()));
       }
+ 
     // THIS PART OF CODE RETURN HOW ID THE ATRIBUTTE NAME THAT CONTAINS ID FROM ATRIBUTTE TITLE
     const idAtrubutte = this.howIsObjectIdAtributte(this.gridBind.gridTitles.map(x => x.atributteName));
 

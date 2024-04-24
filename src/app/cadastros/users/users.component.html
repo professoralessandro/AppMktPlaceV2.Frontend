@@ -1,0 +1,35 @@
+<app-comp-title [title]="this.title"></app-comp-title>
+<div class="card border-0 rounded-0">
+    <div class="col-md-12 col-lg-12 mb-12 align-items-stretch">
+        <div class="card-title mb-1 p-3">
+            <h5>Filtro avançado de busca</h5>
+        </div>
+        <div class="card border-0 rounded-0 h-100">
+            <div class="form-group">
+                <label for="InputName">Nome</label>
+                <input type="text" [(ngModel)]="this.nome" class="form-control rounded-0" id="InputName" aria-describedby="nomeHelp" maxlength="100" placeholder="Informe o nome">
+            </div>
+            <div class="form-group">
+                <label for="InputEmail">Email</label>
+                <input type="text" [(ngModel)]="this.email" class="form-control rounded-0" id="InputEmail" aria-describedby="emailHelp" maxlength="255" placeholder="Informe o email">
+            </div>
+            <div class="form-group">
+                <label for="Inputdocument">Número do documento</label>
+                <input type="text" [(ngModel)]="this.nmrDocumento" class="form-control rounded-0" id="Inputdocument" aria-describedby="emailHelp" maxlength="50" placeholder="Informe o numero do documento">
+            </div>
+            <div class="form-group">
+                <label for="formControlActive">Ativo</label>
+                <select class="form-control rounded-0" id="formControlActive" [(ngModel)]="this.ativo">
+                    <option value="undefined" selected>Selecione...</option>
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>
+                  </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <button (click)="search()" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-search"></i> Pesquisar</button>
+            </div>
+        </div>
+    </div>
+    <app-grid [title]="this.gridTitle" [isExistsAction]="true" [previusLabel]="'Anterior'" [nextLabel]="'Próxima'"></app-grid>
+</div>

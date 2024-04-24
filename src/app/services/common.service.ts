@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import { AlertModalService } from '../components/alert-modal/alert-modal.service';
 import { LoaderService } from '../components/loader/loader.service';
 import { QueryParameter } from '../models/query-parameter';
+import { TipoBloqueioMapping } from '../Enums/tipo-bloqueio.enum';
+import { TipoDocumentoMapping } from '../Enums/tipo-documento.enum';
+import { AddressTypeMapping } from '../Enums/address-type.enum';
+import { TipoEntregaMapping } from '../Enums/tipo-entrega.enum';
+import { ProductTypeMapping } from '../Enums/product-type.enum';
 
 
 
@@ -43,7 +48,7 @@ export class CommonService {
   }
 
   public isNullOrUndefined(value: any): boolean {
-    if (value === null || value === undefined) {
+    if (value === null || value === undefined || value.toString() === 'undefined' || value.toString() === 'null') {
       return true;
     } else {
       return false;
@@ -84,5 +89,43 @@ export class CommonService {
     this.route.navigate([route]).then(e => {
       this.loaderService.SetLoaderState(false);
     });
+  }
+
+  public ReturnEnumObjectByName(value: string, position): any {
+    debugger;
+    switch (value.toLocaleLowerCase()) {
+      case 'TipoDocumentoEnum'.toLocaleLowerCase():
+        return TipoDocumentoMapping[position];
+      case 'blockTypeEnum'.toLocaleLowerCase():
+        return TipoBloqueioMapping[position];
+      case 'addressTypeEnum'.toLocaleLowerCase():
+        return AddressTypeMapping[position];
+      case 'deliveryTypeEnum'.toLocaleLowerCase():
+        return TipoEntregaMapping[position];
+      case 'producttypeenum'.toLocaleLowerCase():
+          return ProductTypeMapping[position];
+      default:
+        return 'Unknow';
+    }
+  }
+
+  public ReturnValueMyEnumDescription(value: string, member) {
+    debugger;
+    switch (value.toLocaleLowerCase()) {
+      case 'TipoDocumentoEnum'.toLocaleLowerCase():
+        return Object.values(TipoDocumentoMapping).filter(c => typeof (c) == 'string').indexOf(member);
+      case 'blockTypeEnum'.toLocaleLowerCase():
+        return Object.values(TipoBloqueioMapping).filter(c => typeof (c) == 'string').indexOf(member);
+      case 'addressTypeEnum'.toLocaleLowerCase():
+        return Object.values(AddressTypeMapping).filter(c => typeof (c) == 'string').indexOf(member);
+      case 'producttypeenum'.toLocaleLowerCase():
+        return Object.values(ProductTypeMapping).filter(c => typeof (c) == 'string').indexOf(member);
+      default:
+        return null;
+    }
+  }
+
+  public ReturnModalMessagErrorSuccess(messege: string, isSucsess: boolean = true) {
+    this.alertService.showAlert(messege, isSucsess ? 'success' : 'error');
   }
 }

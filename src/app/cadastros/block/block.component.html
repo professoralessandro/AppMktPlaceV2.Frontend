@@ -1,0 +1,55 @@
+<app-comp-title [title]="this.title"></app-comp-title>
+<div class="card border-0 rounded-0">
+    <div class="col-md-12 col-lg-12 mb-12 align-items-stretch">
+        <div class="card-title mb-1 p-3">
+            <h5>Filtro avançado de busca</h5>
+        </div>
+        <div class="card border-0 rounded-0 h-100">
+            <div class="form-group">
+                <label for="InputId">Identificador</label>
+                <input maxlength="36" [(ngModel)]="this.id" class="form-control rounded-0" id="InputIdentifier" aria-describedby="InputIdentifier" placeholder="Informe o id">
+            </div>
+
+            <div class="form-group">
+                <label for="InputItemBloqueadoId">Identificador do item bloqueado</label>
+                <input maxlength="36" [(ngModel)]="this.itemBloqueadoId" class="form-control rounded-0" id="InputItemBloqueadoId" aria-describedby="InputItemBloqueadoId" placeholder="Informe o identificador do item bloqueado">
+            </div>
+
+            <div class="form-group">
+                <label for="InputDescryption">Descrição</label>
+                <input type="text" [(ngModel)]="this.descricao" class="form-control rounded-0" id="InputDescryption" aria-describedby="InputDescryption" maxlength="150" placeholder="Informe a descrição">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputDocumentType">Tipo de bloqueio</label>
+                <select [(ngModel)]="this.tipoBloqueio" [ngModelOptions]="{ standalone: true }" class="custom-select" name="state_raw" id="state_raw" required>
+                    <option [value]="undefined" selected>Selecione...</option>
+                    <option [value]="documentType" *ngFor="let documentType of this.blockTypes"> {{ documentType }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="formControlIsBloqueiaAcesso">Bloqueia Acesso</label>
+                <select class="form-control rounded-0" id="formControlIsBloqueiaAcesso" [(ngModel)]="this.isBloqueiaAcesso">
+                    <option value="undefined" selected>Selecione...</option>
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
+                  </select>
+            </div>
+
+            <div class="form-group">
+                <label for="formControlActive">Ativo</label>
+                <select class="form-control rounded-0" id="formControlActive" [(ngModel)]="this.ativo">
+                    <option value="undefined" selected>Selecione...</option>
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>
+                  </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <button (click)="search()" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-search"></i> Pesquisar</button>
+            </div>
+        </div>
+    </div>
+    <app-grid [title]="this.gridTitle" [isExistsAction]="true" [previusLabel]="'Anterior'" [nextLabel]="'Próxima'"></app-grid>
+</div>
