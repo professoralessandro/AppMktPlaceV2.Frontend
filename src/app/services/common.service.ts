@@ -92,7 +92,6 @@ export class CommonService {
   }
 
   public ReturnEnumObjectByName(value: string, position): any {
-    debugger;
     switch (value.toLocaleLowerCase()) {
       case 'TipoDocumentoEnum'.toLocaleLowerCase():
         return TipoDocumentoMapping[position];
@@ -102,7 +101,7 @@ export class CommonService {
         return AddressTypeMapping[position];
       case 'deliveryTypeEnum'.toLocaleLowerCase():
         return TipoEntregaMapping[position];
-      case 'producttypeenum'.toLocaleLowerCase():
+      case 'productTypeEnum'.toLocaleLowerCase():
           return ProductTypeMapping[position];
       default:
         return 'Unknow';
@@ -110,7 +109,6 @@ export class CommonService {
   }
 
   public ReturnValueMyEnumDescription(value: string, member) {
-    debugger;
     switch (value.toLocaleLowerCase()) {
       case 'TipoDocumentoEnum'.toLocaleLowerCase():
         return Object.values(TipoDocumentoMapping).filter(c => typeof (c) == 'string').indexOf(member);
@@ -118,7 +116,7 @@ export class CommonService {
         return Object.values(TipoBloqueioMapping).filter(c => typeof (c) == 'string').indexOf(member);
       case 'addressTypeEnum'.toLocaleLowerCase():
         return Object.values(AddressTypeMapping).filter(c => typeof (c) == 'string').indexOf(member);
-      case 'producttypeenum'.toLocaleLowerCase():
+      case 'productTypeEnum'.toLocaleLowerCase():
         return Object.values(ProductTypeMapping).filter(c => typeof (c) == 'string').indexOf(member);
       default:
         return null;

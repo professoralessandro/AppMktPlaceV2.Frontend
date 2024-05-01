@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductTypeMapping } from 'src/app/Enums/product-type.enum';
 import { LoaderService } from 'src/app/components/loader/loader.service';
 import { QueryParameter } from 'src/app/models/query-parameter';
+import { CommonService } from 'src/app/services/common.service';
 import { GridCommonService } from 'src/app/services/grid-common-service';
 import { projectUrls } from 'src/environments/endpoints-environment';
 
@@ -49,6 +50,7 @@ export class ProdutoComponent implements OnInit {
   constructor(
     private loaderService: LoaderService,
     private gridService: GridCommonService,
+    private commonService: CommonService
   ) { }
 
   public ngOnInit(): void {
@@ -63,7 +65,7 @@ export class ProdutoComponent implements OnInit {
 
     this.loaderService.SetLoaderState(true);
 
-    this.gridTitle = 'Produto';
+    this.gridTitle = 'Produtos';
     this.title = 'Busca de Produto';
     this.gridTitles = ['Descrição', 'Tipo de produto', 'Marca'];
     this.gridElements = ['descricao', 'productTypeEnum', 'marca'];
@@ -83,7 +85,6 @@ export class ProdutoComponent implements OnInit {
       { parameter: 'pageNumber', value: this.pageNumber },
       { parameter: 'rowspPage', value: this.rownpPage },
     ];
-    debugger;
     // SETAR VALORES DO GRID
     this.gridService.setGridServiceValues(this.model, this.gridTitles, this.gridElements, this.apiUrl, this.endpointUrl, this.parameters, this.registerUrl, this.deleteUrl, true);
   }

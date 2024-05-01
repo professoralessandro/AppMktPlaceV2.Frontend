@@ -1,1 +1,166 @@
-<p>insert-produto works!</p>
+<div class="col-md-12 col-lg-12 mb-4 align-items-stretch">
+    <app-comp-title [title]="this.title"></app-comp-title>
+    <div class="card border-0 rounded-0 h-100">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label for="ProductDescription">Descrição:</label>
+                    <input maxlength="50" type="text" class="form-control rounded-0"
+                        placeholder="Informe a descrição para o produto" [(ngModel)]="product.descricao"
+                        [ngModelOptions]="{ standalone: true }" required />
+                    <small id="ProductDescription" class="form-text text-muted">Informe a descrição para o
+                        produto.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="InputProductType">Tipo:</label>
+                    <select [(ngModel)]="this.product.productTypeEnum" (change)="isProductChange()"
+                        [ngModelOptions]="{ standalone: true }" class="custom-select" name="state_raw" id="state_raw"
+                        required>
+                        <option [value]="undefined" selected>Selecione...</option>
+                        <option [value]="0">Produto</option>
+                        <option [value]="1" selected>Serviço</option>
+                        <option [value]="9999999">Outros</option>
+                    </select>
+                    <small id="InputProductType" class="form-text text-muted">Informe o tipo de produto.</small>
+                </div>
+
+                <div class="form-group" *ngIf="this.isProduct === true">
+                    <label for="InputProductBarCode">Código de Barras:</label>
+                    <input maxlength="50" type="text" class="form-control rounded-0"
+                        [disabled]="this.isInputBlocked === true" placeholder="Informe o código de Barras"
+                        [(ngModel)]="product.codigoBarras" [ngModelOptions]="{ standalone: true }" />
+                    <small id="InputProductBarCode" class="form-text text-muted">Informe o código de Barras.</small>
+                </div>
+
+                <div class="form-group" *ngIf="this.isProduct === true">
+                    <label for="InputProductMark">Marca:</label>
+                    <input maxlength="30" type="text" class="form-control rounded-0"
+                        [disabled]="this.isInputBlocked === true" placeholder="Informe a marca do produto"
+                        [(ngModel)]="product.marca" [ngModelOptions]="{ standalone: true }" />
+                    <small id="InputProductMark" class="form-text text-muted">Informe a marca do produto.</small>
+                </div>
+
+                <div class="custom-control custom-checkbox my-1 mr-sm-2 mb-3" *ngIf="this.isProduct === true">
+                    <input type="checkbox" class="custom-control-input" id="customControlIsUnlimited"
+                        [disabled]="this.isInputBlocked === true" [(ngModel)]="this.product.isIlimitado"
+                        [ngModelOptions]="{ standalone: true }" required />
+                    <label class="custom-control-label" for="customControlIsUnlimited">Ilimitado ?</label>
+                </div>
+
+                <div *ngIf="this.isProduct === true && !this.product.isIlimitado">
+                    <div class="form-group">
+                        <label for="InputProductQuantity">Quantidade:</label>
+                        <input type="number" class="form-control rounded-0" placeholder="Informe a quantidade"
+                            [disabled]="this.isInputBlocked === true" [(ngModel)]="product.quantidade"
+                            [ngModelOptions]="{ standalone: true }" />
+                        <small id="InputProductQuantity" class="form-text text-muted">Informe a quantidade.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputProductQuantity">Quantidade Crítica:</label>
+                        <input type="number" class="form-control rounded-0" placeholder="Informe a quantidade crítica"
+                            [disabled]="this.isInputBlocked === true" [(ngModel)]="product.quantidadeCritica"
+                            [ngModelOptions]="{ standalone: true }" />
+                        <small id="InputProductQuantity" class="form-text text-muted">Informe a quantidade
+                            crítica.</small>
+                    </div>
+                </div>
+
+                <div *ngIf="this.isProduct === true">
+                    <div class="form-group">
+                        <label for="InputProductWeight">Peso:</label>
+                        <input type="number" min="0" max="100" class="form-control rounded-0"
+                            [disabled]="this.isInputBlocked === true" placeholder="Informe o peso do produto"
+                            [(ngModel)]="product.weight" [ngModelOptions]="{ standalone: true }" />
+                        <small id="InputProductWeight" class="form-text text-muted">Informe o peso do produto.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputProductHeight">Altura:</label>
+                        <input type="number" min="0" max="100" class="form-control rounded-0"
+                            [disabled]="this.isInputBlocked === true" placeholder="Informe a altura do produto"
+                            [(ngModel)]="product.height" [ngModelOptions]="{ standalone: true }" />
+                        <small id="InputProductHeight" class="form-text text-muted">Informe a altura do produto.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputProductWidth">Largura:</label>
+                        <input type="number" min="0" max="100" class="form-control rounded-0"
+                            [disabled]="this.isInputBlocked === true" placeholder="Informe a largura do produto"
+                            [(ngModel)]="product.width" [ngModelOptions]="{ standalone: true }" />
+                        <small id="InputProductWidth" class="form-text text-muted">Informe a largura do produto.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputProductLength">Comprimento:</label>
+                        <input type="number" min="0" max="100" class="form-control rounded-0"
+                            [disabled]="this.isInputBlocked === true" placeholder="Informe a comprimento do produto"
+                            [(ngModel)]="product.length" [ngModelOptions]="{ standalone: true }" />
+                        <small id="InputProductLength" class="form-text text-muted">Informe o comprimento do
+                            produto.</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="InputProductPriceCost">Preço de Custo R$:</label>
+                    <input type="text" class="form-control rounded-0" placeholder="Informe o preço de custo" (input)="calcularPercentualMargemLucro()"
+                        [disabled]="this.isInputBlocked === true" [(ngModel)]="product.precoCusto"
+                        [ngModelOptions]="{ standalone: true }"/>
+                    <small id="InputProductPriceCost" class="form-text text-muted">Informe o preço de custo R$.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="InputProductPriceSale">Preço de Venda R$:</label>
+                    <input type="text" class="form-control rounded-0" placeholder="Informe o preço de venda" (input)="calcularPercentualMargemLucro()"
+                        [disabled]="this.isInputBlocked === true" [(ngModel)]="product.precoVenda"
+                        [ngModelOptions]="{ standalone: true }" required />
+                    <small id="InputProductPriceSale" class="form-text text-muted">Informe o preço de venda R$.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="InputProductQuantity">Margem de Lucro %:</label>
+                    <input type="number" min="0" max="100" class="form-control rounded-0"
+                        [disabled]="this.isInputBlocked === true" (input)="calcularPrecoVenda()"
+                        placeholder=" Informe a Margem de Lucro" [(ngModel)]="this.profitMargin"
+                        [ngModelOptions]="{ standalone: true }" />
+                    <small id="InputProductQuantity" class="form-text text-muted">Informe a Margem de Lucro %.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="InputDetails">Descricao:</label>
+                    <textarea class="form-control rounded-0" placeholder="Informe detalhes adicionais"
+                        [disabled]="this.isInputBlocked === true" [(ngModel)]="this.product.detalhes"
+                        [ngModelOptions]="{ standalone: true }" required>
+                      {{this.product.detalhes}}
+                    </textarea>
+                    <small id="InputDetails" class="form-text text-muted">Informe detalhes adicionais.</small>
+                </div>
+
+                <div class="custom-control custom-checkbox my-1 mr-sm-2 mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customControlBlocked"
+                        [disabled]="this.isInputBlocked === true" [(ngModel)]="this.product.bloqueado"
+                        [ngModelOptions]="{ standalone: true }" required />
+                    <label class="custom-control-label" for="customControlBlocked">Bloqueado ?</label>
+                </div>
+
+                <div class="custom-control custom-checkbox my-1 mr-sm-2 mb-3">
+                    <input
+                        [disabled]="this.isNew && this.product.productTypeEnum === undefined || this.isInputBlocked === true"
+                        type="checkbox" class="custom-control-input" id="customControlInline"
+                        [(ngModel)]="this.product.ativo" [ngModelOptions]="{ standalone: true }" required />
+                    <label class="custom-control-label" for="customControlInline">Ativo</label>
+                </div>
+
+                <!-- BUTTONS -->
+                <button type="button" class="btn btn-lightning rounded-0 mb-2 mr-2" (click)="incluir()"
+                    [disabled]="this.isInputBlocked === true">
+                    {{ this.titleButton }}
+                </button>
+                <button type="button" class="btn btn-outline-lightning rounded-0 mb-2" (click)="navigateToBack()">
+                    Cancelar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
