@@ -24,6 +24,10 @@ export class CommonService {
     private sanitizer: DomSanitizer
   ) { }
 
+  /**
+   * PUBLIC METHODS
+   */
+
   public retornQuery(queryParams: QueryParameter[]): string {
     let istheFist = true;
     let query = '';
@@ -125,5 +129,14 @@ export class CommonService {
 
   public ReturnModalMessagErrorSuccess(messege: string, isSucsess: boolean = true) {
     this.alertService.showAlert(messege, isSucsess ? 'success' : 'error');
+  }
+
+/**
+ * 
+ * @param value 
+ * @returns RETURN CURRENCY BRASIL REAL FORMATED: R$ XX,XX
+ */
+  public currencyFormatterBRL(value: number): string {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
   }
 }
