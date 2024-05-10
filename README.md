@@ -19,7 +19,7 @@ node v20.12.2
 npm 10.5.1
 ```
 
-## Unstall Angular
+## Install Angular and execute the project
 
 ```
 1) install node.js x64
@@ -38,14 +38,12 @@ npm install -g @angular/cli
 ## Quick start
 
 ```
-npm install --unsafe-perm -g node-sass
-
 npm install
 
 ng serve
-```
 
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
 
 ## Author
 Alessandro dos Santos

@@ -51,7 +51,7 @@ export class DeleteProdutoComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar produto';
     this.label = '';
-    this.rotaAnterior = './cadastros/teste';
+    this.rotaAnterior = './cadastros/test';
     this.parameters = [];
     this.product = new Produto();
   }
@@ -65,7 +65,7 @@ export class DeleteProdutoComponent implements OnInit {
   }
 
   public deletar(): void {
-    this.service.delete('cadastros_url', 'product', this.product.descricao)
+    this.service.delete('cadastros_url', 'product', this.product.identifier)
       .toPromise()
       .then(c => {
         this.commonService.responseActionWithNavigation

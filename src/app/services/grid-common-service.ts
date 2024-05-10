@@ -56,11 +56,11 @@ export class GridCommonService {
 
           let actions: ColunmAction[] = [];
           c.map(element => {
-            debugger;
+
             actions.push(this.gridService.makeActionGridLine('edit', element.identifier, permission.isUpdateDisabled, 'far fa-edit', registerUpdateRoute, objectTitle));
 
             actions.push(this.gridService.makeActionGridLine('delete', element.identifier, !element.ativo ? !element.ativo : permission.isDeleteDisabled, 'far fa-trash-alt', deleteRoute, objectTitle));
-            debugger;
+
             this.gridService.addGridLine(this.ReturnaddGridLineValues(element, gridElements), actions);
 
             actions = [];
@@ -80,20 +80,20 @@ export class GridCommonService {
 
     private ReturnaddGridLineValues(elements: any[], gridElements:string[]): string[] {
       let gridValues: string[] = [];
-      debugger;
+
       gridElements.forEach(element => {
         // VALIDACAO DE O OBJETO E UM TIPO DATA PARA FORMACACAO
         if (this.commonService.isNullOrUndefined(elements[element])) {
           // HERE DEFINES GRID LINE VALUE NULL OR UNDEFINED HAS -
           elements[element] = "";
         }
-        debugger;
+
         if (element.toLocaleLowerCase().indexOf('enum') > -1) {
           elements[element] = this.commonService.ReturnEnumObjectByName(element, elements[element]);
         }
 
         if (typeof(elements[element]) === 'string') {
-          if (this.ValidateStringDate(elements[element])) {
+          if (this.validateStringDate(elements[element]) && this.containsDateOrData(element)) {
             elements[element] = new DatePipe('en-US').transform(elements[element], 'dd/MM/yyyy  HH:mm:ss');
           }
         }
@@ -129,8 +129,9 @@ export class GridCommonService {
       }
     }
 
+
     // METODO QUE VALIDA SE A DATA E VALIDA
-    private ValidateStringDate(value): boolean {
+    private validateStringDate(value): boolean {
       try{
         var data = new Date(value);
         if (data.toString().toLocaleLowerCase() === 'invalid date') {
@@ -142,5 +143,14 @@ export class GridCommonService {
       {
         return false;
       }
+    }
+
+    /*
+    This method converts the input string to lowercase and then checks whether it contains “data” or “date”.
+    Returns true if the input string contains “data” or “date”, and false otherwise.
+    */
+    private containsDateOrData(inputString: string): boolean {
+      const lowerCaseString = inputString.toLowerCase();
+      return lowerCaseString.includes('data') || lowerCaseString.includes('date');
     }
 }

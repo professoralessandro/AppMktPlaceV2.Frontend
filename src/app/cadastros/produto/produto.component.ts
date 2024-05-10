@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductTypeMapping } from 'src/app/Enums/product-type.enum';
 import { LoaderService } from 'src/app/components/loader/loader.service';
 import { QueryParameter } from 'src/app/models/query-parameter';
+import { CommonService } from 'src/app/services/common.service';
 import { GridCommonService } from 'src/app/services/grid-common-service';
 import { projectUrls } from 'src/environments/endpoints-environment';
 
@@ -24,7 +25,7 @@ export class ProdutoComponent implements OnInit {
   public marca: string;
   public codigoBarras: string;
   public isBloqueado: boolean;
-  public ativo: boolean;
+  public isAtivo: boolean;
   public parameters: QueryParameter[];
   public pageNumber: number = 1;
   public rownpPage: number = 10;
@@ -42,13 +43,14 @@ export class ProdutoComponent implements OnInit {
   public deleteUrl: string;
   // URL AREA
 
-  // ENUM AREA
-  public ProdutoTypes = Object.values(ProductTypeMapping).filter(c => typeof (c) == 'string');
-  public ProdutoType: number;
+  // ENUM VALUE FORMATER
+  public productTypes = Object.values(ProductTypeMapping).filter(c => typeof (c) == 'string');
+  public productTypeString: string[] = [];
 
   constructor(
     private loaderService: LoaderService,
     private gridService: GridCommonService,
+    private commonService: CommonService
   ) { }
 
   public ngOnInit(): void {
@@ -59,11 +61,14 @@ export class ProdutoComponent implements OnInit {
     this.destroyComponent();
   }
 
+  /**
+   * INITIALIZE THE COMPONENT GRID THEN THE PAGE IS LOADED
+   */
   private initializeComponent(): void {
 
     this.loaderService.SetLoaderState(true);
 
-    this.gridTitle = 'Produto';
+    this.gridTitle = 'Produtos';
     this.title = 'Busca de Produto';
     this.gridTitles = ['Descrição', 'Tipo de produto', 'Marca'];
     this.gridElements = ['descricao', 'productTypeEnum', 'marca'];
@@ -72,6 +77,7 @@ export class ProdutoComponent implements OnInit {
     this.registerUrl = projectUrls.RegisterGroupUrl;
     this.deleteUrl = projectUrls.DeleteGroupUrl;
     //QUERY PARAMETERS
+
     this.parameters = [
       { parameter: 'id', value: this.id },
       { parameter: 'tipoProduto', value: this.tipoProduto },
@@ -79,15 +85,18 @@ export class ProdutoComponent implements OnInit {
       { parameter: 'marca', value: this.marca },
       { parameter: 'codigoBarras', value: this.codigoBarras },
       { parameter: 'isBloqueado', value: this.isBloqueado },
-      { parameter: 'ativo', value: this.ativo },
+      { parameter: 'ativo', value: this.isAtivo },
       { parameter: 'pageNumber', value: this.pageNumber },
       { parameter: 'rowspPage', value: this.rownpPage },
     ];
-    debugger;
+
     // SETAR VALORES DO GRID
     this.gridService.setGridServiceValues(this.model, this.gridTitles, this.gridElements, this.apiUrl, this.endpointUrl, this.parameters, this.registerUrl, this.deleteUrl, true);
   }
 
+  /**
+   * ON THE COMPONENT HAS DESTROYED
+   */
   private destroyComponent(): void {
     this.loaderService.SetLoaderState(false);
     this.model = null;
@@ -106,12 +115,12 @@ export class ProdutoComponent implements OnInit {
 
     this.parameters = [
       { parameter: 'id', value: this.id },
-      { parameter: 'tipoProduto', value: this.tipoProduto },
+      { parameter: 'tipoProduto', value: this.commonService.isNullOrUndefined(this.tipoProduto) ? undefined : this.commonService.ReturnValueMyEnumDescription('productTypeEnum', this.tipoProduto)},
       { parameter: 'descricao', value: this.descricao },
       { parameter: 'marca', value: this.marca },
       { parameter: 'codigoBarras', value: this.codigoBarras },
       { parameter: 'isBloqueado', value: this.isBloqueado },
-      { parameter: 'ativo', value: this.ativo },
+      { parameter: 'ativo', value: this.isAtivo },
       { parameter: 'pageNumber', value: this.pageNumber },
       { parameter: 'rowspPage', value: this.rownpPage },
     ];
