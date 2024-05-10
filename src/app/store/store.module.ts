@@ -4,6 +4,7 @@ import { ProductComponent } from './product/product.component';
 import { DetailsComponent } from './product/details/details.component';
 import { PurchaseComponent } from './product/purchase/purchase.component';
 import { DeliveryComponent } from './product/delivery/delivery.component';
+import { OpinateComponent } from './product/opinate/opinate.component';
 
 
 
@@ -12,7 +13,8 @@ import { DeliveryComponent } from './product/delivery/delivery.component';
     ProductComponent,
     DetailsComponent,
     PurchaseComponent,
-    DeliveryComponent
+    DeliveryComponent,
+    OpinateComponent
   ],
   imports: [
     CommonModule
