@@ -205,7 +205,7 @@ export class InsertProdutoComponent implements OnInit {
   private initializeComponent(): void {
     this.product = new Produto();
     this.isNew = true;
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/produto';
     this.parameters = [];
     this.title = '';
     this.isProduct = true;

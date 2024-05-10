@@ -6,10 +6,10 @@ import { DeleteProdutoComponent } from './delete-produto/delete-produto.componen
 import { InsertProdutoComponent } from './insert-produto/insert-produto.component';
 
 const routes: Routes = [
-  { path: 'produto', component: ProdutoComponent },
-  { path: 'produto/cadastro', component: InsertProdutoComponent },
-  { path: 'produto/cadastro/:id', component: InsertProdutoComponent },
-  { path: 'produto/deletar/:id', component: DeleteProdutoComponent }
+  { path: 'test', component: ProdutoComponent },
+  { path: 'test/cadastro', component: InsertProdutoComponent },
+  { path: 'test/cadastro/:id', component: InsertProdutoComponent },
+  { path: 'test/deletar/:id', component: DeleteProdutoComponent }
 ];
 
 @NgModule({
@@ -20,4 +20,4 @@ const routes: Routes = [
   ]
 })
 
-export class ProdutoRoutingModule { }
+export class ProdutoOldRoutingModule { }
