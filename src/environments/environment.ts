@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  cadastros_url: 'http://localhost:7210'
+  cadastros_url: 'http://localhost:7210',
+  story_url: 'http://localhost:7210'
 };
 
 /*
