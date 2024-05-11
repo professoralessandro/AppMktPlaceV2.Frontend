@@ -5,6 +5,8 @@ import { DetailsComponent } from './product/details/details.component';
 import { PurchaseComponent } from './product/purchase/purchase.component';
 import { DeliveryComponent } from './product/delivery/delivery.component';
 import { OpinateComponent } from './product/opinate/opinate.component';
+import { FormsModule } from '@angular/forms';
+import { ProductRoutingModule } from './product/product.routing';
 
 
 
@@ -17,7 +19,9 @@ import { OpinateComponent } from './product/opinate/opinate.component';
     OpinateComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ProductRoutingModule,
   ]
 })
 export class StoreModule { }
