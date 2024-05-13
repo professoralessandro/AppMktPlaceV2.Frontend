@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductTypeEnum } from 'src/app/Enums/product-type.enum';
 
 @Component({
@@ -14,13 +15,18 @@ export class ProductComponent implements OnInit {
   public productList = [];
   public testList = [1,2,3,4,5,6];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   /**
    * PUBLIC METHOD
    */
   public ngOnInit(): void {
     this.initializeAtributtes();
+  }
+
+  public redirectToProductPage(productId: number): void {
+    // Redirecionar para a página de compra com o ID do produto
+    this.router.navigate(['/product', productId]);
   }
 
   /**

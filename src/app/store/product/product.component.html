@@ -1,3 +1,17 @@
+<!-- product-list.component.html -->
+<div class="card border-0 rounded-0">{{ this.title }}</div>
+<div *ngFor="let product of productList" class="product-card">
+  <img [src]="product.imageUrl" alt="{{ product.title }}" />
+  <h3>{{ product.title }}</h3>
+  <p>{{ product.detalhes }}</p>
+  <p>{{ product.precoVenda }}</p>
+  <button [routerLink]="['details',product.identifier]">Comprar</button>
+  <!-- test/details/:id -->
+</div>
+
+
+<!-- OLDER CODE -->
+<!-- 
 <div class="card border-0 rounded-0">{{ this.title }}</div>
 <div class="card border-0 rounded-0">
   <h1>{{ this.title }}</h1>
@@ -12,3 +26,4 @@
     <button [routerLink]="['store/test/details/:product.identifier']">Comprar</button>
   </div>
 </div>
+-->
