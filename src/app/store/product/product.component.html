@@ -1,29 +1,10 @@
 <!-- product-list.component.html -->
 <div class="card border-0 rounded-0">{{ this.title }}</div>
 <div *ngFor="let product of productList" class="product-card">
-  <img [src]="product.imageUrl" alt="{{ product.title }}" />
-  <h3>{{ product.title }}</h3>
-  <p>{{ product.detalhes }}</p>
+  <img [src]="product.image" alt="{{ product.descricao }}" width="50%" height="50%" />
+  <h3>{{ product.titulo }}</h3>
+  <p>{{ product.resumoDetalhes }}</p>
   <p>{{ product.precoVenda }}</p>
   <button [routerLink]="['details',product.identifier]">Comprar</button>
   <!-- test/details/:id -->
 </div>
-
-
-<!-- OLDER CODE -->
-<!-- 
-<div class="card border-0 rounded-0">{{ this.title }}</div>
-<div class="card border-0 rounded-0">
-  <h1>{{ this.title }}</h1>
-
-  <div *ngFor="let product of this.productList">
-    {{ this.title }}
-
-    <img [src]="product.image" alt="{{ product.descricao }}" />
-    <h3>{{ product.descricao }}</h3>
-    <p>{{ product.detalhes }}</p>
-    <p>{{ product.precoVenda }}</p>
-    <button [routerLink]="['store/test/details/:product.identifier']">Comprar</button>
-  </div>
-</div>
--->

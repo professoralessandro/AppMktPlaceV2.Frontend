@@ -1,1 +1,13 @@
-<p>details works!</p>
+<!-- product-details.component.html -->
+<div class="product-details">
+    <h2>{{ product.titulo }}</h2>
+    <img [src]="product.image" alt="{{ product.titulo }}" width="80%" height="80%" />
+    <p>Detalhes: {{ product.detalhes }}</p>
+    <p>Preço: R$ {{ product.precoVenda }}</p>
+    <p>Marca: {{ product.marca }}</p>
+    <p>Código de Barras: {{ product.codigoBarras }}</p>
+    <p>Quantidade: {{ product.quantidade }}</p>
+    <p>Tipo de Produto: {{ product.productTypeEnum }}</p>
+    <p>Pontuação: {{ product.rating }}</p>
+    <button (click)="buyProduct()">Comprar</button>
+</div>
