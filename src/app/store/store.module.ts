@@ -3,12 +3,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 // tslint:disable-next-line:max-line-length
-import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import { ProductComponent } from './product/product.component';
 import { ProductRoutingModule } from './product/product.routing';
+import { DeliveryComponent } from './product/delivery/delivery.component';
+import { OpinateComponent } from './product/opinate/opinate.component';
+import { PurchaseComponent } from './product/purchase/purchase.component';
+import { DetailsComponent } from './product/details/details.component';
+import { PurchaseDetailsComponent } from './product/purchase/purchase-details/purchase-details.component';
 @NgModule({
   declarations: [
     ProductComponent,
+    DetailsComponent,
+    DeliveryComponent,
+    OpinateComponent,
+    PurchaseComponent,
+    DetailsComponent,
+    PurchaseDetailsComponent
   ],
   imports: [
     CommonModule,
