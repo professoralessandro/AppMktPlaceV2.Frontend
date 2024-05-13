@@ -1,1 +1,14 @@
-<p>product works!</p>
+<div class="card border-0 rounded-0">{{ this.title }}</div>
+<div class="card border-0 rounded-0">
+  <h1>{{ this.title }}</h1>
+
+  <div *ngFor="let product of this.productList">
+    {{ this.title }}
+
+    <img [src]="product.image" alt="{{ product.descricao }}" />
+    <h3>{{ product.descricao }}</h3>
+    <p>{{ product.detalhes }}</p>
+    <p>{{ product.precoVenda }}</p>
+    <button [routerLink]="['store/test/details/:product.identifier']">Comprar</button>
+  </div>
+</div>
