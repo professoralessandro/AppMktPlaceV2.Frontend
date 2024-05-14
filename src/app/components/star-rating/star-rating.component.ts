@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
-  selector: 'app-opinate',
-  templateUrl: './opinate.component.html',
-  styleUrls: ['./opinate.component.scss']
+  selector: 'app-star-rating',
+  templateUrl: './star-rating.component.html',
+  styleUrls: ['./star-rating.component.scss']
 })
-export class OpinateComponent implements OnInit {
+export class StarRatingComponent implements OnInit {
   /**
-   * CLASS ATRIBUTTES
+  * CLASS ATRIBUTTES
    */
 
   public stars: number[] = [1, 2, 3, 4, 5];
@@ -53,7 +53,7 @@ export class OpinateComponent implements OnInit {
       this.commonService.responseActionWithoutNavigation(alertType, alertMessage);
       debugger;
     }
-    catch(ex) {
+    catch (ex) {
       const alertType: string = 'error';
       const errorMessage: string = 'Houve um erro ao tentar efetivar o pagamento: \n' + ex.error;
       this.commonService.responseActionWithoutNavigation(alertType, errorMessage);

@@ -7,22 +7,22 @@ import { NgxMaskModule } from 'ngx-mask';
 import { ProductComponent } from './product/product.component';
 import { ProductRoutingModule } from './product/product.routing';
 import { DeliveryComponent } from './purchase/delivery/delivery.component';
-import { OpinateComponent } from './purchase/opinate/opinate.component';
 import { DetailsComponent } from './product/details/details.component';
 import { DEFAULT_CURRENCY_CODE } from '@angular/core'
 import { PurchaseDetailsComponent } from './purchase/purchase-details/purchase-details.component';
 import { PurchaseFlowComponent } from './purchase/purchase-details/purchase-flow/purchase-flow.component';
 import { PurchaseRoutingModule } from './purchase/purchase-details/purchase.routing';
+import { StarRatingComponent } from '../components/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
     ProductComponent,
     DetailsComponent,
     DeliveryComponent,
-    OpinateComponent,
     DetailsComponent,
     PurchaseDetailsComponent,
     PurchaseFlowComponent,
+    StarRatingComponent,
   ],
   imports: [
     CommonModule,
