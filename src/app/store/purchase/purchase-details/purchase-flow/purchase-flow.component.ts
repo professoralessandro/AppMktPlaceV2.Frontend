@@ -22,12 +22,15 @@ export class PurchaseFlowComponent implements OnInit {
    * PUBLIC METHOD
    */
   public ngOnInit(): void {
+    this.initializeComponent();
   }
 
   public enviarOpiniao(): void {
+    debugger;
     // Lógica para enviar a opinião
     console.log('Opinião enviada!');
     this.isOpinate = !this.isOpinate;
+    debugger;
   }
 
   /**

@@ -22,7 +22,7 @@ import { PurchaseRoutingModule } from './purchase/purchase-details/purchase.rout
     OpinateComponent,
     DetailsComponent,
     PurchaseDetailsComponent,
-    PurchaseFlowComponent
+    PurchaseFlowComponent,
   ],
   imports: [
     CommonModule,
