@@ -6,11 +6,11 @@ import { RouterModule } from '@angular/router';
 import { NgxMaskModule } from 'ngx-mask';
 import { ProductComponent } from './product/product.component';
 import { ProductRoutingModule } from './product/product.routing';
-import { DeliveryComponent } from './product/delivery/delivery.component';
-import { OpinateComponent } from './product/opinate/opinate.component';
-import { PurchaseComponent } from './product/purchase/purchase.component';
+import { DeliveryComponent } from './purchase/delivery/delivery.component';
+import { OpinateComponent } from './purchase/opinate/opinate.component';
+import { PurchaseComponent } from './purchase/purchase.component';
 import { DetailsComponent } from './product/details/details.component';
-import { PurchaseDetailsComponent } from './product/purchase/purchase-details/purchase-details.component';
+import { PurchaseDetailsComponent } from './purchase/purchase-details/purchase-details.component';
 @NgModule({
   declarations: [
     ProductComponent,

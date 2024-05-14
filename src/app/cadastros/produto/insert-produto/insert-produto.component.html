@@ -4,11 +4,11 @@
         <div class="card-body">
             <form>
                 <div class="form-group">
-                    <label for="ProductDescription">Descrição:</label>
+                    <label for="ProductDescription">Titulo:</label>
                     <input maxlength="50" type="text" class="form-control rounded-0"
-                        placeholder="Informe a descrição para o produto" [(ngModel)]="product.descricao"
+                        placeholder="Informe a descrição para o produto" [(ngModel)]="product.titulo"
                         [ngModelOptions]="{ standalone: true }" required />
-                    <small id="ProductDescription" class="form-text text-muted">Informe a descrição para o
+                    <small id="ProductDescription" class="form-text text-muted">Informe a titulo para o
                         produto.</small>
                 </div>
 
@@ -129,6 +129,16 @@
                     <label for="InputDetails">Descricao:</label>
                     <textarea class="form-control rounded-0" placeholder="Informe detalhes adicionais"
                         [disabled]="this.isInputBlocked === true" [(ngModel)]="this.product.detalhes"
+                        [ngModelOptions]="{ standalone: true }" required>
+                      {{this.product.detalhes}}
+                    </textarea>
+                    <small id="InputDetails" class="form-text text-muted">Informe detalhes adicionais.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="InputDetails">Descricao abreviada (descrição que aparecerá no catálogo):</label>
+                    <textarea class="form-control rounded-0" placeholder="Informe detalhes adicionais"
+                        [disabled]="this.isInputBlocked === true" [(ngModel)]="this.product.resumoDetalhes"
                         [ngModelOptions]="{ standalone: true }" required>
                       {{this.product.detalhes}}
                     </textarea>

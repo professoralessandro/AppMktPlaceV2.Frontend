@@ -3,7 +3,8 @@ import { ProductTypeEnum } from "src/app/Enums/product-type.enum";
 export class Produto {
     public identifier?: string;
     public productTypeEnum: ProductTypeEnum | string;
-    public descricao: string;
+    public titulo: string;
+    public resumoDetalhes: string;
     public detalhes: string;
     public codigoBarras: string;
     public marca: string;
@@ -24,11 +25,12 @@ export class Produto {
     public length: number | null;
     public image: string | null;
 
-  public Produto() {
+  public constructor() {
     this.identifier = '';
     this.productTypeEnum = '';
-    this.descricao = '';
+    this.titulo = '';
     this.detalhes = '';
+    this.resumoDetalhes = '';
     this.codigoBarras = '';
     this.marca = '';
     this.quantidade = 0;
