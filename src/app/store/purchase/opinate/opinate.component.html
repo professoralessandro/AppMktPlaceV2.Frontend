@@ -1,1 +1,12 @@
-<p>opinate works!</p>
+<div class="row">
+    <div class="col-sm-12">
+        <ul class="list-inline rating-list" *ngFor="let star of stars; let i= index" style="display: inline-block">
+            <li (click)="countStar(star)" id="{{'starId'+i}}" [ngClass]="{'selected': (star <= selectedValue)}"
+                (mouseover)="addClass(star)" (mouseout)="removeClass(star)"> ★
+            </li>
+        </ul>
+        <div class="col-sm-12">
+            <button (click)="enviarOpiniao()">Enviar Opinião</button>
+        </div>
+    </div>
+</div>
