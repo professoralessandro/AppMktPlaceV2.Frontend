@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductTypeEnum } from 'src/app/Enums/product-type.enum';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-product',
@@ -15,13 +16,22 @@ export class ProductComponent implements OnInit {
   public productList = [];
   public testList = [1,2,3,4,5,6];
 
-  constructor(private router: Router) { }
+  /**
+   * CONSTRUCTOR
+   */
+  constructor(
+    private commonService: CommonService
+  ) { }
 
   /**
    * PUBLIC METHOD
    */
   public ngOnInit(): void {
     this.initializeAtributtes();
+  }
+
+  public currencyFormatterBRL(value) {
+    return this.commonService.currencyFormatterBRL(value);
   }
 
   /**

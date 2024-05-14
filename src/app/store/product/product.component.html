@@ -4,7 +4,7 @@
   <img [src]="product.image" alt="{{ product.descricao }}" width="50%" height="50%" />
   <h3>{{ product.titulo }}</h3>
   <p>{{ product.resumoDetalhes }}</p>
-  <p>{{ product.precoVenda }}</p>
+  <p>{{ currencyFormatterBRL(product.precoVenda) }}</p>
   <button [routerLink]="['details',product.identifier]">Comprar</button>
   <!-- test/details/:id -->
 </div>

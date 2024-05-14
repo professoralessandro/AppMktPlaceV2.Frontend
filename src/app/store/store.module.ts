@@ -11,6 +11,8 @@ import { OpinateComponent } from './purchase/opinate/opinate.component';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { DetailsComponent } from './product/details/details.component';
 import { PurchaseDetailsComponent } from './purchase/purchase-details/purchase-details.component';
+import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core'
+
 @NgModule({
   declarations: [
     ProductComponent,
@@ -27,6 +29,12 @@ import { PurchaseDetailsComponent } from './purchase/purchase-details/purchase-d
     ProductRoutingModule,
     RouterModule,
     NgxMaskModule.forRoot(),
+  ],
+  providers: [
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'BRL'
+    },
   ]
 })
 export class StoreModule { }

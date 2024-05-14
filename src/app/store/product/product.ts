@@ -8,7 +8,7 @@ export class Product {
     public detalhes: string;
     public codigoBarras: string;
     public marca: string;
-    public precoVenda: number;
+    public precoVenda: number | string;
     public image: string | null;
     public quantidade: number;
     public rating: number;

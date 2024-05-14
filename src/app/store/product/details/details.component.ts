@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductTypeEnum } from 'src/app/Enums/product-type.enum';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-details',
@@ -18,7 +19,7 @@ export class DetailsComponent implements OnInit {
   /**
    * CONSTRUCTOR
    */
-  constructor() { }
+  constructor(private commonService: CommonService) { }
 
   /**
    * PUBLIC METHOD
@@ -32,6 +33,10 @@ export class DetailsComponent implements OnInit {
     // Implement your logic for purchasing the product
     // For example, navigate to a checkout page
     // You can use Angular Router for navigation
+  }
+
+  public currencyFormatterBRL(value) {
+    return this.commonService.currencyFormatterBRL(value);
   }
 
   /**
@@ -49,7 +54,7 @@ export class DetailsComponent implements OnInit {
     this.product.codigoBarras = '12345678910';
     this.product.marca = 'Marca Teste 1';
     this.product.image = './assets/img/test/d90029fa-c1fc-4310-9913-4c64b57498c8.jpeg';
-    this.product.precoVenda = 50.10;
+    this.product.precoVenda = 50;
     this.product.quantidade = 50;
     this.product.rating = 4.5;
 

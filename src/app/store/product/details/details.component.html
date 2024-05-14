@@ -3,7 +3,7 @@
     <h2>{{ product.titulo }}</h2>
     <img [src]="product.image" alt="{{ product.titulo }}" width="80%" height="80%" />
     <p>Detalhes: {{ product.detalhes }}</p>
-    <p>Preço: R$ {{ product.precoVenda }}</p>
+    <p>Preço: {{ currencyFormatterBRL(product.precoVenda)}}</p>
     <p>Marca: {{ product.marca }}</p>
     <p>Código de Barras: {{ product.codigoBarras }}</p>
     <p>Quantidade: {{ product.quantidade }}</p>
