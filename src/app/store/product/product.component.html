@@ -1,5 +1,7 @@
-<!-- product-list.component.html -->
+<!-- TITLE -->
 <div class="card border-0 rounded-0">{{ this.title }}</div>
+
+<!-- PRODUCT CARD -->
 <div *ngFor="let product of productList" class="product-card">
   <img [src]="product.image" alt="{{ product.descricao }}" width="50%" height="50%" />
   <h3>{{ product.titulo }}</h3>

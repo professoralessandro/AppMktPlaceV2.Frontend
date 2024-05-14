@@ -19,9 +19,7 @@ export class ProductComponent implements OnInit {
   /**
    * CONSTRUCTOR
    */
-  constructor(
-    private commonService: CommonService
-  ) { }
+  constructor(private commonService: CommonService) { }
 
   /**
    * PUBLIC METHOD

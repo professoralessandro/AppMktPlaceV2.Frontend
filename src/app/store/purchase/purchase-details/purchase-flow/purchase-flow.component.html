@@ -1,1 +1,30 @@
-<p>purchase-flow works!</p>
+<!-- TITLE -->
+<div class="card border-0 rounded-0">{{ this.title }}</div>
+
+<!-- PRODUCT STATUS -->
+<div class="product-details">
+    <div class="timeline">
+        <div class="step">
+            <span>Status do Pagamento</span>
+        </div>
+        <div class="step">
+            <span>Status da Entrega</span>
+        </div>
+        <div class="step">
+            <span>Entrega a Caminho</span>
+        </div>
+        <div class="step">
+            <span>Entrega Recebida</span>
+        </div>
+        <div class="step">
+            <span>Devolução</span>
+        </div>
+        <div class="step">
+            <span>Confirmação do Recebimento</span>
+        </div>
+        <button (click)="enviarOpiniao()">Enviar Opinião</button>
+        <div *ngIf="this.isOpinate === true">
+            <app-opinate></app-opinate>
+        </div>
+    </div>
+</div>
