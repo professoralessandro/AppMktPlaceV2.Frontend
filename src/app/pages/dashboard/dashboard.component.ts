@@ -117,19 +117,22 @@ export class DashboardComponent implements OnInit {
     new Chart('chart-line', {
       type: 'line',
       data: this.chart1.data,
-      options: this.chart1.options
+      // ERROR
+      // options: this.chart1.options
     });
     // tslint:disable-next-line:no-unused-expression
     new Chart('chart-bar', {
       type: 'bar',
       data: this.chart2.data,
-      options: this.chart2.options
+      // ERROR
+      // options: this.chart2.options
     });
     // tslint:disable-next-line:no-unused-expression
     new Chart('chart-doughnut', {
       type: 'doughnut',
       data: this.chart3.data,
-      options: this.chart3.options
+      // ERROR
+      // options: this.chart3.options
     });
   }
 

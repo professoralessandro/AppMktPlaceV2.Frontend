@@ -28,13 +28,15 @@ export class ConfirmService {
       type: 'confirm',
       text: message,
       siFn: function () {
-        that.subject.next();
+        // ERROR
+        // that.subject.next();
         // this will close the modal
         siFn();
         that.ngOnDestroy();
       },
       noFn: function () {
-        that.subject.next();
+        // ERROR
+        // that.subject.next();
         noFn();
         that.ngOnDestroy();
       },

@@ -24,6 +24,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
 import { ConfirmService } from './components/confirm/confirm.service';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -50,16 +51,20 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
     ToastrModule.forRoot(),
     NgxLoadingModule.forRoot({}),
     ModalModule.forRoot(),
+    NgxMaskDirective,
+    NgxMaskPipe
     ],
   providers: [
     ConfirmService,
     BsModalRef
   ],
-  entryComponents: [
-    AlertModalComponent
-  ],
+  // entryComponents: [
+  //   AlertModalComponent
+  // ],
   bootstrap: [AppComponent],
   exports: [
+    AlertModalComponent,
+    LoaderComponent,
     AlertModalComponent,
   ]
 })

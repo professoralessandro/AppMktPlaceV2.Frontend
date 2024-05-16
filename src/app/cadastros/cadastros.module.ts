@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 // tslint:disable-next-line:max-line-length
 import { GridComponent } from '../components/grid/grid.component';
 import { CompTitleComponent } from '../components/comp-title/comp-title.component';
-import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { GroupsComponent } from './groups/groups.component';
 import { InsertGroupsComponent } from './groups/insert-groups/insert-groups.component';
 import { DeleteGroupsComponent } from './groups/delete-groups/delete-groups.component';
@@ -63,7 +63,8 @@ import { DeleteProdutoComponent } from './produto/delete-produto/delete-produto.
     DeliveryRoutingModule,
     ProdutoRoutingModule,
     RouterModule,
-    NgxMaskModule.forRoot(),
+    NgxMaskDirective,
+    NgxMaskPipe,
   ]
 })
 export class CadastrosModule { }
