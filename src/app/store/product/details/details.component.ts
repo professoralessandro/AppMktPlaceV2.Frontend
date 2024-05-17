@@ -53,7 +53,7 @@ export class DetailsComponent implements OnInit {
     this.product.detalhes = 'Detalhes do Produto 1';
     this.product.codigoBarras = '12345678910';
     this.product.marca = 'Marca Teste 1';
-    this.product.image = './assets/img/test/d90029fa-c1fc-4310-9913-4c64b57498c8.jpeg';
+    this.product.mainImage = './assets/img/test/d90029fa-c1fc-4310-9913-4c64b57498c8.jpeg';
     this.product.precoVenda = 50;
     this.product.quantidade = 50;
     this.product.rating = 4.5;

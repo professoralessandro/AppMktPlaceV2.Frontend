@@ -4,7 +4,7 @@
 <!-- PRODUCT DETAILS -->
 <div class="product-details">
     <h2>{{ product.titulo }}</h2>
-    <img [src]="product.image" alt="{{ product.titulo }}" width="80%" height="80%" />
+    <img [src]="product.mainImage" alt="{{ product.titulo }}" width="80%" height="80%" />
     <p>Detalhes: {{ product.detalhes }}</p>
     <p>Preço: {{ currencyFormatterBRL(product.precoVenda)}}</p>
     <p>Marca: {{ product.marca }}</p>

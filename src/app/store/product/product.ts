@@ -9,7 +9,7 @@ export class Product {
     public codigoBarras: string;
     public marca: string;
     public precoVenda: number | string;
-    public image: string | null;
+    public mainImage: string | null;
     public quantidade: number;
     public rating: number;
 
@@ -21,7 +21,7 @@ export class Product {
     this.detalhes = '';
     this.codigoBarras = '';
     this.marca = '';
-    this.image = '';
+    this.mainImage = '';
     this.precoVenda = 0;
     this.quantidade = 0;
     this.rating = 0;
