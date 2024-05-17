@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { SystemParameterEnum } from 'src/app/Enums/system-parameters.enum';
 import { ProductTypeEnum, ProductTypeMapping } from 'src/app/Enums/product-type.enum';
+import { LoaderService } from 'src/app/components/loader/loader.service';
 
 @Component({
   selector: 'app-insert-produto',
@@ -39,18 +40,22 @@ export class InsertProdutoComponent implements OnInit {
   constructor(
     private service: HttpCommonService,
     private router: ActivatedRoute,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private loaderService: LoaderService,
   ) { }
 
   ngOnInit(): void {
 
+    this.loaderService.SetLoaderState(true);
     this.initializeComponent();
-    
+
     this.router.paramMap.subscribe((params) => {
+
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.isNew = false;
         this.title = 'Editar produto';
         this.titleButton = this.title.split(' ')[0];
+
         this.parameters = [
           { parameter: 'id', value: params.get('id') }
         ];
@@ -63,8 +68,10 @@ export class InsertProdutoComponent implements OnInit {
             this.product.productTypeEnum = this.commonService.ReturnEnumObjectByName('productTypeEnum', this.product.productTypeEnum);
             this.isProductChange();
             this.calcularPercentualMargemLucro();
+            this.loaderService.SetLoaderState(false);
           })
           .catch(e => {
+            this.loaderService.SetLoaderState(false);
             this.commonService.ReturnModalMessagErrorSuccess('Houve um erro buscar o produto.', false);
           });
       } else {
@@ -72,6 +79,7 @@ export class InsertProdutoComponent implements OnInit {
         this.title = 'Cadastrar produto';
         this.titleButton = this.title.split(' ')[0] === 'Cadastrar' ? 'Salvar' : '';
         this.product.ativo = true;
+        this.loaderService.SetLoaderState(false);
       }
     });
   }
@@ -81,6 +89,7 @@ export class InsertProdutoComponent implements OnInit {
 
     // TODO: REMOVER ESTA IMAGEM MOCADA
     this.product.image = 'D:/Pictures/d90029fa-c1fc-4310-9913-4c64b57498c8.jpeg';
+
     if (!this.productValidator(this.product)) return this.commonService.ReturnModalMessagErrorSuccess('Houve um erro na validacao do produto, verifique os campos e tente novamente', false);
 
     // this.product.productTypeEnum = Number(this.product.productTypeEnum);
@@ -102,9 +111,11 @@ export class InsertProdutoComponent implements OnInit {
       this.service.insert('cadastros_url', 'product', this.product)
         .toPromise()
         .then(c => {
+          this.loaderService.SetLoaderState(false);
           this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Produto incluido com sucesso.', true);
         })
         .catch(e => {
+          this.loaderService.SetLoaderState(false);
           this.commonService.responseActionWithNavigation(this.rotaAnterior, e.error, false);
         });
     } else {
@@ -113,9 +124,11 @@ export class InsertProdutoComponent implements OnInit {
       this.service.edit('cadastros_url', 'product', this.product)
         .toPromise()
         .then(c => {
+          this.loaderService.SetLoaderState(false);
           this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Produto editado com sucesso.', true);
         })
         .catch(e => {
+          this.loaderService.SetLoaderState(false);
           this.commonService.responseActionWithNavigation(this.rotaAnterior, e.error, false);
         });
     }
@@ -153,7 +166,7 @@ export class InsertProdutoComponent implements OnInit {
   public isProductChange() {
     try {
       if (!this.commonService.isNullOrUndefined(this.product.productTypeEnum)) {
-        if (Number(this.product.productTypeEnum) === ProductTypeEnum.Produto) {
+        if (Number(this.product.productTypeEnum) === ProductTypeEnum.Produto || this.product.productTypeEnum.toString().toLocaleLowerCase() == "produto") {
           this.isInputBlocked = false;
           this.isProduct = true;
         }
@@ -205,7 +218,7 @@ export class InsertProdutoComponent implements OnInit {
   private initializeComponent(): void {
     this.product = new Produto();
     this.isNew = true;
-    this.rotaAnterior = './cadastros/produto';
+    this.rotaAnterior = './produto/produto';
     this.parameters = [];
     this.title = '';
     this.isProduct = true;
@@ -219,6 +232,7 @@ export class InsertProdutoComponent implements OnInit {
     this.product.isIlimitado = false;
     this.product.ativo = true;
     this.product.bloqueado = false;
+    this.product.identifier = null;
 
     this.calcularPercentualMargemLucro();
   }

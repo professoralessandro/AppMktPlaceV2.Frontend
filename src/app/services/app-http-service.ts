@@ -27,6 +27,7 @@ export class HttpCommonService {
     }
 
     insert(api_url: string, endPoint: string, model: any) {
+      debugger;
       return this.http.post<any>(`${environment[api_url]}/api/${endPoint}/`, model);
     }
 
