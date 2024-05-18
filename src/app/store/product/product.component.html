@@ -19,7 +19,7 @@
     <!-- PRODUCT CARD -->
     <div  infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="loadMoreProducts()">
       <div *ngFor="let product of productList" class="product-card">
-        <img [src]="product.mainImage" alt="{{ product.descricao }}" width="50%" height="50%" />
+        <img [src]="product.mainImage" alt="{{ product.descricao }}" (error)="handleMissingImage(product)" width="50%" height="50%" />
         <h3>{{ product.titulo }}</h3>
         <p>{{ product.resumoDetalhes }}</p>
         <p>{{ currencyFormatterBRL(product.precoVenda) }}</p>

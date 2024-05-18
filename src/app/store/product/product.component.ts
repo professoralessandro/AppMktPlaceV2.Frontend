@@ -22,8 +22,8 @@ export class ProductComponent implements OnInit {
   public pageNumber: number;
   public rowspPage: number;
   public param: string;
+  public imgError: string;
 
-  public post: any = [];
   /**
    * CONSTRUCTOR
    */
@@ -40,10 +40,6 @@ export class ProductComponent implements OnInit {
     this.loaderService.SetLoaderState(true);
     this.initializeAtributtes();
     this.searchForProduct(this.param, this.pageNumber, this.rowspPage);
-
-    for (let i=1; i <= 100; i++) {
-      this.post.push(i);
-    }
   }
 
   public currencyFormatterBRL(value) {
@@ -59,6 +55,21 @@ export class ProductComponent implements OnInit {
     this.pageNumber = (this.pageNumber + 1);
 
     this.searchForProduct(this.param, this.pageNumber, this.rowspPage, true);
+  }
+
+  /**
+   * THE METHOD CHECK IF EXISTS A IMAGE, IF IT HAVENT ANY IMAGE IT REPLACE FOR ERROR IMAGE
+   * @param product 
+   */
+  public handleMissingImage(product) {
+    try {
+      if(this.commonService.isNullOrUndefined(product.mainImage) || product.mainImage === '') {
+        product.mainImage = this.imgError;
+      }
+    }
+    catch{
+      product.mainImage = this.imgError;
+    }
   }
 
   /**
@@ -96,5 +107,6 @@ export class ProductComponent implements OnInit {
     this.param = null;
     this.pageNumber = 1;
     this.rowspPage = 10;
+    this.imgError = './assets/img/test/carregar-notificacao-de-erro-icone-de-sinal-de-aviso-ilustracao-vetorial-eps-10-imagem-stock_797523-2316.jpg';
   }
 }
