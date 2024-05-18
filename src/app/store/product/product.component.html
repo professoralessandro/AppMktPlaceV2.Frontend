@@ -8,22 +8,28 @@
     </div>
     <div class="form-group">
       <label for="InputParam">Parametro de busca</label>
-      <input type="text" maxlength="50" [(ngModel)]="this.param" class="form-control rounded-0"
-        id="InputDescryption" aria-describedby="emailHelp" maxlength="150" placeholder="Informe: titulo, identificador, cogido de barras, marca, valor">
+      <input type="text" maxlength="50" [(ngModel)]="this.param" class="form-control rounded-0" id="InputDescryption"
+        aria-describedby="emailHelp" maxlength="150"
+        placeholder="Informe: titulo, identificador, cogido de barras, marca, valor">
     </div>
     <br>
     <div class="form-group">
-        <button (click)="search()" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-search"></i> Pesquisar</button>
+      <button (click)="search()" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-search"></i>
+        Pesquisar</button>
     </div>
     <br>
     <!-- PRODUCT CARD -->
-    <div  infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="loadMoreProducts()">
+    <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="loadMoreProducts()">
       <div *ngFor="let product of productList" class="product-card">
-        <img [src]="product.mainImage" alt="{{ product.descricao }}" (error)="handleMissingImage(product)" width="50%" height="50%" />
+        <img [src]="product.mainImage" alt="{{ product.descricao }}" (error)="handleMissingImage(product)" width="50%"
+          height="50%" />
         <h3>{{ product.titulo }}</h3>
         <p>{{ product.resumoDetalhes }}</p>
         <p>{{ currencyFormatterBRL(product.precoVenda) }}</p>
-        <button [routerLink]="['details',product.identifier]">Comprar</button>
+        <div class="form-group">
+          <button [routerLink]="['details',product.identifier]" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-shopping-cart"></i>
+            Comprar</button>
+        </div>
       </div>
     </div>
     <!-- LAZY LOADING -->

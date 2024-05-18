@@ -12,5 +12,8 @@
     <p>Quantidade: {{ product.quantidade }}</p>
     <p>Tipo de Produto: {{ product.productTypeEnum }}</p>
     <p>Pontuação: {{ product.rating }}</p>
-    <button [routerLink]="['/store/purchase/details/',product.identifier]">Comprar</button>
+    <div class="form-group">
+        <button [routerLink]="['/store/purchase/details/',product.identifier]" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-shopping-cart"></i>
+          Comprar</button>
+      </div>
 </div>
