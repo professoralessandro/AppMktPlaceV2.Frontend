@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { concat } from 'rxjs';
 import { ProductTypeEnum } from 'src/app/Enums/product-type.enum';
 import { LoaderService } from 'src/app/components/loader/loader.service';
 import { QueryParameter } from 'src/app/models/query-parameter';
@@ -22,6 +23,7 @@ export class ProductComponent implements OnInit {
   public rowspPage: number;
   public param: string;
 
+  public post: any = [];
   /**
    * CONSTRUCTOR
    */
@@ -35,10 +37,13 @@ export class ProductComponent implements OnInit {
    * PUBLIC METHOD
    */
   public ngOnInit(): void {
-    debugger;
     this.loaderService.SetLoaderState(true);
     this.initializeAtributtes();
     this.searchForProduct(this.param, this.pageNumber, this.rowspPage);
+
+    for (let i=1; i <= 100; i++) {
+      this.post.push(i);
+    }
   }
 
   public currencyFormatterBRL(value) {
@@ -46,45 +51,38 @@ export class ProductComponent implements OnInit {
   }
 
   public search() {
-    debugger;
+    this.pageNumber = 1;
     this.searchForProduct(this.param, this.pageNumber, this.rowspPage);
-    debugger;
   }
 
   public loadMoreProducts() {
-    debugger;
     this.pageNumber = (this.pageNumber + 1);
 
     this.searchForProduct(this.param, this.pageNumber, this.rowspPage, true);
-    debugger;
   }
 
   /**
    * PRIVATEE METHOD
    */
   private searchForProduct(param, pageNumber, rowspPage, concat?): void {
-    debugger;
     this.loaderService.SetLoaderState(true);
     this.parameters = [
       { parameter: 'param', value: param },
       { parameter: 'pageNumber', value: pageNumber },
       { parameter: 'rowspPage', value: rowspPage }
     ];
-    debugger;
+
     this.service.getAll('cadastros_url', 'product/store-paginated', this.parameters)
       .toPromise()
       .then(c => {
-        debugger;
         if (concat)
           this.productList = [...this.productList, ...c]
         else
           this.productList = c;
 
         this.loaderService.SetLoaderState(false);
-        debugger;
       })
       .catch(e => {
-        debugger;
         const messageType = 'error';
         const messageText = 'Houve um erro ao buscar os produtos.';
         this.commonService.responseActionWithoutNavigation(messageType, messageText);

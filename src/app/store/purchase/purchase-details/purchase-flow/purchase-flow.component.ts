@@ -26,11 +26,9 @@ export class PurchaseFlowComponent implements OnInit {
   }
 
   public enviarOpiniao(): void {
-    debugger;
     // Lógica para enviar a opinião
     console.log('Opinião enviada!');
     this.isOpinate = !this.isOpinate;
-    debugger;
   }
 
   /**

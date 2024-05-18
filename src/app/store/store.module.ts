@@ -13,6 +13,7 @@ import { PurchaseDetailsComponent } from './purchase/purchase-details/purchase-d
 import { PurchaseFlowComponent } from './purchase/purchase-details/purchase-flow/purchase-flow.component';
 import { PurchaseRoutingModule } from './purchase/purchase-details/purchase.routing';
 import { StarRatingComponent } from '../components/star-rating/star-rating.component';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { StarRatingComponent } from '../components/star-rating/star-rating.compo
     ProductRoutingModule,
     PurchaseRoutingModule,
     RouterModule,
+    InfiniteScrollModule,
     NgxMaskModule.forRoot(),
   ],
   providers: [

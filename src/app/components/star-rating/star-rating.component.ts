@@ -51,7 +51,6 @@ export class StarRatingComponent implements OnInit {
       const alertType: string = 'success'
       const alertMessage: string = 'Seu voto foi salvo com sucesso';
       this.commonService.responseActionWithoutNavigation(alertType, alertMessage);
-      debugger;
     }
     catch (ex) {
       const alertType: string = 'error';

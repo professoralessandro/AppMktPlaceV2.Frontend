@@ -8,6 +8,8 @@
 /tmp/*
 /app/**/*.js
 /app/**/*.js.map
+/.angular/*
+/.angular
 
 # dependencies
 /node_modules/*

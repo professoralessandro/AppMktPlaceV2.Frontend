@@ -38,13 +38,11 @@ export class PurchaseDetailsComponent implements OnInit {
 
   public goToPaymentMethod() {
     try {
-      debugger;
       // TODO: IMPLEMENTS HERE THE PAYMENT METHOD
 
       const alertMessage: string = 'Voce sera redirecionado para o metodo de pagamento: ' + this.formaPagamento;
       const routePaymentNavigation: string = '/store/purchase/flow/' + this.identifier;
       this.commonService.responseActionWithNavigation(routePaymentNavigation, alertMessage, true);
-      debugger;
     }
     catch(ex) {
       const alertType: string = 'error';
