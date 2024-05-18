@@ -72,6 +72,21 @@ export class ProductComponent implements OnInit {
     }
   }
 
+  public isRow(index): boolean {
+    if((index + 1) % 3 == 0) {
+      return true;
+    }
+    return false;
+  }
+
+  public returnOpenRow() {
+    return '<br>';
+  }
+
+  public returCloseRow() {
+    return '<br>';
+  }
+
   /**
    * PRIVATEE METHOD
    */

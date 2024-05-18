@@ -18,20 +18,19 @@
         Pesquisar</button>
     </div>
     <br>
-    <!-- PRODUCT CARD -->
-    <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="loadMoreProducts()">
-      <div *ngFor="let product of productList" class="product-card">
+    <!-- PRODUCT CARD - INFINIT SCROLL -->
+    <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="loadMoreProducts()" class="container-fluid d-flex flex-wrap">
+      <div *ngFor="let product of productList" class="product-card col-5">
         <img [src]="product.mainImage" alt="{{ product.descricao }}" (error)="handleMissingImage(product)" width="50%"
           height="50%" />
         <h3>{{ product.titulo }}</h3>
         <p>{{ product.resumoDetalhes }}</p>
         <p>{{ currencyFormatterBRL(product.precoVenda) }}</p>
         <div class="form-group">
-          <button [routerLink]="['details',product.identifier]" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-shopping-cart"></i>
+          <button [routerLink]="['details',product.identifier]" class="btn btn-outline-success m-1 flex-fill rounded-0"><i class="fa fa-shopping-cart"></i>
             Comprar</button>
         </div>
       </div>
     </div>
-    <!-- LAZY LOADING -->
   </div>
 </div>
