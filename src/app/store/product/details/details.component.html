@@ -15,7 +15,7 @@
     <p>Pontuação: {{ product.rating }}</p>
     <br>
     <div class="form-group">
-        <button [routerLink]="['/store/purchase/details/',product.identifier]"
+        <button (click)="addProductToShoppingcartProduct()"
             class="btn btn-outline-info m-1 flex-fill rounded-0"><i class="fas fa-cart-plus"></i>
             Adicionar ao carrinho</button>
     </div>

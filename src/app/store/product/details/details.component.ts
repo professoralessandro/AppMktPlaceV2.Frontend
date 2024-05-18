@@ -15,6 +15,7 @@ export class DetailsComponent implements OnInit {
    */
   public product: Product;
   public title: string;
+  public previusRoute: string;
 
   /**
    * CONSTRUCTOR
@@ -39,6 +40,10 @@ export class DetailsComponent implements OnInit {
     return this.commonService.currencyFormatterBRL(value);
   }
 
+  public addProductToShoppingcartProduct(): void {
+    this.commonService.responseActionWithNavigation(this.previusRoute,'O produto: ' + this.product.titulo + ' foi adocionado com sucesso', true);
+  }
+
   /**
    * PRIVATE METHOD
    */
@@ -60,5 +65,8 @@ export class DetailsComponent implements OnInit {
 
     // TITLE
     this.title = 'Detalhes do produto ';
+
+    // ROUTE
+    this.previusRoute = './store/test';
   }
 }
