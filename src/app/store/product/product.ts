@@ -12,6 +12,11 @@ export class Product {
     public mainImage: string | null;
     public quantidade: number;
     public rating: number;
+    public shoppingCartId: string;
+    public usuarioInclusaoId: string;
+    public usuarioUltimaAlteracaoId: string | null;
+    public dataInclusao: Date | null;
+    public dataUltimaAlteracao: Date | null;
 
   public constructor() {
     this.identifier = '';
@@ -25,5 +30,8 @@ export class Product {
     this.precoVenda = 0;
     this.quantidade = 0;
     this.rating = 0;
+    this.shoppingCartId = null;
+    this.usuarioInclusaoId = '';
+    this.dataInclusao = null;
   }
 }

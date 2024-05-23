@@ -53,7 +53,7 @@ export class ProductComponent implements OnInit {
 
   public loadMoreProducts() {
     this.pageNumber = (this.pageNumber + 1);
-
+    this.loaderService.SetLoaderState(true);
     this.searchForProduct(this.param, this.pageNumber, this.rowspPage, true);
   }
 
@@ -104,8 +104,9 @@ export class ProductComponent implements OnInit {
         if (concat)
           this.productList = [...this.productList, ...c]
         else
+        {
           this.productList = c;
-
+        }
         this.loaderService.SetLoaderState(false);
       })
       .catch(e => {
@@ -114,7 +115,6 @@ export class ProductComponent implements OnInit {
         this.commonService.responseActionWithoutNavigation(messageType, messageText);
         this.loaderService.SetLoaderState(false);
       });
-    this.loaderService.SetLoaderState(false);
   }
 
   private initializeAtributtes() {
