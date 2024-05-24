@@ -1,7 +1,7 @@
 <!-- TITLE -->
 <h4 class="text-muted mb-4">{{ this.title }}</h4>
 <!-- PRODUCT DETAILS -->
-<div class="product-details">
+<div *ngIf="product !== null && product != undefined" class="product-details">
     <br>
     <h2>{{ product.titulo }}</h2>
     <br>
@@ -30,7 +30,7 @@
 </div>
 <br>
 
-<div class="product-details">
+<div *ngIf="productList.length > 0" class="product-details">
     <h2>{{ this.shoppingCartTitle }}</h2>
     <div *ngFor="let product of productList">
         <div class="product-card">
@@ -55,6 +55,5 @@
                     Remover do carrinho</button>
             </div>
         </div>
-        <hr>
     </div>
 </div>
