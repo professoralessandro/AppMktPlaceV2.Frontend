@@ -22,6 +22,7 @@ export class DetailsComponent implements OnInit {
   public previusRoute: string;
   public imgError: string;
   public isBlockedToAddShopCart: boolean;
+  public isShoppingCartVisualization: boolean;
 
   public shoppingCartTitle: string;
 
@@ -62,6 +63,12 @@ export class DetailsComponent implements OnInit {
     // You can use Angular Router for navigation
   }
 
+  public buyShoppingCartProduct(): void {
+    // Implement your logic for purchasing the product
+    // For example, navigate to a checkout page
+    // You can use Angular Router for navigation
+  }
+
   public currencyFormatterBRL(value) {
     return this.commonService.currencyFormatterBRL(value);
   }
@@ -77,7 +84,10 @@ export class DetailsComponent implements OnInit {
       .then(c => {
         // SUCCESS MESSAGE
         this.loaderService.SetLoaderState(false);
-        this.commonService.responseActionWithNavigation(this.previusRoute, 'O produto: ' + this.product.titulo + ' foi adocionado com sucesso', true);
+        this.product
+        // LOAD AGAIN THE SHOPPING CART
+        this.commonService.responseActionWithoutNavigation('success', 'O produto: ' + this.product.titulo + ' foi adocionado com sucesso.');
+        this.loadShoopingCart();
       })
       .catch(e => {
         // ERROR MESSAGE
@@ -155,8 +165,12 @@ export class DetailsComponent implements OnInit {
   private initializeAtributtes() {
     this.loaderService.SetLoaderState(true);
 
+    // PRODUCT EMPTY INITIALIZED
+    this.product = new Product();
+
     this.imgError = './assets/img/test/carregar-notificacao-de-erro-icone-de-sinal-de-aviso-ilustracao-vetorial-eps-10-imagem-stock_797523-2316.jpg';
     this.isBlockedToAddShopCart = false;
+    this.isShoppingCartVisualization = false;
 
     // TITLE
     this.title = 'Detalhes do produto ';
@@ -182,11 +196,8 @@ export class DetailsComponent implements OnInit {
         // INITIALIZE PRODUCT
         this.loadProduct(this.productId);
       } else {
-        // SUCCESS MESSAGE
-        this.loaderService.SetLoaderState(false);
-        const messageType = 'error';
-        const messageText = 'Houve um erro ao carregar as informacoes do produto.';
-        this.commonService.responseActionWithoutNavigation(messageType, messageText);
+        // INITIALIZE SHOPPING CART ATTRIB
+        this.loadShoopingCart();
       }
     });
   }
@@ -203,19 +214,23 @@ export class DetailsComponent implements OnInit {
       .then(c => {
         this.productList = c;
         if (this.productList.length > 0) {
-          // IF EXISTS MORE THAN 10 OBJECS ON SHOPPING CART OR THE PRODUCT ALREDY THERE IT WILL BE BLOCKED TO ADDED ON SHOPPING CART
-          if (this.productList.length >= 10 || !this.commonService.isNullOrUndefined(this.productList.find(c => c.identifier === prodId))) {
-            this.isBlockedToAddShopCart = true;
-          } else {
+          if (!this.commonService.isNullOrUndefined(prodId)) {
+            // IF EXISTS MORE THAN 10 OBJECS ON SHOPPING CART OR THE PRODUCT ALREDY THERE IT WILL BE BLOCKED TO ADDED ON SHOPPING CART
+            if (this.productList.length >= 10 || !this.commonService.isNullOrUndefined(this.productList.find(c => c.identifier === prodId))) {
+              this.isBlockedToAddShopCart = true;
+            } else {
+              this.isBlockedToAddShopCart = false;
+            }
+          }
+          else {
+            this.isShoppingCartVisualization = true;
             this.isBlockedToAddShopCart = false;
           }
-
           this.productList.forEach(x => {
             x.productTypeEnum = this.commonService.ReturnEnumObjectByName('productTypeEnum', x.productTypeEnum);
           });
+          this.loaderService.SetLoaderState(false);
         }
-
-        this.loaderService.SetLoaderState(false);
       })
       .catch(e => {
         this.loaderService.SetLoaderState(false);
