@@ -14,11 +14,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Requires
 
 ```
-node v20.13.1
+node v16.20.2
 
 npm 10.5.1
 
-node-sass 9.0.0 (compatible with: node v20.13.1)
+node-sass 6.0.0 (compatible with: node v16.20.2)
 ```
 
 ## Install Angular and execute the project
