@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: 'notifications', component: NotificationsComponent},
 
   { path: 'cadastros', loadChildren: () => import('./cadastros/cadastros.module').then(m => m.CadastrosModule) },
+  { path: 'store', loadChildren: () => import('./store/store.module').then(m => m.StoreModule) },
   // {path: 'buscateste', component: TiposTelefonesComponent},
   // {path: 'cadastroteste', component: CadastrosTiposTelefonesComponent},
   // {path: 'buscateste/edicaoteste/:id', component: CadastrosTiposTelefonesComponent}

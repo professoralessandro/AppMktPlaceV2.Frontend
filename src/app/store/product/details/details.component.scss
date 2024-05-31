@@ -1,0 +1,25 @@
+/* product-details.component.css */
+.product-details {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .product-details img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* product-list.component.css */
+.product-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+}

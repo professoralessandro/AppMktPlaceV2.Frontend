@@ -14,9 +14,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Requires
 
 ```
-node v20.12.2
+node v16.20.2
 
 npm 10.5.1
+
+node-sass 6.0.0 (compatible with: node v16.20.2)
 ```
 
 ## Install Angular and execute the project
@@ -38,7 +40,7 @@ npm install -g @angular/cli
 ## Quick start
 
 ```
-npm install
+npm install or npm i --legacy-peer-deps
 
 ng serve
 

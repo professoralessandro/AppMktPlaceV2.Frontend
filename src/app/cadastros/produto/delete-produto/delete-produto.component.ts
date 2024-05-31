@@ -35,7 +35,7 @@ export class DeleteProdutoComponent implements OnInit {
           .toPromise()
           .then(c => {
             this.product = c;
-            this.label = `Tem certerza que deseja deletar o item ${this.product.descricao} ?`;
+            this.label = `Tem certerza que deseja deletar o item ${this.product.titulo} ?`;
           })
           .catch(e => {
             this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o product.', false);
@@ -69,7 +69,7 @@ export class DeleteProdutoComponent implements OnInit {
       .toPromise()
       .then(c => {
         this.commonService.responseActionWithNavigation
-          (this.rotaAnterior, `Item<br>${this.product.descricao}<br>Deletado com sucesso.`, true);
+          (this.rotaAnterior, `Item<br>${this.product.titulo}<br>Deletado com sucesso.`, true);
       })
       .catch(e => {
         this.commonService.responseActionWithNavigation(this.rotaAnterior, e.error, false);

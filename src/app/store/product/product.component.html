@@ -1,0 +1,39 @@
+<!-- TITLE -->
+<h4 class="text-muted mb-4">{{ this.title }}</h4>
+<div class="card border-0 rounded-0">
+  <div class="col-md-12 col-lg-12 mb-12 align-items-stretch">
+    <!-- ADVANTAGE SEARCH FILTER -->
+    <div class="card-title mb-1 p-3">
+      <h5>Filtro avançado de busca</h5>
+    </div>
+    <div class="form-group">
+      <label for="InputParam">Parametro de busca</label>
+      <input type="text" maxlength="50" [(ngModel)]="this.param" class="form-control rounded-0" id="InputDescryption"
+        aria-describedby="emailHelp" maxlength="150"
+        placeholder="Informe: titulo, identificador, cogido de barras, marca, valor">
+    </div>
+    <br>
+    <div class="form-group">
+      <button (click)="search()" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-search"></i>
+        Pesquisar</button>
+    </div>
+    <br>
+    <!-- PRODUCT CARD - INFINIT SCROLL -->
+    <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="loadMoreProducts()">
+      <div  class="container-fluid d-flex flex-wrap">
+        <div *ngFor="let product of productList" class="product-card col-5">
+          <img [src]="product.mainImage" alt="{{ product.descricao }}" (error)="handleMissingImage(product)" width="50%"
+            height="50%" />
+          <h3>{{ product.titulo }}</h3>
+          <p>{{ product.resumoDetalhes }}</p>
+          <p>{{ currencyFormatterBRL(product.precoVenda) }}</p>
+          <div class="form-group">
+            <button [routerLink]="['details',product.identifier]" class="btn btn-outline-success m-1 flex-fill rounded-0"><i class="fa fa-shopping-cart"></i>
+              Comprar</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

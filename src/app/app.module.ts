@@ -60,7 +60,7 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
   ],
   bootstrap: [AppComponent],
   exports: [
-    AlertModalComponent
+    AlertModalComponent,
   ]
 })
 export class AppModule { }

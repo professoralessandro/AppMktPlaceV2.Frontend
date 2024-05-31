@@ -21,7 +21,7 @@ export class ProdutoComponent implements OnInit {
   // PARAMETERS AREA
   public id: string;
   public tipoProduto: number;
-  public descricao: string;
+  public titulo: string;
   public marca: string;
   public codigoBarras: string;
   public isBloqueado: boolean;
@@ -71,7 +71,7 @@ export class ProdutoComponent implements OnInit {
     this.gridTitle = 'Produtos';
     this.title = 'Busca de Produto';
     this.gridTitles = ['Descrição', 'Tipo de produto', 'Marca'];
-    this.gridElements = ['descricao', 'productTypeEnum', 'marca'];
+    this.gridElements = ['titulo', 'productTypeEnum', 'marca'];
     this.apiUrl = 'cadastros_url';
     this.endpointUrl = projectUrls.GetAllProductPaginated;
     this.registerUrl = projectUrls.RegisterGroupUrl;
@@ -81,7 +81,7 @@ export class ProdutoComponent implements OnInit {
     this.parameters = [
       { parameter: 'id', value: this.id },
       { parameter: 'tipoProduto', value: this.tipoProduto },
-      { parameter: 'descricao', value: this.descricao },
+      { parameter: 'titulo', value: this.titulo },
       { parameter: 'marca', value: this.marca },
       { parameter: 'codigoBarras', value: this.codigoBarras },
       { parameter: 'isBloqueado', value: this.isBloqueado },
@@ -116,7 +116,7 @@ export class ProdutoComponent implements OnInit {
     this.parameters = [
       { parameter: 'id', value: this.id },
       { parameter: 'tipoProduto', value: this.commonService.isNullOrUndefined(this.tipoProduto) ? undefined : this.commonService.ReturnValueMyEnumDescription('productTypeEnum', this.tipoProduto)},
-      { parameter: 'descricao', value: this.descricao },
+      { parameter: 'titulo', value: this.titulo },
       { parameter: 'marca', value: this.marca },
       { parameter: 'codigoBarras', value: this.codigoBarras },
       { parameter: 'isBloqueado', value: this.isBloqueado },

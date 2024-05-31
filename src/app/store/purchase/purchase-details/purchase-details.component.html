@@ -1,0 +1,40 @@
+<!-- TITLE -->
+<div class="card border-0 rounded-0">{{ this.title }}</div>
+<div class="card border-0 rounded-0">
+    <div class="col-md-12 col-lg-12 mb-12 align-items-stretch">
+        <!-- PRODUCT DETAILS -->
+        <div class="product-details">
+            <h2>{{ this.title }}</h2>
+            <!-- TODO: DEPOOIS SERA UM CARRINHO DE COMPRAS -->
+            <!-- INFORMACOES SOBRE O PRODUTO -->
+            <br>
+            <br>
+            <h3>Informacoes sobre o Produto:</h3>
+            <img [src]="product.mainImage" alt="{{ product.titulo }}" width="80%" height="80%" />
+            <p>Detalhes: {{ product.detalhes }}</p>
+            <p>Preço: {{ currencyFormatterBRL(product.precoVenda)}}</p>
+            <p>Marca: {{ product.marca }}</p>
+            <p>Código de Barras: {{ product.codigoBarras }}</p>
+            <p>Quantidade: {{ product.quantidade }}</p>
+            <p>Tipo de Produto: {{ product.productTypeEnum }}</p>
+            <p>Pontuação: {{ product.rating }}</p>
+            <br>
+            <br>
+            <h3>Confirmação de Venda:</h3>
+            <!-- VALOR TOTAL DA COMPRA, CALCULO FINAL -->
+            <p>Valor total da compra: {{ currencyFormatterBRL(valorTotal) }}</p>
+
+            <!-- INFORMACOES SOBRE O ENDERECO -->
+            <p>Endereço de entrega: {{ endereco }} <button (click)="goToPaymentMethod()">Alterar</button> </p>
+
+            <!-- PRAZO DE ENTREGA -->
+            <p>Prazo de entrega: {{ prazoEntrega }}</p>
+
+            <!-- FORMA DE PAGAMENTO -->
+            <p>Forma de pagamento: {{ formaPagamento }}</p>
+
+            <!-- TODO: CRIAR METODO DE PAGAMENTO NO MERCADO PAGO -->
+            <button (click)="goToPaymentMethod()">Comprar</button>
+        </div>
+    </div>
+</div>

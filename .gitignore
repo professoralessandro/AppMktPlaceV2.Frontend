@@ -8,12 +8,16 @@
 /tmp/*
 /app/**/*.js
 /app/**/*.js.map
+/.angular/*
+/.angular
 
 # dependencies
 /node_modules/*
 /bower_components/*
 /node_modules
 /bower_components
+/.DS_Store/
+/package-lock.*
 
 # IDEs and editors
 /.idea/*
