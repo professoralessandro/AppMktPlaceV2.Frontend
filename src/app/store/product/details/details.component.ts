@@ -5,7 +5,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { QueryParameter } from 'src/app/models/query-parameter';
 import { LoaderService } from 'src/app/components/loader/loader.service';
 import { HttpCommonService } from 'src/app/services/app-http-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -23,11 +23,12 @@ export class DetailsComponent implements OnInit {
   public imgError: string;
   public isBlockedToAddShopCart: boolean;
   public isShoppingCartVisualization: boolean;
+  public paymentPurchaseRoute: string;
 
   public shoppingCartTitle: string;
 
   // SHOPCART PRODUCTS
-  public productList = [];
+  public productList: Product[];
   private parameters: QueryParameter[];
   public pageNumber: number;
   public rowspPage: number;
@@ -47,6 +48,7 @@ export class DetailsComponent implements OnInit {
     private loaderService: LoaderService,
     private service: HttpCommonService,
     private router: ActivatedRoute,
+    private route: Router,
   ) { }
 
   /**
@@ -57,16 +59,33 @@ export class DetailsComponent implements OnInit {
     this.initializeAtributtes();
   }
 
-  public buyProduct(): void {
-    // Implement your logic for purchasing the product
-    // For example, navigate to a checkout page
-    // You can use Angular Router for navigation
+  public buyProduct(product): void {
+    debugger;
+    if (this.validatePurchaseProduct(product)) {
+      //ADD PRODUCT TO SHOPCART
+      localStorage.setItem('shoppingcart', JSON.stringify(Array<Product>().push(product)));
+      this.route.navigate([this.paymentPurchaseRoute]).then();
+    }
   }
 
-  public buyShoppingCartProduct(): void {
-    // Implement your logic for purchasing the product
-    // For example, navigate to a checkout page
-    // You can use Angular Router for navigation
+  public buyShoppingCartProduct(productList): void {
+    debugger;
+    productList.forEach(product => {
+      if (!this.validatePurchaseProduct(product)) {
+        return;
+      }
+    });
+    debugger;
+
+    //PARA ADICIONAR
+    localStorage.setItem('shoppingcart', JSON.stringify(productList));
+    debugger;
+    this.route.navigate([this.paymentPurchaseRoute]).then();
+    debugger;
+    // this.route.navigate([route]).then(e => {
+    //   this.loaderService.SetLoaderState(false);
+    //   this.alertService.showAlert(messege, isSucsess ? 'success' : 'error');
+    // });
   }
 
   public currencyFormatterBRL(value) {
@@ -74,6 +93,7 @@ export class DetailsComponent implements OnInit {
   }
 
   public addProductToShoppingcartProduct(product): void {
+    debugger;
     this.service.insert('cadastros_url', 'store/shoppingcart', {
       usuarioId: this.userId,
       produtoId: product.identifier,
@@ -186,6 +206,8 @@ export class DetailsComponent implements OnInit {
     // TODO: THEN REMOVE IT
     this.userId = "D2A833DE-5BB4-4931-A3C2-133C8994072A".toLocaleLowerCase();
 
+    this.paymentPurchaseRoute = '/store/purchase/details';
+
     this.router.paramMap.subscribe((params) => {
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.productId = params.get('id');
@@ -212,7 +234,7 @@ export class DetailsComponent implements OnInit {
     this.service.getAll('cadastros_url', 'store/GetAllShoppingCartProductByUserId', this.parameters)
       .toPromise()
       .then(c => {
-        this.productList = c;
+        this.productList = this.ConvertAnyProductListToProductList(c);
         if (this.productList.length > 0) {
           if (!this.commonService.isNullOrUndefined(prodId)) {
             // IF EXISTS MORE THAN 10 OBJECS ON SHOPPING CART OR THE PRODUCT ALREDY THERE IT WILL BE BLOCKED TO ADDED ON SHOPPING CART
@@ -259,6 +281,52 @@ export class DetailsComponent implements OnInit {
         this.loaderService.SetLoaderState(false);
         this.commonService.ReturnModalMessagErrorSuccess('Houve um erro buscar o produto.', false);
       })
+  }
+
+  private ConvertAnyProductListToProductList(productList: any[]): Product[] {
+    try {
+      let products = new Array<Product>();
+      if (productList.length > 0) {
+        productList.forEach(c => {
+          let product = new Product();
+          product.identifier = c.identifier;
+          product.productTypeEnum = c.productTypeEnum;
+          product.titulo = c.titulo;
+          product.resumoDetalhes = c.resumoDetalhes;
+          product.detalhes = c.detalhes;
+          product.codigoBarras = c.codigoBarras;
+          product.marca = c.marca;
+          product.mainImage = c.mainImage;
+          product.precoVenda = c.precoVenda;
+          product.quantidade = c.quantidade;
+          product.rating = c.rating;
+          product.shoppingCartId = c.shoppingCartId;
+          product.usuarioInclusaoId = c.usuarioInclusaoId;
+          product.dataInclusao = c.dataInclusao;
+          product.productQuantity = 0;
+          products.push(product);
+        })
+      }
+
+      return products;
+    }
+    catch {
+      return new Array<Product>();
+    }
+  }
+
+  private validatePurchaseProduct(product: Product): boolean {
+    if (product.productQuantity > 10 || product.productQuantity < 1) {
+      this.commonService.ReturnModalMessagErrorSuccess(`A quantidade do produto: ${product.titulo}\ndeve ser maior 0 e menor que 11 produtos.`, false);
+      return false;
+    }
+
+    if (product.productQuantity > product.productQuantity) {
+      this.commonService.ReturnModalMessagErrorSuccess(`A quantidade do produto: ${product.titulo} indisponível.`, false);
+      return false;
+    }
+
+    return true;
   }
 }
 

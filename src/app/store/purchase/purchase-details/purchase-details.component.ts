@@ -22,6 +22,9 @@ export class PurchaseDetailsComponent implements OnInit {
   public formaPagamento: string; // Exemplo: substitua pela forma real
   public identifier: string;
 
+  // SHOPCART PRODUCTS
+  public productList: Product[];
+
   constructor(private commonService: CommonService) { }
 
   /**
@@ -29,6 +32,10 @@ export class PurchaseDetailsComponent implements OnInit {
    */
 
   public ngOnInit(): void {
+    debugger;
+    //PARA PEGAR
+    this.productList = JSON.parse(localStorage.getItem('shoppingcart'));
+    debugger;
     this.initializeComponent();
   }
 
