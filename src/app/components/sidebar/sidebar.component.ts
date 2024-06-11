@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
    */
   private initializeComponent(): void {
     this.isSysAdmin = false;
-    // this.isSysAdmin = this.validateIsSysAdmin();
+    this.isSysAdmin = this.validateIsSysAdmin();
   }
 
   private validateIsSysAdmin(): boolean {
