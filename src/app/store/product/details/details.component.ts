@@ -60,32 +60,27 @@ export class DetailsComponent implements OnInit {
   }
 
   public buyProduct(product): void {
-    debugger;
     if (this.validatePurchaseProduct(product)) {
       //ADD PRODUCT TO SHOPCART
+      let products: Product[] = [product]
+      this.goToPaymentConfirmation(products);
+      localStorage.removeItem('shoppingcart');
       localStorage.setItem('shoppingcart', JSON.stringify(Array<Product>().push(product)));
       this.route.navigate([this.paymentPurchaseRoute]).then();
     }
   }
 
   public buyShoppingCartProduct(productList): void {
-    debugger;
     productList.forEach(product => {
       if (!this.validatePurchaseProduct(product)) {
         return;
       }
     });
-    debugger;
 
     //PARA ADICIONAR
     localStorage.setItem('shoppingcart', JSON.stringify(productList));
-    debugger;
+
     this.route.navigate([this.paymentPurchaseRoute]).then();
-    debugger;
-    // this.route.navigate([route]).then(e => {
-    //   this.loaderService.SetLoaderState(false);
-    //   this.alertService.showAlert(messege, isSucsess ? 'success' : 'error');
-    // });
   }
 
   public currencyFormatterBRL(value) {
@@ -327,6 +322,13 @@ export class DetailsComponent implements OnInit {
     }
 
     return true;
+  }
+
+  private goToPaymentConfirmation(productList: Array<Product>) {
+    //ADD PRODUCT TO SHOPCART
+    localStorage.removeItem('shoppingcart');
+    localStorage.setItem('shoppingcart', JSON.stringify(productList));
+    this.route.navigate([this.paymentPurchaseRoute]).then();
   }
 }
 

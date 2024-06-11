@@ -22,13 +22,13 @@
             <br>
             <h3>Confirmação de Venda:</h3>
             <!-- VALOR TOTAL DA COMPRA, CALCULO FINAL -->
-            <p>Valor total da compra: {{ currencyFormatterBRL(valorTotal) }}</p>
+            <p>Valor total da compra: {{ currencyFormatterBRL(this.totalShoppingCartValue) }}</p>
 
             <!-- INFORMACOES SOBRE O ENDERECO -->
             <p>Endereço de entrega: {{ endereco }} <button (click)="goToPaymentMethod()">Alterar</button> </p>
 
             <!-- PRAZO DE ENTREGA -->
-            <p>Prazo de entrega: {{ prazoEntrega }}</p>
+            <p>Prazo de entrega: {{ this.totalDeliveryCalculateDayValue }} dias</p>
 
             <!-- FORMA DE PAGAMENTO -->
             <p>Forma de pagamento: {{ formaPagamento }}</p>

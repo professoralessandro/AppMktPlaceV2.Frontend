@@ -10,7 +10,9 @@ export class NavbarComponent implements OnInit {
 
   constructor(private appService: AppService) { }
   isCollapsed = true;
+  isSysAdmin: boolean;
   ngOnInit() {
+    this.initializeComponent();
   }
 
   toggleSidebarPin() {
@@ -20,4 +22,15 @@ export class NavbarComponent implements OnInit {
     this.appService.toggleSidebar();
   }
 
+  /**
+   * PRIVATE METHOD
+   */
+  private initializeComponent(): void {
+    this.isSysAdmin = false;
+    // this.isSysAdmin = this.validateIsSysAdmin();
+  }
+
+  private validateIsSysAdmin(): boolean {
+    return true;
+  }
 }
