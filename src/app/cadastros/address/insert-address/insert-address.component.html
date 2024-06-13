@@ -4,15 +4,15 @@
         <div class="card-body">
             <form>
 
-                <div class="form-group">
-                    <label for="exampleInputUsuario">Usuario</label>
+                <div class="form-group" *ngIf="this.usersSelect.length > 0">
+                    <label for="exampleInputUsuario">Usuário</label>
                     <select [(ngModel)]="this.model.usuarioId" [ngModelOptions]="{ standalone: true }"
                         class="custom-select" name="state_raw" id="state_raw" required>
                         <option [value]="undefined" selected>Selecione...</option>
                         <option [value]="user.key" *ngFor="let user of this.usersSelect"> {{ user.value }}
                         </option>
                     </select>
-                    <small id="BlockType" class="form-text text-muted">Informe o tipo do documento para o
+                    <small id="BlockType" class="form-text text-muted">Informe o usuário para o
                         cadastro.</small>
                 </div>
 

@@ -9,6 +9,7 @@
             <!-- INFORMACOES SOBRE O PRODUTO -->
             <br>
             <br>
+            <!--             
             <h3>Informacoes sobre o Produto:</h3>
             <img [src]="product.mainImage" alt="{{ product.titulo }}" width="80%" height="80%" />
             <p>Detalhes: {{ product.detalhes }}</p>
@@ -20,21 +21,56 @@
             <p>Pontuação: {{ product.rating }}</p>
             <br>
             <br>
-            <h3>Confirmação de Venda:</h3>
+            <hr>
+            -->
+            <!-- INFORMACOES SOBRE O VALOR -->
+            <h3>Confirmação produtos:</h3>
+            <div *ngFor="let product of productList">
+                <div class="product-card">
+                    <br>
+                    <h2>{{ product.titulo }}</h2>
+                    <br>
+                    <img [src]="product.mainImage" alt="{{ product.titulo }}" (error)="handleMissingImage(product)" width="80%"
+                        height="80%" />
+                    <br>
+                    <br>
+                    <p *ngIf="isValueValid(product.detalhes)">Detalhes: {{ product.detalhes }}</p>
+                    <p *ngIf="isValueValid(product.precoVenda)">Preço: {{ currencyFormatterBRL(product.precoVenda)}}</p>
+                    <p *ngIf="isValueValid(product.quantidade)">Quantidade: {{ product.productQuantity }}</p>
+                    <p *ngIf="isValueValid(product.rating)">Pontuação: {{ product.rating }}</p>
+                </div>
+                <hr>
+            </div>
             <!-- VALOR TOTAL DA COMPRA, CALCULO FINAL -->
             <p>Valor total da compra: {{ currencyFormatterBRL(this.totalShoppingCartValue) }}</p>
-
-            <!-- INFORMACOES SOBRE O ENDERECO -->
-            <p>Endereço de entrega: {{ endereco }} <button (click)="goToPaymentMethod()">Alterar</button> </p>
-
+            <hr>
+            <h3>Confirmação do endereço:</h3>
+                <!-- INFORMACOES SOBRE O ENDERECO -->
+                <p>Tipo: {{ this.tipoEndereco }}
+                <br>Endereço de entrega: {{ this.endereco }}
+                <br>Ponto de Referência: {{ this.pontoReferencia }}
+                <br>
+                <button [routerLink]="['/cadastros/address/user/',user.identifier]" class="btn btn-outline-info m-1 flex-fill rounded-0"><i
+                    class="far fa-edit"></i>
+                    Alterar
+                </button>
+            </p>
+            <hr>
+            <h3>Prazo de entrega:</h3>
             <!-- PRAZO DE ENTREGA -->
             <p>Prazo de entrega: {{ this.totalDeliveryCalculateDayValue }} dias</p>
-
+            <hr>
+            <h3>Confirmação forma de pagamento:</h3>
             <!-- FORMA DE PAGAMENTO -->
             <p>Forma de pagamento: {{ formaPagamento }}</p>
 
             <!-- TODO: CRIAR METODO DE PAGAMENTO NO MERCADO PAGO -->
-            <button (click)="goToPaymentMethod()">Comprar</button>
+            <!-- <button (click)="goToPaymentMethod()">Comprar</button> -->
+            <div class="form-group">
+                <button (click)="goToPaymentMethod()" class="btn btn-outline-success m-1 flex-fill rounded-0"><i
+                        class="fas fa-dollar-sign"></i>
+                    Comprar</button>
+            </div>
         </div>
     </div>
 </div>

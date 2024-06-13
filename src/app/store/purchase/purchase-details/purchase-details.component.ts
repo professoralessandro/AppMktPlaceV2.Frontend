@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 import { Product } from '../../product/product';
 import { ProductTypeEnum } from 'src/app/Enums/product-type.enum';
+import { LoaderService } from 'src/app/components/loader/loader.service';
+import { HttpCommonService } from 'src/app/services/app-http-service';
+import { QueryParameter } from 'src/app/models/query-parameter';
+import { Address } from 'src/app/cadastros/address/address';
+import { projectUrls } from 'src/environments/endpoints-environment';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-purchase-details',
@@ -13,17 +19,8 @@ export class PurchaseDetailsComponent implements OnInit {
   /**
    * CLASS ATIBUTTES
    */
-  public product: Product;
   public title: string;
-
-  public valorTotal: number; // Exemplo: substitua pelo valor real
-  public endereco: string;
-  public prazoEntrega: string; // Exemplo: substitua pelo prazo real
-  public formaPagamento: string; // Exemplo: substitua pela forma real
-  public identifier: string;
-
-  // SHOPPIING CART ATTIBUTTES
-  public totalShoppingCartValue: number;
+  public productIdentifier: string;
 
   // DELYVERY ATRIBUTTES
   public totalDeliveryCalculateDayValue: number;
@@ -31,7 +28,36 @@ export class PurchaseDetailsComponent implements OnInit {
   // SHOPCART PRODUCTS
   public productList: Product[];
 
-  constructor(private commonService: CommonService) { }
+  // SHOPPIING CART ATTIBUTTES
+  public totalShoppingCartValue: number;
+
+  // HTTP REQUEST ATRIBUTTES
+  private parameters: QueryParameter[];
+  public pageNumber: number;
+  public rowspPage: number;
+  public apiUrl: string;
+  public endpointUrl: string;
+
+  // ADRESS ATRIBUTTES
+  public address: Address;
+  public tipoEndereco: string;
+  public endereco: string;
+  public pontoReferencia: string;
+
+  // USER ATRIBUTTES
+  public user: any;
+
+  // PRODUCT ATRIBUTTES
+  public product: Product;
+
+  // PAYMENT ATRIBUTTES
+  public formaPagamento: string;
+
+  constructor(
+    private commonService: CommonService,
+    private loaderService: LoaderService,
+    private service: HttpCommonService
+  ) { }
 
   /**
    * PUBLIC METHOD
@@ -49,9 +75,9 @@ export class PurchaseDetailsComponent implements OnInit {
   public goToPaymentMethod() {
     try {
       // TODO: IMPLEMENTS HERE THE PAYMENT METHOD
-
       const alertMessage: string = 'Voce sera redirecionado para o metodo de pagamento: ' + this.formaPagamento;
-      const routePaymentNavigation: string = '/store/purchase/flow/' + this.identifier;
+      // TODO: THEN REMOVE IT: this.productIdentifier AND REPLACE TO REAL INFORMATION
+      const routePaymentNavigation: string = '/store/purchase/flow/' + this.productIdentifier;
       this.commonService.responseActionWithNavigation(routePaymentNavigation, alertMessage, true);
     }
     catch (ex) {
@@ -61,42 +87,80 @@ export class PurchaseDetailsComponent implements OnInit {
     }
   }
 
+  public loadUserAdressByUserId(userId) {
+    this.loaderService.SetLoaderState(true);
+    //QUERY PARAMETERS
+    this.parameters = [
+      {parameter: 'userId',           value: userId},
+      {parameter: 'pageNumber',       value: 1},
+      {parameter: 'rowspPage',        value: 1}
+    ];
+    this.service.getAll('cadastros_url', 'address/paginated', this.parameters)
+      .toPromise()
+      .then(c => {
+        this.loaderService.SetLoaderState(false);
+        if(c.length > 0) {
+          this.address = c[0];
+          this.address.addressTypeEnum = this.commonService.ReturnEnumObjectByName('addressTypeEnum', this.address.addressTypeEnum);
+          this.buildAdressAtributtes(this.address);
+          debugger;
+        }
+      })
+      .catch(e => {
+        this.loaderService.SetLoaderState(false);
+        const messageType = 'error';
+        const messageText = 'Houve um erro ao buscar os produtos.';
+        this.commonService.responseActionWithoutNavigation(messageType, messageText);
+      });
+  }
+
+  public isValueValid(value): boolean {
+    let validation = true;
+    try {
+      if (this.commonService.isNullOrUndefined(value) || value === '') {
+        validation = false;
+      }
+      return validation;
+    }
+    catch {
+      return false;
+    }
+  }
+
   /**
    * PRIVATE METHOD
    */
   private initializeComponent() {
-    this.endereco = 'Rua Exemplo, 123 - Cidade';
-    this.prazoEntrega = '3 dias úteis'; // Exemplo: substitua pelo prazo real
+    // ACRESS
+    this.address = new Address();
+    this.tipoEndereco = '';
 
     this.formaPagamento = 'Mercado Pago'; // Exemplo: substitua pela forma real
-    this.identifier = 'ffeb6c56-17a5-4fee-b23a-27b6c235ce33';
+    this.productIdentifier = 'ffeb6c56-17a5-4fee-b23a-27b6c235ce33';
     this.title = 'Confirmacao da compra';
 
     // PRODUCT
     this.product = new Product();
-    this.product.identifier = 'ffeb6c56-17a5-4fee-b23a-27b6c235ce33';
-    this.product.productTypeEnum = ProductTypeEnum.Produto;
-    this.product.titulo = 'Descrição do Produto 1';
-    this.product.resumoDetalhes = 'resumo detalhes do Produto 1';
-    this.product.detalhes = 'Detalhes do Produto 1';
-    this.product.codigoBarras = '12345678910';
-    this.product.marca = 'Marca Teste 1';
-    this.product.mainImage = './assets/img/test/d90029fa-c1fc-4310-9913-4c64b57498c8.jpeg';
-    this.product.precoVenda = 50;
-    this.product.quantidade = 50;
-    this.product.rating = 4.5;
 
     // GET SHOPPING CART PRODUCT
     this.productList = JSON.parse(localStorage.getItem('shoppingcart'));
+    debugger;
+    // GET USER INFORMATION
+    this.user = JSON.parse(localStorage.getItem('user'));
 
-    // CLASS ATRIBUTTES
-    this.valorTotal = 1000; // Exemplo: substitua pelo valor real
+    // HTTP CLASS ATRIBUTTES
+    this.endpointUrl = projectUrls.GetAllAddressPaginated;
+    this.apiUrl = environment.cadastros_url;
+
     // SHOPPIING CART ATTIBUTTES
     this.totalShoppingCartValue = this.calculateTotalShoppingCartValue(this.productList);
     debugger;
 
+    // GETTING THE USER ADRES
+    this.loadUserAdressByUserId(this.user.identifier);
+
     // DELYVERY ATRIBUTTES
-    this.totalDeliveryCalculateDayValue = this.calculateTotalDeliveryTimeValue(this.productList);
+    this.totalDeliveryCalculateDayValue = this.calculateTotalDeliveryTimeValue(this.productList); // Exemplo: substitua pelo prazo real
   }
 
   /**
@@ -132,7 +196,18 @@ export class PurchaseDetailsComponent implements OnInit {
     }
   }
 
-  private returnAdressByUserId() {
-    
+  private buildAdressAtributtes(_address: Address): void {
+    debugger;
+    this.endereco = `
+    ${!this.commonService.isNullOrUndefined(_address.logradouro) ? _address.logradouro.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.numero) ? 'N' + _address.numero.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.complemento) ? ' ' + _address.complemento.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.bairro) ? ', ' + _address.bairro.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.complemento) ? ', ' +  _address.complemento.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.cidade) ? ', ' +  _address.cidade.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.estado) ? ', ' + _address.estado.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.cep) ? ', ' + _address.cep.trim() : ''}`;
+    this.pontoReferencia = `${!this.commonService.isNullOrUndefined(_address.pontoReferencia) ? _address.pontoReferencia : ''}`;
+    this.tipoEndereco = `${!this.commonService.isNullOrUndefined(_address.addressTypeEnum) ? _address.addressTypeEnum : ''}`;
   }
 }

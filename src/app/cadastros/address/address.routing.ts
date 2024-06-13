@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'address', component: AddressComponent },
   { path: 'address/cadastro', component: InsertAddressComponent },
   { path: 'address/cadastro/:id', component: InsertAddressComponent },
-  { path: 'address/deletar/:id', component: DeleteAddressComponent }
+  { path: 'address/deletar/:id', component: DeleteAddressComponent },
+  { path: 'address/user/:userId', component: InsertAddressComponent }
 ];
 
 @NgModule({

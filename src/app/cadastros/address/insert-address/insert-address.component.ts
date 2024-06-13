@@ -22,8 +22,9 @@ export class InsertAddressComponent implements OnInit {
   public parameters: QueryParameter[];
   private rotaAnterior: string;
   public usersSelect: SelectParameter[] = [];
+  public userIdAdressEdit: string;
 
-  public addressTypes = Object.values(AddressTypeMapping).filter(c => typeof(c) == 'string');
+  public addressTypes = Object.values(AddressTypeMapping).filter(c => typeof (c) == 'string');
 
   public constructor(
     private service: HttpCommonService,
@@ -32,15 +33,17 @@ export class InsertAddressComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    debugger;
     // TODO: PEGAR USUARIOS ID
     this.initializeComponent();
     this.router.paramMap.subscribe((params) => {
+      // EDIT ADDRESS AREA
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.isNew = false;
         this.title = 'Editar endereço';
         this.titleButton = this.title.split(' ')[0];
         this.parameters = [
-          {parameter: 'addressId', value: params.get('id')}
+          { parameter: 'addressId', value: params.get('id') }
         ];
         this.service.getSingle('cadastros_url', 'address/getbyid', this.parameters)
           .toPromise()
@@ -50,9 +53,45 @@ export class InsertAddressComponent implements OnInit {
             this.model.addressTypeEnum = this.commonService.ReturnEnumObjectByName('addressTypeEnum', this.model.addressTypeEnum);
           })
           .catch(e => {
+            debugger;
             this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o addres.', false);
           });
-      } else {
+      }
+      // EDIT USER ADRESS AREA
+      else if (!this.commonService.isNullOrUndefined(params.get('userId')) && params.get('userId') !== '') {
+        this.userIdAdressEdit = params.get('userId');
+        this.isNew = false;
+        this.title = 'Editar endereço';
+        this.titleButton = this.title.split(' ')[0];
+        this.parameters = [
+          { parameter: 'userId', value: this.userIdAdressEdit }
+        ];
+        debugger;
+        this.service.getSingle('cadastros_url', 'address/paginated', this.parameters)
+          .toPromise()
+          .then(c => {
+            debugger;
+            if (c.length > 0) {
+              debugger;
+              this.model = c[0];
+              // this.LoadUsersToSelect();
+              this.rotaAnterior = '/store/purchase/details';
+              this.model.addressTypeEnum = this.commonService.ReturnEnumObjectByName('addressTypeEnum', this.model.addressTypeEnum);
+              debugger;
+            } else {
+              debugger;
+              throw new Error();
+              debugger;
+            }
+          })
+          .catch(e => {
+            debugger;
+            this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o addres.', false);
+            debugger;
+          });
+      }
+      else {
+        debugger;
         this.isNew = true;
         this.title = 'Cadastrar endereço';
         this.titleButton = this.title.split(' ')[0] === 'Cadastrar' ? 'Salvar' : '';
@@ -101,7 +140,12 @@ export class InsertAddressComponent implements OnInit {
           this.commonService.responseActionWithNavigation(this.rotaAnterior, e.error, false);
         });
     } else {
-      this.model.usuarioUltimaAlteracaoId = new SystemParameterEnum().systemUser;
+      if (!this.commonService.isNullOrUndefined(this.userIdAdressEdit)) {
+        this.model.usuarioUltimaAlteracaoId = this.userIdAdressEdit;
+      } else {
+        this.model.usuarioUltimaAlteracaoId = new SystemParameterEnum().systemUser;
+      }
+      
       this.model.dataUltimaAlteracao = new Date();
       this.service.edit('cadastros_url', 'address', this.model)
         .toPromise()
@@ -119,7 +163,6 @@ export class InsertAddressComponent implements OnInit {
   }
 
   private LoadUsersToSelect() {
-
     this.service.getAll('cadastros_url', 'user/returnuserstoselect', this.parameters)
       .toPromise()
       .then(c => {
