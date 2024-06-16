@@ -71,11 +71,15 @@ export class DetailsComponent implements OnInit {
   }
 
   public buyShoppingCartProduct(productList): void {
+    let isValidated = true;
+
     productList.forEach(product => {
       if (!this.validatePurchaseProduct(product)) {
-        return;
+        isValidated = false
       }
     });
+
+    if(!isValidated) return; 
 
     //PARA ADICIONAR
     localStorage.setItem('shoppingcart', JSON.stringify(productList));

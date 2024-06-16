@@ -53,6 +53,8 @@ export class PurchaseDetailsComponent implements OnInit {
   // PAYMENT ATRIBUTTES
   public formaPagamento: string;
 
+  public routePaymentNavigation: string;
+
   constructor(
     private commonService: CommonService,
     private loaderService: LoaderService,
@@ -74,13 +76,15 @@ export class PurchaseDetailsComponent implements OnInit {
 
   public goToPaymentMethod() {
     try {
+      this.loaderService.SetLoaderState(true);
       // TODO: IMPLEMENTS HERE THE PAYMENT METHOD
       const alertMessage: string = 'Voce sera redirecionado para o metodo de pagamento: ' + this.formaPagamento;
       // TODO: THEN REMOVE IT: this.productIdentifier AND REPLACE TO REAL INFORMATION
-      const routePaymentNavigation: string = '/store/purchase/flow/' + this.productIdentifier;
+      const routePaymentNavigation: string = this.routePaymentNavigation.replace('{id}', this.productIdentifier);
       this.commonService.responseActionWithNavigation(routePaymentNavigation, alertMessage, true);
     }
     catch (ex) {
+      this.loaderService.SetLoaderState(false);
       const alertType: string = 'error';
       const errorMessage: string = 'Houve um erro ao tentar efetivar o pagamento: \n' + ex.error;
       this.commonService.responseActionWithoutNavigation(alertType, errorMessage);
@@ -161,6 +165,12 @@ export class PurchaseDetailsComponent implements OnInit {
 
     // DELYVERY ATRIBUTTES
     this.totalDeliveryCalculateDayValue = this.calculateTotalDeliveryTimeValue(this.productList); // Exemplo: substitua pelo prazo real
+
+    // SUM DELIVERY VALUE TO TOTAL VALUE
+    this.totalShoppingCartValue += this.totalDeliveryCalculateDayValue;
+
+    // ROUTE
+    this.routePaymentNavigation = '/store/purchase/details/flow/{id}';
   }
 
   /**
@@ -202,11 +212,11 @@ export class PurchaseDetailsComponent implements OnInit {
     ${!this.commonService.isNullOrUndefined(_address.logradouro) ? _address.logradouro.trim() : ''}
     ${!this.commonService.isNullOrUndefined(_address.numero) ? 'N' + _address.numero.trim() : ''}
     ${!this.commonService.isNullOrUndefined(_address.complemento) ? ' ' + _address.complemento.trim() : ''}
-    ${!this.commonService.isNullOrUndefined(_address.bairro) ? ', ' + _address.bairro.trim() : ''}
-    ${!this.commonService.isNullOrUndefined(_address.complemento) ? ', ' +  _address.complemento.trim() : ''}
-    ${!this.commonService.isNullOrUndefined(_address.cidade) ? ', ' +  _address.cidade.trim() : ''}
-    ${!this.commonService.isNullOrUndefined(_address.estado) ? ', ' + _address.estado.trim() : ''}
-    ${!this.commonService.isNullOrUndefined(_address.cep) ? ', ' + _address.cep.trim() : ''}`;
+    ${!this.commonService.isNullOrUndefined(_address.bairro) ? ' ,' + _address.bairro.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.complemento) ? ' ,' +  _address.complemento.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.cidade) ? ' ,' +  _address.cidade.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.estado) ? ' ,' + _address.estado.trim() : ''}
+    ${!this.commonService.isNullOrUndefined(_address.cep) ? ' ,' + _address.cep.trim() : ''}`;
     this.pontoReferencia = `${!this.commonService.isNullOrUndefined(_address.pontoReferencia) ? _address.pontoReferencia : ''}`;
     this.tipoEndereco = `${!this.commonService.isNullOrUndefined(_address.addressTypeEnum) ? _address.addressTypeEnum : ''}`;
   }
