@@ -10,7 +10,10 @@ import { TokenApiModel } from '../models/token-api-model';
 
 export class AuthService {
     // ATRIBUTTES
-    private baseUrl: string = "https://localhost:7052/api/User/";
+    // private baseUrl: string = "https://localhost:7052/api/User/";
+    // private baseUrl: string =  "https://localhost:7031/api/User/authenticate"
+    private baseUrl: string =  "http://localhost:5030/api/User/"
+
     private userPayload: any;
 
     constructor(
