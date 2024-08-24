@@ -31,38 +31,32 @@ export class AuthService {
         localStorage.clear();
         this.router.navigate(['login'])
     }
-    /*
-    * PUBLIC METHODS END
-    */
-
-    /*
-    * PRIVATE METHODS BEGIN
-    */
-    private storeToken(tokenValue: string) {
+    
+    public storeToken(tokenValue: string) {
         localStorage.setItem('token', tokenValue);
     }
 
-    private storeRefreshToken(tokenValue: string) {
+    public storeRefreshToken(tokenValue: string) {
         localStorage.setItem('refreshToken', tokenValue);
     }
 
-    private getToken() {
+    public getToken() {
         return localStorage.getItem('token');
     }
 
-    private getRefreshToken() {
+    public getRefreshToken() {
         return localStorage.getItem('refreshToken');
     }
 
-    private isLoggedIn(): boolean {
+    public isLoggedIn(): boolean {
         return !!localStorage.getItem('token');
     }
 
-    private getFullNameFromToken() {
+    public getFullNameFromToken() {
         if (this.userPayload)
             return this.userPayload.unique_name;
     }
-    private getRoleFromToken() {
+    public getRoleFromToken() {
         if (this.userPayload)
             return this.userPayload.role;
     }
@@ -70,13 +64,22 @@ export class AuthService {
         return this.http.post<any>(`${this.baseUrl}refresh`, tokenApi)
     }
 
-    private decodeToken() {
+    public decodeToken() {
         const jwtHelper = new JwtHelperService();
         const token = this.getToken()!;
         console.log(jwtHelper.decodeToken(token));
 
         return jwtHelper.decodeToken(token);
     }
+    /*
+    * PUBLIC METHODS END
+    */
+
+
+    
+    /*
+    * PRIVATE METHODS BEGIN
+    */
 
 
     /*
