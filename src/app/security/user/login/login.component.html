@@ -2,9 +2,7 @@
 <h4 class="text-muted mb-4">{{ this.title }}</h4>
 <div class="card border-0 rounded-0">
     <div class="col-md-12 col-lg-12 mb-12 align-items-stretch">
-        <div class="card-title mb-1 p-3">
-            <h5>{{ this.title }}</h5>
-        </div>
+        <br>
         <div class="card border-0 rounded-0 h-100">
             <div class="form-group">
                 <label for="InputEmail">Email</label>
@@ -20,16 +18,17 @@
                 <div *ngIf="this.password === ''" class="text-danger">
                     Please enter a valid password.
                 </div>
-                <br>
-                <!-- TODO: CREATE FORGET PASSWORD METHOD -->
-                <a>Esqueceu a senha?</a>
             </div>
             <br>
             <div class="button-container">
-                <button (click)="onSubmit()" class="btn btn-block btn-lightning rounded-0"><i class="fa fa-search"></i> Login</button>
+                <button (click)="onSubmit()" class="btn btn-block btn-lightning rounded-0">Fazer Login</button>
+                <br>
+                <div class="text-link">
+                    <a class="text-center" [routerLink]="['../../security/forgot-password']">Esqueceu a senha?</a>
+                </div>
+                <br>
             </div>
         </div>
-        <br>
         <br>
     </div>
 </div>
