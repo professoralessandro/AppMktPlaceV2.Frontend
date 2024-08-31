@@ -6,19 +6,19 @@ import { FormsComponent } from './pages/forms/forms.component';
 import { TypographyComponent } from './pages/typography/typography.component';
 import { MapsComponent } from './pages/maps/maps.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
-import { ResetPasswordComponent } from './security/user/reset-password/reset-password.component';
 import { LoginComponent } from './security/user/login/login.component';
+import { ResetPasswordComponent } from './security/user/reset-password/reset-password.component';
 
 const routes: Routes = [
-  {path: '',   redirectTo: '/login', pathMatch: 'full'},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'forms', component: FormsComponent},
-  {path: 'tables', component: TablesComponent},
-  {path: 'typography', component: TypographyComponent},
-  {path: 'maps', component: MapsComponent},
-  {path: 'notifications', component: NotificationsComponent},
+  { path: '',   redirectTo: '/login', pathMatch: 'full'},
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'forms', component: FormsComponent},
+  { path: 'tables', component: TablesComponent},
+  { path: 'typography', component: TypographyComponent},
+  { path: 'maps', component: MapsComponent},
+  { path: 'notifications', component: NotificationsComponent},
   { path: 'reset-password/:b/:a', component: ResetPasswordComponent },
-  { path: 'active-account/:b/:a', component: ResetPasswordComponent },
+  // { path: 'active-account/:b/:a', component: ActiveAccountComponent },
   { path: 'login', component: LoginComponent },
 
   { path: 'cadastros', loadChildren: () => import('./cadastros/cadastros.module').then(m => m.CadastrosModule) },
