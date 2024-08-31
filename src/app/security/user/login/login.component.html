@@ -14,7 +14,7 @@
             
             <div class="form-group">
                 <label for="InputPassword">Password</label>
-                <input type="text" maxlength="50" [(ngModel)]="this.password" class="form-control rounded-0" id="InputDescryption" aria-describedby="emailHelp" maxlength="150" placeholder="Informe a senha">
+                <input type="password" maxlength="50" [(ngModel)]="this.password" class="form-control rounded-0" id="InputDescryption" aria-describedby="emailHelp" maxlength="150" placeholder="Informe a senha">
                 <div *ngIf="this.password === ''" class="text-danger">
                     Please enter a valid password.
                 </div>
@@ -23,9 +23,17 @@
             <div class="button-container">
                 <button (click)="onSubmit()" class="btn btn-block btn-lightning rounded-0">Fazer Login</button>
                 <br>
+<!--                 
                 <div class="text-link">
                     <a class="text-center" [routerLink]="['../../security/forgot-password']">Esqueceu a senha?</a>
+                </div> -->
+
+                <!-- TODO: REMOVE IT -->
+                 
+                <div class="text-link">
+                    <a class="text-center" [routerLink]="['../../security/reset-password/TKN123456/d2a833de-5bb4-4931-a3c2-133c8994072a']">Esqueceu a senha?</a>
                 </div>
+
                 <br>
             </div>
         </div>

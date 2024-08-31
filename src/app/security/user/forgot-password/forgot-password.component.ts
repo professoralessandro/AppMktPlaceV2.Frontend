@@ -21,7 +21,6 @@ export class ForgotPasswordComponent implements OnInit {
    */
   constructor(
     private service: HttpCommonService,
-    private router: ActivatedRoute,
     private commonService: CommonService) { }
 
   /**
@@ -36,7 +35,8 @@ export class ForgotPasswordComponent implements OnInit {
    */
 
   public onSubmit(): void {
-    this.service.insert('security_url', `User/forgot-password?email=${this.email}`, null)
+    if(this.validateEmail(this.email)){
+      this.service.insert('security_url', `User/forgot-password?email=${this.email}`, null)
       .toPromise()
       .then(c => {
         this.commonService.responseActionWithNavigation
@@ -45,6 +45,7 @@ export class ForgotPasswordComponent implements OnInit {
       .catch(e => {
         this.commonService.responseActionWithNavigation(this.loginRoute, e.error, false);
       });
+    }
   }
 
   /**
@@ -54,5 +55,16 @@ export class ForgotPasswordComponent implements OnInit {
     this.title = 'Forgot Password';
     this.loginRoute = '../../security/login';
     this.email = '';
+  }
+
+  private validateEmail(email: string): boolean {
+    var isValid = true;
+
+    if(!this.commonService.validatedEmail(email)) {
+      isValid = false;
+      this.commonService.ReturnModalMessagErrorSuccess("Erro na validação do email.", false);
+    }
+
+    return isValid;
   }
 }

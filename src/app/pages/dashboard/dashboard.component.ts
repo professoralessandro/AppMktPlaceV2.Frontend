@@ -171,7 +171,9 @@ export class DashboardComponent implements OnInit {
   private loadUserByUserIdToSetOnLocalStorage(userId) {
     return {
       identifier: "d2a833de-5bb4-4931-a3c2-133c8994072a",
-      userName: null,
+      userName: "ALESSANDRO2010",
+      userGroup: "Master",
+      userProfileImage: './assets/img/user.jpg',
       nmrDocumento: "00000000000",
       documentTypeEnum: 0,
       senha: "@DASDFsdfksdofksdofksdfffff",

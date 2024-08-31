@@ -1,14 +1,23 @@
 <aside class="sidebar shadow-sm">
 
-    <div class="sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3">
+    <div *ngIf="_isLoggedIn() === true" class="sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3">
         <div class="picture-wrapper mb-4">
             <div class="user-picture m-auto">
-                <img src="./assets/img/user.jpg" class="img-fluid" alt="">
+                <!-- <img src="./assets/img/user.jpg" (error)="handleMissingImage()" class="img-fluid" alt=""> -->
+                <img [src]="this.user.userProfileImage" (error)="handleMissingImage()" class="img-fluid" alt="">
             </div>
         </div>
         <div class="profile-details text-center pb-4">
+            <!-- TODO: REMOVE IT -->
+<!--             
             <p class="mb-0 text-uppercase name">Jhon Doe</p>
             <small class="text-uppercase role">Administrator</small>
+            <small class="text-uppercase role">Sair</small> -->
+
+            <p class="mb-0 text-uppercase name">{{ this.user.userName }}</p>
+            <small class="text-uppercase role">{{ this.user.userGroup }}</small>
+            <br>
+            <small (click)="signOut()" class="text-uppercase role">Sair</small>
         </div>
     </div>
     <div class="sidebar-search pt-1 pb-1 pl-3 pr-3">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
     // private fb: FormBuilder ,
     private auth: AuthService,
     private router: Router,
-    // private userStore : UserStoreService
+    private commonService: CommonService
   ) { }
 
   /**
@@ -78,8 +79,19 @@ export class LoginComponent implements OnInit {
    */
 
   private validateLogin(email: string, password: string): boolean {
-    
-    return true;
+    var isValid = true;
+
+    if(!this.commonService.validatedEmail(email)) {
+      isValid = false;
+      this.commonService.ReturnModalMessagErrorSuccess("Erro na validação do email.", false);
+    }
+
+    if(password.length < 7) {
+      isValid = false;
+      this.commonService.ReturnModalMessagErrorSuccess("Erro na validação da senha.", false);
+    }
+
+    return isValid;
   }
 
   /**
