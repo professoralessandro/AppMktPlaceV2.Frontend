@@ -8,6 +8,7 @@ import { MapsComponent } from './pages/maps/maps.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { LoginComponent } from './security/user/login/login.component';
 import { ResetPasswordComponent } from './security/user/reset-password/reset-password.component';
+import { ActiveAccountComponent } from './security/user/active-account/active-account.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/login', pathMatch: 'full'},
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: 'maps', component: MapsComponent},
   { path: 'notifications', component: NotificationsComponent},
   { path: 'reset-password/:b/:a', component: ResetPasswordComponent },
-  // { path: 'active-account/:b/:a', component: ActiveAccountComponent },
+  { path: 'active-account', component: ActiveAccountComponent },
   { path: 'login', component: LoginComponent },
 
   { path: 'cadastros', loadChildren: () => import('./cadastros/cadastros.module').then(m => m.CadastrosModule) },

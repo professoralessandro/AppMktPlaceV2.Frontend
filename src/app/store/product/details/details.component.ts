@@ -92,7 +92,6 @@ export class DetailsComponent implements OnInit {
   }
 
   public addProductToShoppingcartProduct(product): void {
-    debugger;
     this.service.insert('cadastros_url', 'store/shoppingcart', {
       usuarioId: this.userId,
       produtoId: product.identifier,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoaderService } from 'src/app/components/loader/loader.service';
 import { HttpCommonService } from 'src/app/services/app-http-service';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -21,13 +22,16 @@ export class ForgotPasswordComponent implements OnInit {
    */
   constructor(
     private service: HttpCommonService,
-    private commonService: CommonService) { }
+    private commonService: CommonService,
+    private loaderService: LoaderService,) { }
 
   /**
    * ONINIT
    */
   ngOnInit(): void {
+    this.loaderService.SetLoaderState(true);
     this.initializeComponent();
+    this.loaderService.SetLoaderState(false);
   }
 
   /**
@@ -35,6 +39,7 @@ export class ForgotPasswordComponent implements OnInit {
    */
 
   public onSubmit(): void {
+    this.loaderService.SetLoaderState(true);
     if(this.validateEmail(this.email)){
       this.service.insert('security_url', `User/forgot-password?email=${this.email}`, null)
       .toPromise()
@@ -43,7 +48,8 @@ export class ForgotPasswordComponent implements OnInit {
           (this.loginRoute, `Caso seu email esteja cadastrado na base de dados<br>você receberá um email na sua caixa de mensagem<br>com as instruções para resetar a sua senha.`, true);
       })
       .catch(e => {
-        this.commonService.responseActionWithNavigation(this.loginRoute, e.error, false);
+        this.commonService.responseActionWithNavigation
+          (this.loginRoute, `Houve um erro no reset da senha.`, false);
       });
     }
   }
@@ -53,7 +59,7 @@ export class ForgotPasswordComponent implements OnInit {
    */
   private initializeComponent(): void {
     this.title = 'Forgot Password';
-    this.loginRoute = '../../security/login';
+    this.loginRoute = 'login';
     this.email = '';
   }
 

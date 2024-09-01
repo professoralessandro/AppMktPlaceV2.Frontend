@@ -107,7 +107,6 @@ export class PurchaseDetailsComponent implements OnInit {
           this.address = c[0];
           this.address.addressTypeEnum = this.commonService.ReturnEnumObjectByName('addressTypeEnum', this.address.addressTypeEnum);
           this.buildAdressAtributtes(this.address);
-          debugger;
         }
       })
       .catch(e => {
@@ -148,7 +147,6 @@ export class PurchaseDetailsComponent implements OnInit {
 
     // GET SHOPPING CART PRODUCT
     this.productList = JSON.parse(localStorage.getItem('shoppingcart'));
-    debugger;
     // GET USER INFORMATION
     this.user = JSON.parse(localStorage.getItem('user'));
 
@@ -158,7 +156,6 @@ export class PurchaseDetailsComponent implements OnInit {
 
     // SHOPPIING CART ATTIBUTTES
     this.totalShoppingCartValue = this.calculateTotalShoppingCartValue(this.productList);
-    debugger;
 
     // GETTING THE USER ADRES
     this.loadUserAdressByUserId(this.user.identifier);
@@ -207,7 +204,6 @@ export class PurchaseDetailsComponent implements OnInit {
   }
 
   private buildAdressAtributtes(_address: Address): void {
-    debugger;
     this.endereco = `
     ${!this.commonService.isNullOrUndefined(_address.logradouro) ? _address.logradouro.trim() : ''}
     ${!this.commonService.isNullOrUndefined(_address.numero) ? 'N' + _address.numero.trim() : ''}
