@@ -147,7 +147,7 @@ export class CommonService {
    */
   public validatedEmail(email: string): boolean {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!regex.test(email)){
+    if (!regex.test(email)) {
       this.ReturnModalMessagErrorSuccess("O email digitado e invalido.");
       return false;
     }
@@ -161,7 +161,7 @@ export class CommonService {
   public validatePassword(senha: string): boolean {
     // Verifica se a senha tem pelo menos seis caracteres
     if (senha.length < 6) {
-      this.ReturnModalMessagErrorSuccess("A senha deve ter entre 6 e 30 caracteres.");
+      this.ReturnModalMessagErrorSuccess("A senha deve ter entre 6 e 30 caracteres.", false);
       return false;
     }
 
@@ -179,5 +179,53 @@ export class CommonService {
 
     // Todas as condições foram atendidas
     return true;
+  }
+
+  /**
+   * 
+   * @param dateString 
+   * @returns IF DATE IS MORE OLDER THAN 120 YEARS
+   */
+  public validateIsOver120YearsOld(dateString: string): boolean {
+    // Converte a string para um objeto Date
+    const birthDate = new Date(dateString);
+    if (isNaN(birthDate.getTime())) {
+      // Verifica se a data é inválida
+      throw new Error("Data inválida");
+    }
+
+    // Obtém a data atual
+    const currentDate = new Date();
+    // Calcula a diferença em milissegundos
+    const ageInMilliseconds = currentDate.getTime() - birthDate.getTime();
+    // Converte a diferença para anos
+    const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+
+    // Verifica se a idade é maior que 120 anos
+    return ageInYears > 120;
+  }
+
+  /**
+     * 
+     * @param dateString 
+     * @returns RETURN YEAR VALUE BY DATESTRING
+     */
+  public returnYearsByDateString(dateString: string): number {
+    // Converte a string para um objeto Date
+    const birthDate = new Date(dateString);
+    if (isNaN(birthDate.getTime())) {
+      // Verifica se a data é inválida
+      throw new Error("Data inválida");
+    }
+
+    // Obtém a data atual
+    const currentDate = new Date();
+    // Calcula a diferença em milissegundos
+    const ageInMilliseconds = currentDate.getTime() - birthDate.getTime();
+    // Converte a diferença para anos
+    const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+
+    // Verifica se a idade é maior que 120 anos
+    return ageInYears;
   }
 }

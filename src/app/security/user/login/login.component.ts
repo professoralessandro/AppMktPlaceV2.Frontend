@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/components/loader/loader.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -19,14 +20,17 @@ export class LoginComponent implements OnInit {
     // private fb: FormBuilder ,
     private auth: AuthService,
     private router: Router,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private loaderService: LoaderService
   ) { }
 
   /**
    * PUBLIC MEHTHOD BEGIN
    */
   ngOnInit(): void {
+    this.loaderService.SetLoaderState(true);
     this.initComponent();
+    this.loaderService.SetLoaderState(false);
   }
 
   public initComponent(): void {
@@ -36,6 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loaderService.SetLoaderState(true);
     if (this.validateLogin(this.email, this.password)) {
       this.auth.login({ email: this.email, password: this.password})
       .subscribe({
@@ -55,6 +60,7 @@ export class LoginComponent implements OnInit {
         }
       })
     }else{
+      this.loaderService.SetLoaderState(false);
       alert("form is invalid");
     }
   }

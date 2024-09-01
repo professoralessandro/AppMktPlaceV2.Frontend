@@ -9,9 +9,10 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 import { LoginComponent } from './security/user/login/login.component';
 import { ResetPasswordComponent } from './security/user/reset-password/reset-password.component';
 import { ActiveAccountComponent } from './security/user/active-account/active-account.component';
+import { ProductComponent } from './store/product/product.component';
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/login', pathMatch: 'full'},
+  { path: '',   redirectTo: '/store', pathMatch: 'full'},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'forms', component: FormsComponent},
   { path: 'tables', component: TablesComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'reset-password/:b/:a', component: ResetPasswordComponent },
   { path: 'active-account', component: ActiveAccountComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'store', component: ProductComponent },
 
   { path: 'cadastros', loadChildren: () => import('./cadastros/cadastros.module').then(m => m.CadastrosModule) },
   { path: 'store', loadChildren: () => import('./store/store.module').then(m => m.StoreModule) },

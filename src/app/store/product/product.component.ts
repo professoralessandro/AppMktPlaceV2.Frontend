@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { concat } from 'rxjs';
-import { ProductTypeEnum } from 'src/app/Enums/product-type.enum';
 import { LoaderService } from 'src/app/components/loader/loader.service';
 import { QueryParameter } from 'src/app/models/query-parameter';
 import { HttpCommonService } from 'src/app/services/app-http-service';

@@ -1,1 +1,142 @@
-<p>register works!</p>
+<div class="col-md-12 col-lg-12 mb-4 align-items-stretch">
+    <h4 class="text-muted mb-4">{{ this.title }}</h4>
+    <div class="card border-0 rounded-0 h-100">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputNome">Nome</label>
+                    <input maxlength="100" type="text" class="form-control rounded-0" placeholder="Informe o Nome"
+                        [(ngModel)]="this.model.nome" [ngModelOptions]="{ standalone: true }" />
+                    <small id="nome" class="form-text text-muted">Informe um nome para o cadastro.</small>
+                    <div *ngIf="this.model.nome === ''" class="text-danger">
+                        Informe um nome válido.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputUserName">Nome de usuário</label>
+                    <input maxlength="50" type="text" class="form-control rounded-0"
+                        placeholder="Informe o Nome de usuário" [(ngModel)]="this.model.userName"
+                        [ngModelOptions]="{ standalone: true }" />
+                    <small id="UserName" class="form-text text-muted">Informe um nome de usuario para o
+                        cadastro.</small>
+                    <div *ngIf="this.model.userName === ''" class="text-danger">
+                        Informe um nome de usuário válido.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail">Email</label>
+                    <input maxlength="255" type="email" class="form-control rounded-0" placeholder="Informe o Email"
+                        [(ngModel)]="this.model.email" [ngModelOptions]="{ standalone: true }" />
+                    <small id="email" class="form-text text-muted">Informe um email para o cadastro.</small>
+                    <div *ngIf="this.model.email === ''" class="text-danger">
+                        Informe um email válido.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputDataNascimento">Data de nascimento</label>
+                    <input type="date" class="form-control rounded-0" placeholder="Informe a Data de Nascimento"
+                        [(ngModel)]="this.model.dataNascimento" [ngModelOptions]="{ standalone: true }" />
+                    <small id="dataNascimento" class="form-text text-muted">Informe a data de nascimento para o
+                        cadastro.</small>
+                    <div *ngIf="this.model.dataNascimento === undefined" class="text-danger">
+                        Informe um email válido.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputDocumentType">Tipo do documento</label>
+                    <select [(ngModel)]="this.model.tipoDocumento" [ngModelOptions]="{ standalone: true }"
+                        class="custom-select" name="state_raw" id="state_raw" required>
+                        <option [value]="undefined" selected>Selecione...</option>
+                        <option [value]="documentType" *ngFor="let documentType of this.documentTypes"> {{ documentType
+                            }}</option>
+                    </select>
+                    <small id="DocumentType" class="form-text text-muted">Informe o tipo do documento para o
+                        cadastro.</small>
+                        <div *ngIf="this.model.tipoDocumento === undefined" class="text-danger">
+                            Informe um tipo de documento valido.
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputDocument">Numero o número documento</label>
+                    <input maxlength="50" type="text" class="form-control rounded-0"
+                        placeholder="Informe o número de documento" [(ngModel)]="this.model.nmrDocumento"
+                        [ngModelOptions]="{ standalone: true }" />
+                    <small id="email" class="form-text text-muted">Informe um número de documento para o
+                        cadastro.</small>
+                        <div *ngIf="this.model.nmrDocumento === ''" class="text-danger">
+                            Informe um número de documento válido.
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="formControlSexo">Sexo</label>
+                    <select [(ngModel)]="this.model.sexo" [ngModelOptions]="{ standalone: true }"
+                        class="form-control rounded-0" id="formControlSexo">
+                        <option [value]="undefined" selected>Selecione...</option>
+                        <option [value]="sexoOption" *ngFor="let sexoOption of this.sexoOptions"> {{ sexoOption }}
+                        </option>
+                    </select>
+                    <small id="sexo" class="form-text text-muted">Informe o sexo para o cadastro.</small>
+                    <div *ngIf="this.model.sexo === undefined" class="text-danger">
+                        Informe um o sexo.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="formControlEstadoCivil">Estado Civil</label>
+                    <select [(ngModel)]="this.model.estadoCivil" [ngModelOptions]="{ standalone: true }"
+                        class="form-control rounded-0" id="formControlEstadoCivil">
+                        <option [value]="undefined" selected>Selecione...</option>
+                        <option [value]="estadoCivil" *ngFor="let estadoCivil of this.estadoCivilOptions"> {{
+                            estadoCivil }}</option>
+                    </select>
+                    <small id="estadoCivil" class="form-text text-muted">Informe o estado civil para o cadastro.</small>
+                    <div *ngIf="this.model.estadoCivil === undefined" class="text-danger">
+                        Informe um estado civil válido.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputNmrTelefone">Informar o número do telefone</label>
+                    <input maxlength="14" type="text" class="form-control rounded-0" mask="(00)00000-0000"
+                        placeholder="Informe o telefone" [(ngModel)]="this.model.nmrTelefone"
+                        [ngModelOptions]="{ standalone: true }" />
+                    <small id="NmrTelefone" class="form-text text-muted">Informe o número do telefone para o
+                        cadastro.</small>
+                        <div *ngIf="this.model.nmrTelefone === ''" class="text-danger">
+                            Informe um número de telefone válida.
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword">Informar a senha</label>
+                    <input maxlength="50" type="password" class="form-control rounded-0" placeholder="Informe a senha"
+                        [(ngModel)]="this.model.password" [ngModelOptions]="{ standalone: true }" />
+                    <small id="password" class="form-text text-muted">Informe uma senha para o cadastro.</small>
+                    <div *ngIf="this.model.password === ''" class="text-danger">
+                        Informe uma senha válida.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputReplayPassword">Confirmar senha</label>
+                    <input maxlength="50" type="password" class="form-control rounded-0" placeholder="Informe a senha"
+                        [(ngModel)]="this.replayPassWord" [ngModelOptions]="{ standalone: true }" />
+                    <small id="password" class="form-text text-muted">Informe a senha novamente para o cadastro.</small>
+                    <div *ngIf="this.replayPassWord === ''" class="text-danger">
+                        Confirme a senha.
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-lightning rounded-0 mb-2 mr-2" (click)="incluir()">
+                    {{this.titleButton}}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
