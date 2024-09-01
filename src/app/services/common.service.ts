@@ -106,7 +106,7 @@ export class CommonService {
       case 'deliveryTypeEnum'.toLocaleLowerCase():
         return TipoEntregaMapping[position];
       case 'productTypeEnum'.toLocaleLowerCase():
-          return ProductTypeMapping[position];
+        return ProductTypeMapping[position];
       default:
         return 'Unknow';
     }
@@ -131,12 +131,53 @@ export class CommonService {
     this.alertService.showAlert(messege, isSucsess ? 'success' : 'error');
   }
 
-/**
- * 
- * @param value 
- * @returns RETURN CURRENCY BRASIL REAL FORMATED: R$ XX,XX
- */
+  /**
+   * 
+   * @param value 
+   * @returns RETURN CURRENCY BRASIL REAL FORMATED: R$ XX,XX
+   */
   public currencyFormatterBRL(value: number): string {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+  }
+
+  /**
+   * 
+   * @param email 
+   * @returns IF EMAIL IS VALID
+   */
+  public validatedEmail(email: string): boolean {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!regex.test(email)){
+      this.ReturnModalMessagErrorSuccess("O email digitado e invalido.");
+      return false;
+    }
+  }
+
+  /**
+   * 
+   * @param senha 
+   * @returns IF IS A PASSWORD VALID
+   */
+  public validatePassword(senha: string): boolean {
+    // Verifica se a senha tem pelo menos seis caracteres
+    if (senha.length < 6) {
+      this.ReturnModalMessagErrorSuccess("A senha deve ter entre 6 e 30 caracteres.");
+      return false;
+    }
+
+    // Verifica se a senha contém pelo menos uma letra maiúscula
+    if (!/[A-Z]/.test(senha)) {
+      this.ReturnModalMessagErrorSuccess("A senha deve conter um caractere maiusculo.");
+      return false;
+    }
+
+    // Verifica se a senha contém pelo menos um caractere especial
+    if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\-]/.test(senha)) {
+      this.ReturnModalMessagErrorSuccess("A senha deve conter um caractere especial.");
+      return false;
+    }
+
+    // Todas as condições foram atendidas
+    return true;
   }
 }

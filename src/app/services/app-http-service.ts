@@ -27,7 +27,7 @@ export class HttpCommonService {
     }
 
     insert(api_url: string, endPoint: string, model: any) {
-      return this.http.post<any>(`${environment[api_url]}/api/${endPoint}/`, model);
+      return this.http.post<any>(`${environment[api_url]}/api/${endPoint}`, model);
     }
 
     delete(api_url: string, endPoint: string, id: number | string) {

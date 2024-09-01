@@ -5,8 +5,8 @@ import { PurchaseFlowComponent } from './purchase-flow/purchase-flow.component';
 import { PurchaseDetailsComponent } from './purchase-details.component';
 
 const routes: Routes = [
-  { path: 'purchase/details/:id', component: PurchaseDetailsComponent },
-  { path: 'purchase/flow/:id', component: PurchaseFlowComponent },
+  { path: 'purchase/details', component: PurchaseDetailsComponent },
+  { path: 'purchase/details/flow/:id', component: PurchaseFlowComponent },
 ];
 
 @NgModule({

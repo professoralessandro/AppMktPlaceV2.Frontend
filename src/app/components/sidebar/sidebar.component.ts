@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserProfile } from 'src/app/dto/UserProfile';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,10 +8,48 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  public isSysAdmin: boolean;
+  public imgError: string;
 
-  constructor() { }
+  // USER ATRIBUTTES
+  public user: UserProfile;
+
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
+    this.initializeComponent();
   }
 
+  /**
+   * PUBLIC METHOD
+   */
+
+  public _isLoggedIn(): boolean{
+    return this.auth.isLoggedIn();
+  }
+
+  public handleMissingImage() {
+    return this.imgError;
+  }
+
+  public signOut() {
+    this.auth.signOut();
+  }
+
+  /**
+   * PRIVATE METHOD
+   */
+  private initializeComponent(): void {
+    debugger;
+    this.isSysAdmin = false;
+    this.isSysAdmin = this.validateIsSysAdmin();
+    this.imgError = './assets/img/user.jpg';
+    debugger;
+    // LOAD PERSOL PROFILE INFORMATION
+    this.user = JSON.parse(localStorage.getItem('user'));
+  }
+
+  private validateIsSysAdmin(): boolean {
+    return true;
+  }
 }

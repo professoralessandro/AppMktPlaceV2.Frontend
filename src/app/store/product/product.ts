@@ -17,6 +17,7 @@ export class Product {
     public usuarioUltimaAlteracaoId: string | null;
     public dataInclusao: Date | null;
     public dataUltimaAlteracao: Date | null;
+    public productQuantity: number;
 
   public constructor() {
     this.identifier = '';
@@ -33,5 +34,6 @@ export class Product {
     this.shoppingCartId = null;
     this.usuarioInclusaoId = '';
     this.dataInclusao = null;
+    this.productQuantity = 0;
   }
 }

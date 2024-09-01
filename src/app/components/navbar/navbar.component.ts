@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { AppService } from './../../services/app.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,16 +9,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private appService: AppService) { }
-  isCollapsed = true;
+  constructor(
+    private appService: AppService,
+    private auth: AuthService
+  ) { }
+
+  public isCollapsed = true;
+  public isSysAdmin: boolean;
+
   ngOnInit() {
+    this.initializeComponent();
   }
 
-  toggleSidebarPin() {
+  /**
+   * PUBLIC METHOD
+   */
+
+  public toggleSidebarPin() {
     this.appService.toggleSidebarPin();
   }
-  toggleSidebar() {
+  public toggleSidebar() {
     this.appService.toggleSidebar();
   }
 
+  public _isLoggedIn(): boolean{
+    return this.auth.isLoggedIn();
+  }
+
+  /**
+   * PRIVATE METHOD
+   */
+  private initializeComponent(): void {
+    this.isSysAdmin = false;
+    this.isSysAdmin = this.validateIsSysAdmin();
+  }
+
+  private validateIsSysAdmin(): boolean {
+    return true;
+  }
 }

@@ -1,14 +1,23 @@
 <aside class="sidebar shadow-sm">
 
-    <div class="sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3">
+    <div *ngIf="_isLoggedIn() === true" class="sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3">
         <div class="picture-wrapper mb-4">
             <div class="user-picture m-auto">
-                <img src="./assets/img/user.jpg" class="img-fluid" alt="">
+                <!-- <img src="./assets/img/user.jpg" (error)="handleMissingImage()" class="img-fluid" alt=""> -->
+                <img [src]="this.user.userProfileImage" (error)="handleMissingImage()" class="img-fluid" alt="">
             </div>
         </div>
         <div class="profile-details text-center pb-4">
+            <!-- TODO: REMOVE IT -->
+<!--             
             <p class="mb-0 text-uppercase name">Jhon Doe</p>
             <small class="text-uppercase role">Administrator</small>
+            <small class="text-uppercase role">Sair</small> -->
+
+            <p class="mb-0 text-uppercase name">{{ this.user.userName }}</p>
+            <small class="text-uppercase role">{{ this.user.userGroup }}</small>
+            <br>
+            <small (click)="signOut()" class="text-uppercase role">Sair</small>
         </div>
     </div>
     <div class="sidebar-search pt-1 pb-1 pl-3 pr-3">
@@ -20,38 +29,38 @@
         </div>
         <ul class="menu-items">
             <li>
-                <a href="#" routerLink="/dashboard" routerLinkActive="active">
+                <a href="#" routerLink="/dashboard" routerLinkActive="active" *ngIf="isSysAdmin">
                     <i class="fa fa-tv"></i>
                     <span>Dashboard</span>
                     <span class="badge badge-warning rounded-0 text-dark p-1">NEW</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/forms" routerLinkActive="active">
+                <a href="#" routerLink="/forms" routerLinkActive="active" *ngIf="isSysAdmin">
                     <i class="fas fa-gem"></i>
                     <span>Forms</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/tables" routerLinkActive="active">
+                <a href="#" routerLink="/tables" routerLinkActive="active" *ngIf="isSysAdmin">
                     <i class="fa fa-table"></i>
                     <span>Tables</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/typography" routerLinkActive="active">
+                <a href="#" routerLink="/typography" routerLinkActive="active" *ngIf="isSysAdmin">
                     <i class="fa fa-align-center"></i>
                     <span>Typography</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/maps" routerLinkActive="active">
+                <a href="#" routerLink="/maps" routerLinkActive="active" *ngIf="isSysAdmin">
                     <i class="fa fa-globe"></i>
                     <span>Maps</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/notifications" routerLinkActive="active">
+                <a href="#" routerLink="/notifications" routerLinkActive="active" *ngIf="isSysAdmin">
                     <i class="fas fa-bell"></i>
                     <span>Notifications</span>
                 </a>
@@ -70,11 +79,17 @@
                 </a>
             </li>
         </ul>
-        <div class="menu-header mt-4 mb-4">
-            Github Repo
+        <!-- TODO: REMOVE IT -->
+        <!-- GIT HUB REPO -->
+<!-- 
+        <div *ngIf="isSysAdmin">
+            <div class="menu-header mt-4 mb-4">
+                Github Repo
+            </div>
+            <div class="view-source mb-3">
+                <a href="https://github.com/azouaoui-med/lightning-admin-angular" target="_blank" class="btn btn-block btn-lightning rounded-0">View Source</a>
+            </div>
         </div>
-        <div class="view-source mb-3">
-            <a href="https://github.com/azouaoui-med/lightning-admin-angular" target="_blank" class="btn btn-block btn-lightning rounded-0">View Source</a>
-        </div>
+         -->
     </nav>
 </aside>
