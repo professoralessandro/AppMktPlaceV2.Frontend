@@ -33,7 +33,6 @@ export class InsertAddressComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    debugger;
     // TODO: PEGAR USUARIOS ID
     this.initializeComponent();
     this.router.paramMap.subscribe((params) => {
@@ -53,7 +52,6 @@ export class InsertAddressComponent implements OnInit {
             this.model.addressTypeEnum = this.commonService.ReturnEnumObjectByName('addressTypeEnum', this.model.addressTypeEnum);
           })
           .catch(e => {
-            debugger;
             this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o addres.', false);
           });
       }
@@ -66,32 +64,23 @@ export class InsertAddressComponent implements OnInit {
         this.parameters = [
           { parameter: 'userId', value: this.userIdAdressEdit }
         ];
-        debugger;
         this.service.getSingle('cadastros_url', 'address/paginated', this.parameters)
           .toPromise()
           .then(c => {
-            debugger;
             if (c.length > 0) {
-              debugger;
               this.model = c[0];
               // this.LoadUsersToSelect();
               this.rotaAnterior = '/store/purchase/details';
               this.model.addressTypeEnum = this.commonService.ReturnEnumObjectByName('addressTypeEnum', this.model.addressTypeEnum);
-              debugger;
             } else {
-              debugger;
               throw new Error();
-              debugger;
             }
           })
           .catch(e => {
-            debugger;
             this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o addres.', false);
-            debugger;
           });
       }
       else {
-        debugger;
         this.isNew = true;
         this.title = 'Cadastrar endereço';
         this.titleButton = this.title.split(' ')[0] === 'Cadastrar' ? 'Salvar' : '';

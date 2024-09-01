@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { QueryParameter } from 'src/app/models/query-parameter';
 import { HttpCommonService } from 'src/app/services/app-http-service';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -42,7 +41,6 @@ export class ResetPasswordComponent implements OnInit {
    */
   public onSubmit(): void {
     if(this.validateRequest(this.password, this.repeatPassword)) {
-      debugger;
       this.service.insert('security_url', 'user/reset-password', { a: this.token, b: this.userId, password: this.password })
       .toPromise()
       .then(c => {

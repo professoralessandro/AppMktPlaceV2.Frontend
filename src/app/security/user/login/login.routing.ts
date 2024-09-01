@@ -1,16 +1,14 @@
 import { RouterModule, Routes } from "@angular/router";
-import { LoginComponent } from "./login.component";
 import { CommonService } from "src/app/services/common.service";
 import { NgModule } from "@angular/core";
-// import { ResetPasswordComponent } from "../reset-password/reset-password.component";
 import { ForgotPasswordComponent } from "../forgot-password/forgot-password.component";
+import { RegisterComponent } from "../register/register.component";
 
 // TODO: THEN REMOVE IT
 
 const routes: Routes = [
-  // { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  // { path: 'reset-password/:b/:a', component: ResetPasswordComponent }
 ];
 
 @NgModule({

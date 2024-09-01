@@ -40,12 +40,10 @@ export class SidebarComponent implements OnInit {
    * PRIVATE METHOD
    */
   private initializeComponent(): void {
-    debugger;
     this.isSysAdmin = false;
     this.isSysAdmin = this.validateIsSysAdmin();
     this.imgError = './assets/img/user.jpg';
-    debugger;
-    // LOAD PERSOL PROFILE INFORMATION
+    // LOAD PERSONAL PROFILE INFORMATION
     this.user = JSON.parse(localStorage.getItem('user'));
   }
 

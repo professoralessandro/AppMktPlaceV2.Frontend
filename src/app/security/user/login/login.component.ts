@@ -36,35 +36,25 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    debugger;
     if (this.validateLogin(this.email, this.password)) {
       this.auth.login({ email: this.email, password: this.password})
       .subscribe({
         next:(res)=>{
-          debugger;
           this.email = null;
           this.password = null;
-          debugger;
           this.auth.storeToken(res.accessToken);
-          debugger;
           this.auth.storeRefreshToken(res.refreshToken);
-          debugger;
           const tokenPayload = this.auth.decodeToken();
-          debugger;
           // this.userStore.setFullNameFromStore(tokenPayload.unique_name);
           // this.userStore.setRoleFormStore(tokenPayload.role);
           alert(res.message);
-          debugger;
           this.router.navigate(['dashboard']);
-          debugger;
         },
         error:(err)=>{
-          debugger;
           alert(err?.error.message)
         }
       })
     }else{
-      debugger;
       alert("form is invalid");
     }
   }

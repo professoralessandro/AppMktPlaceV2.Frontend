@@ -36,7 +36,7 @@
   <!-- right menu -->
   <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed">
     <ul class="navbar-nav ">
-      <li class="nav-item" *ngIf="isSysAdmin">
+      <li class="nav-item" *ngIf="isSysAdmin && _isLoggedIn() === true">
         <a class="btn nav-link">
           <i class="far fa-bell"></i>
           <span class="link-text">Alerts</span>
@@ -44,7 +44,7 @@
           <span class="nav-alert notifications"></span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="_isLoggedIn() === true">
         <a class="btn nav-link" [routerLink]="['./store/purchase/details/']">
           <i class="fas fa-dollar-sign"></i>
           <span class="link-text">Efetivar compra</span>
@@ -52,7 +52,7 @@
           <span class="nav-alert messages"></span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="_isLoggedIn() === true">
         <a class="btn nav-link" [routerLink]="['./store/test/shopping-cart/']">
           <i class="fa fa-shopping-cart"></i>
           <span class="link-text">Shopping Cart</span>
@@ -60,7 +60,7 @@
           <span class="nav-alert messages"></span>
         </a>
       </li>
-      <li class="nav-item" *ngIf="isSysAdmin">
+      <li class="nav-item" *ngIf="isSysAdmin && _isLoggedIn() === true">
         <a class="btn nav-link">
           <i class="far fa-envelope"></i>
           <span class="link-text">Messages</span>
@@ -68,13 +68,13 @@
           <span class="nav-alert messages"></span>
         </a>
       </li>
-      <li class="nav-item" *ngIf="_isLoggedIn() === false" [routerLink]="['./security/login/']">
+      <li class="nav-item" *ngIf="_isLoggedIn() === false" [routerLink]="['login']">
         <a class="btn nav-link">
           <i class="far fa-user"></i>
           <span class="link-text">Profile</span>
         </a>
       </li>
-      <li class="nav-item" *ngIf="isSysAdmin">
+      <li class="nav-item" *ngIf="isSysAdmin && _isLoggedIn() === true">
         <a class="btn nav-link">
           <i class="fas fa-cog"></i>
           <span class="link-text">Setting</span>
