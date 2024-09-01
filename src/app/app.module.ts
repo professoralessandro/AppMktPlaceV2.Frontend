@@ -50,7 +50,7 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
     ToastrModule.forRoot(),
     NgxLoadingModule.forRoot({}),
     ModalModule.forRoot(),
-    ],
+  ],
   providers: [
     ConfirmService,
     BsModalRef
