@@ -56,6 +56,9 @@
                     </select>
                     <small id="DocumentType" class="form-text text-muted">Informe o tipo do documento para o
                         cadastro.</small>
+                        <div *ngIf="this.model.tipoDocumento === undefined" class="text-danger">
+                            Informe um tipo de documento valido.
+                        </div>
                 </div>
 
                 <div class="form-group">
@@ -65,6 +68,9 @@
                         [ngModelOptions]="{ standalone: true }" />
                     <small id="email" class="form-text text-muted">Informe um número de documento para o
                         cadastro.</small>
+                        <div *ngIf="this.model.nmrDocumento === ''" class="text-danger">
+                            Informe um número de documento válido.
+                        </div>
                 </div>
 
                 <div class="form-group">
@@ -76,6 +82,9 @@
                         </option>
                     </select>
                     <small id="sexo" class="form-text text-muted">Informe o sexo para o cadastro.</small>
+                    <div *ngIf="this.model.sexo === undefined" class="text-danger">
+                        Informe um o sexo.
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -87,6 +96,9 @@
                             estadoCivil }}</option>
                     </select>
                     <small id="estadoCivil" class="form-text text-muted">Informe o estado civil para o cadastro.</small>
+                    <div *ngIf="this.model.estadoCivil === undefined" class="text-danger">
+                        Informe um estado civil válido.
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -96,6 +108,9 @@
                         [ngModelOptions]="{ standalone: true }" />
                     <small id="NmrTelefone" class="form-text text-muted">Informe o número do telefone para o
                         cadastro.</small>
+                        <div *ngIf="this.model.nmrTelefone === ''" class="text-danger">
+                            Informe um número de telefone válida.
+                        </div>
                 </div>
 
                 <div class="form-group">
@@ -103,6 +118,9 @@
                     <input maxlength="50" type="password" class="form-control rounded-0" placeholder="Informe a senha"
                         [(ngModel)]="this.model.password" [ngModelOptions]="{ standalone: true }" />
                     <small id="password" class="form-text text-muted">Informe uma senha para o cadastro.</small>
+                    <div *ngIf="this.model.password === ''" class="text-danger">
+                        Informe uma senha válida.
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -110,6 +128,9 @@
                     <input maxlength="50" type="password" class="form-control rounded-0" placeholder="Informe a senha"
                         [(ngModel)]="this.replayPassWord" [ngModelOptions]="{ standalone: true }" />
                     <small id="password" class="form-text text-muted">Informe a senha novamente para o cadastro.</small>
+                    <div *ngIf="this.replayPassWord === ''" class="text-danger">
+                        Confirme a senha.
+                    </div>
                 </div>
 
                 <button type="button" class="btn btn-lightning rounded-0 mb-2 mr-2" (click)="incluir()">
