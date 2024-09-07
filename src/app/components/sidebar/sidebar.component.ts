@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfile } from 'src/app/dto/UserProfile';
+import { AuthenticatedUser } from 'src/app/security/user/login/authenticated.user';
 import { AuthService } from 'src/app/services/auth.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,13 +9,12 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  public isSysAdmin: boolean;
   public imgError: string;
 
-  // USER ATRIBUTTES
-  public user: UserProfile;
-
-  constructor(private auth: AuthService) { }
+  constructor(
+    private auth: AuthService,
+    private commonService: CommonService
+  ) { }
 
   ngOnInit() {
     this.initializeComponent();
@@ -40,14 +40,6 @@ export class SidebarComponent implements OnInit {
    * PRIVATE METHOD
    */
   private initializeComponent(): void {
-    this.isSysAdmin = false;
-    this.isSysAdmin = this.validateIsSysAdmin();
     this.imgError = './assets/img/user.jpg';
-    // LOAD PERSONAL PROFILE INFORMATION
-    this.user = JSON.parse(localStorage.getItem('user'));
-  }
-
-  private validateIsSysAdmin(): boolean {
-    return true;
   }
 }

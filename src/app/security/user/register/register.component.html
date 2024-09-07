@@ -13,6 +13,14 @@
                     </div>
                 </div>
 
+                <!-- TODO: INSERT PROFILE IMAGE -->
+                <div class="form-group">
+                    <label for="exampleInputProfileImage">Imagem de Perfil</label>
+                    <br>
+                    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+                </div>
+                <!-- TODO: INSERT PROFILE IMAGE -->
+
                 <div class="form-group">
                     <label for="exampleInputUserName">Nome de usuário</label>
                     <input maxlength="50" type="text" class="form-control rounded-0"

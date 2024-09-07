@@ -3,20 +3,13 @@
     <div class="sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3">
         <div class="picture-wrapper mb-4">
             <div class="user-picture m-auto">
-                <!-- <img src="./assets/img/user.jpg" (error)="handleMissingImage()" class="img-fluid" alt=""> -->
-                <img [src]="this.user.userProfileImage" (error)="handleMissingImage()" class="img-fluid" alt="">
+                <!-- <img [src]="returnImageProfile()" (error)="handleMissingImage()" class="img-fluid" width="30%" height="30%"> -->
+                <img [src]="this.auth.getUser().profileImage" (error)="handleMissingImage()" class="img-fluid" alt="">
             </div>
         </div>
         <div class="profile-details text-center pb-4">
             <!-- TODO: REMOVE IT -->
-<!--             
-            <p class="mb-0 text-uppercase name">Jhon Doe</p>
-            <small class="text-uppercase role">Administrator</small>
-            <small class="text-uppercase role">Sair</small> -->
-
-            <p class="mb-0 text-uppercase name">{{ this.user.userName }}</p>
-            <small class="text-uppercase role">{{ this.user.userGroup }}</small>
-            <br>
+            <p class="mb-0 text-uppercase name">Bem vindo {{ this.auth.getUser().userName }}</p>
             <small (click)="signOut()" class="text-uppercase role">Sair</small>
         </div>
     </div>
@@ -29,38 +22,38 @@
         </div>
         <ul class="menu-items">
             <li>
-                <a href="#" routerLink="/dashboard" routerLinkActive="active" *ngIf="isSysAdmin">
+                <a href="#" routerLink="/dashboard" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
                     <i class="fa fa-tv"></i>
                     <span>Dashboard</span>
                     <span class="badge badge-warning rounded-0 text-dark p-1">NEW</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/forms" routerLinkActive="active" *ngIf="isSysAdmin">
+                <a href="#" routerLink="/forms" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
                     <i class="fas fa-gem"></i>
                     <span>Forms</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/tables" routerLinkActive="active" *ngIf="isSysAdmin">
+                <a href="#" routerLink="/tables" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
                     <i class="fa fa-table"></i>
                     <span>Tables</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/typography" routerLinkActive="active" *ngIf="isSysAdmin">
+                <a href="#" routerLink="/typography" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
                     <i class="fa fa-align-center"></i>
                     <span>Typography</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/maps" routerLinkActive="active" *ngIf="isSysAdmin">
+                <a href="#" routerLink="/maps" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
                     <i class="fa fa-globe"></i>
                     <span>Maps</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/notifications" routerLinkActive="active" *ngIf="isSysAdmin">
+                <a href="#" routerLink="/notifications" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
                     <i class="fas fa-bell"></i>
                     <span>Notifications</span>
                 </a>
@@ -82,7 +75,7 @@
         <!-- TODO: REMOVE IT -->
         <!-- GIT HUB REPO -->
 <!-- 
-        <div *ngIf="isSysAdmin">
+        <div *ngIf="this.auth.isAdminUser()">
             <div class="menu-header mt-4 mb-4">
                 Github Repo
             </div>

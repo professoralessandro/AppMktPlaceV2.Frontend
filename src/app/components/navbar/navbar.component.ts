@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private auth: AuthService
+    public auth: AuthService
   ) { }
 
   public isCollapsed = true;

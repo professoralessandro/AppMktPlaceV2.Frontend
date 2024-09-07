@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterUserRequest } from './register-user-request';
 import { QueryParameter } from 'src/app/models/query-parameter';
 import { TipoDocumentoEnum } from 'src/app/Enums/tipo-documento.enum';
 import { HttpCommonService } from 'src/app/services/app-http-service';
 import { CommonService } from 'src/app/services/common.service';
 import { LoaderService } from 'src/app/components/loader/loader.service';
+import { FileUploadRequest } from './file-upload-request';
+import { RegisterUserRequest } from './register-user-request';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,13 @@ import { LoaderService } from 'src/app/components/loader/loader.service';
 })
 export class RegisterComponent implements OnInit {
 
+  // IMAGE ATTRIBUTTES
+  public selectedFile: File;
+  // public previewUrl: string | ArrayBuffer | null = null;
+  public previewUrl: string | ArrayBuffer | null = null;
+  public fileModel: FileUploadRequest;
+
+  // USER ATRIBUTTES
   public model: RegisterUserRequest;
   public replayPassWord: string;
   public title: string;
@@ -28,7 +36,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private service: HttpCommonService,
     private commonService: CommonService,
-    private loaderService: LoaderService,) { }
+    private loaderService: LoaderService
+  ) { }
 
   /**
    * PUBLIC METHOD
@@ -40,10 +49,17 @@ export class RegisterComponent implements OnInit {
   }
 
   public async incluir() {
-
     this.loaderService.SetLoaderState(true);
-
     if (this.validateRegisterUserRequest(this.model)) {
+      // IMAGE UPLOAD
+      this.fileModel.title = this.selectedFile.name;
+      this.fileModel.description = 'profile image :' + this.model.email;
+      this.fileModel.mainFile = true;
+      this.fileModel.public = true;
+      // BASE 64
+      this.fileModel.profileImage = this.previewUrl;
+
+      // USER INSERT
       this.model.estadoCivil = this.ReturnEstadoCivil(this.model.estadoCivil);
       this.model.sexo = this.ReturnSexo(this.model.sexo);
       this.model.tipoDocumento = this.ReturnDocumentType(this.model.tipoDocumento);
@@ -51,8 +67,17 @@ export class RegisterComponent implements OnInit {
       this.service.insert('security_url', 'user/register', this.model)
         .toPromise()
         .then(c => {
-          this.commonService.responseActionWithNavigation
-            (this.loginRoute, `Usuario cadastrado com sucesso.<br>você receberá um email na sua caixa de mensagem<br>com as instruções para ativar a sua conta.`, true);
+          this.fileModel.externalReferenceId = c.jsonObject.identifier;
+          this.service.insert('storage_url', 'storagefile/post-profile-image', this.fileModel)
+            .toPromise()
+            .then(() => {
+              this.commonService.responseActionWithNavigation
+                (this.loginRoute, `Usuario cadastrado com sucesso.<br>você receberá um email na sua caixa de mensagem<br>com as instruções para ativar a sua conta.`, true);
+            })
+            .catch(e => {
+              this.loaderService.SetLoaderState(false);
+              this.commonService.ReturnModalMessagErrorSuccess("Houve um erro ao cadastrar o usuario.", false);
+            });
         })
         .catch(e => {
           this.loaderService.SetLoaderState(false);
@@ -65,18 +90,43 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  public onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      this.selectedFile = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.previewUrl = reader.result;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
+
+  publiconUpload(): void {
+    if (this.selectedFile) {
+      // Aqui você pode adicionar a lógica para enviar a imagem para o servidor
+      console.log('Imagem selecionada:', this.selectedFile);
+    } else {
+      console.log('Nenhuma imagem selecionada.');
+    }
+  }
+
   /**
    * PRIVATE METHOD
    */
   private initializeComponent(): void {
+    // REGISTER USER
     this.model = new RegisterUserRequest();
     this.replayPassWord = '';
     this.sexoOptions = ['Masculino', 'Feminino', 'Outros'];
     this.estadoCivilOptions = ['Solteiro(a)', 'Casado(a)', 'Outros'];
     this.loginRoute = 'login';
     this.parameters = [];
-    this.title = '';
+    this.title = 'Cadastrar usuário';
     this.titleButton = 'Cadastrar';
+
+    // IMAGE ATRIBUTTES
+    this.fileModel = new FileUploadRequest();
   }
 
   private ReturnSexo(value: string): string {
