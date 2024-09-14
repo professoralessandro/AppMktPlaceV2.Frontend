@@ -10,7 +10,7 @@
         <div class="profile-details text-center pb-4">
             <!-- TODO: REMOVE IT -->
             <p class="mb-0 text-uppercase name">Bem vindo {{ this.auth.getUser().userName }}</p>
-            <small (click)="signOut()" appTooltip="LogOut" placement="top" [delay]="2000" class="text-uppercase role">Sair</small>
+            <small (click)="signOut()" appTooltip="LogOut" placement="bottom" [delay]="2000" class="text-uppercase role">Sair</small>
         </div>
     </div>
     <div class="sidebar-search pt-1 pb-1 pl-3 pr-3">

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticatedUser } from 'src/app/security/user/login/authenticated.user';
 import { AuthService } from 'src/app/services/auth.service';
-import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,10 +8,10 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class SidebarComponent implements OnInit {
   public imgError: string;
+  public isAdminUser: boolean;
 
   constructor(
-    private auth: AuthService,
-    private commonService: CommonService
+    public auth: AuthService
   ) { }
 
   ngOnInit() {
