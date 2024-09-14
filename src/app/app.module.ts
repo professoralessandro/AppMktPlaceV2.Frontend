@@ -27,6 +27,7 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
 import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from './security/Interceptor/auth-interceptor';
 import { HttpCommonService } from './services/app-http-service';
+import { TooltipDirective } from './diretives/tooltip.directive';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { HttpCommonService } from './services/app-http-service';
     NotificationsComponent,
     LoaderComponent,
     AlertModalComponent,
+    TooltipDirective,
   ],
   imports: [
     BrowserModule,
