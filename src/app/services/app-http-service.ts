@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { QueryParameter } from '../models/query-parameter';
 import { CommonService } from './common.service';
+import { BaseResponse } from '../models/base.response';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,11 @@ export class HttpCommonService {
 
     edit(api_url: string, endPoint: string, model: any) {
       return this.http.put<any>(`${environment[api_url]}/api/${endPoint}/`, model);
+    }
+
+    getAllNew(api_url: string, endPoint: string, parameters?: QueryParameter[]) {
+      return this.http.get<BaseResponse>
+      (`${environment[api_url]}/api/${endPoint}${ !this.commonService.isNullOrUndefined(parameters) && parameters.length > 0 ?
+        this.commonService.retornQuery(parameters) : ''}`);
     }
 }

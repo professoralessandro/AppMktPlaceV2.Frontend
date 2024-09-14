@@ -131,67 +131,9 @@ export class DashboardComponent implements OnInit {
       data: this.chart3.data,
       options: this.chart3.options
     });
-
-    // TODO: REMOVER MOCK
-    this.initializeComponent();
   }
 
   /**
    * PRIVATE METHOD
    */
-
-  // TODO: REMOVER ESTE METODO DE CARREGAMENTO DE USUARIO
-  private initializeComponent() {
-
-    // THIS METOD GET THE USER
-    const user = this.loadUserByUserIdToSetOnLocalStorage("d2a833de-5bb4-4931-a3c2-133c8994072a");
-
-    // THIS METOD SET THE USER ON LOCAL STORAGE
-    this.returnUserToLoadLocalStorage(user);
-  }
-
-  // TODO: REMOVER MOCK
-  /**
-   * SET USER ON LOCAL STORAGE
-   * TO MOCK A USER STILL HAVENT ANY LOGIN METHOD
-   * @param user 
-   */
-  private returnUserToLoadLocalStorage(user): void {
-    //ADD PRODUCT TO SHOPCART
-    localStorage.removeItem('user');
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-
-  // TODO: REMOVER MOCK
-  /**
-   * 
-   * @param userId THIS HETHOD RECEIVE THE USER ID AND RETURN THE USER TO SET ON LOCAL STORAGE
-   * @returns 
-   */
-  private loadUserByUserIdToSetOnLocalStorage(userId) {
-    return {
-      identifier: "d2a833de-5bb4-4931-a3c2-133c8994072a",
-      userName: "ALESSANDRO2010",
-      userGroup: "Master",
-      userProfileImage: './assets/img/user.jpg',
-      nmrDocumento: "00000000000",
-      documentTypeEnum: 0,
-      senha: "@DASDFsdfksdofksdofksdfffff",
-      nome: "master",
-      dataNascimento: "2024-06-08T14:20:21.657",
-      sexo: "N",
-      estadoCivil: "N",
-      email: "system@appmkt.com.br",
-      trocaSenha: false,
-      bloqueado: false,
-      usuarioInclusaoId: "9a5f0c64-8103-4ee1-8acd-84b28090d898",
-      usuarioUltimaAlteracaoId: "9a5f0c64-8103-4ee1-8acd-84b28090d898",
-      dataInclusao: "2024-06-08T14:20:21.657",
-      dataUltimaAlteracao: "2024-06-08T14:20:21.657",
-      dataUltimaTrocaSenha: "2024-06-08T14:20:21.657",
-      dataUltimoLogin: "2024-06-08T14:20:21.657",
-      nmrTelefone: "(13)99612-4445",
-      ativo: true
-    }
-  }
 }

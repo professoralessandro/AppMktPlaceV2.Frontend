@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 import { Product } from '../../product/product';
-import { ProductTypeEnum } from 'src/app/Enums/product-type.enum';
 import { LoaderService } from 'src/app/components/loader/loader.service';
 import { HttpCommonService } from 'src/app/services/app-http-service';
 import { QueryParameter } from 'src/app/models/query-parameter';
 import { Address } from 'src/app/cadastros/address/address';
 import { projectUrls } from 'src/environments/endpoints-environment';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-purchase-details',
@@ -58,7 +58,8 @@ export class PurchaseDetailsComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private loaderService: LoaderService,
-    private service: HttpCommonService
+    private service: HttpCommonService,
+    private auth: AuthService
   ) { }
 
   /**
@@ -148,7 +149,7 @@ export class PurchaseDetailsComponent implements OnInit {
     // GET SHOPPING CART PRODUCT
     this.productList = JSON.parse(localStorage.getItem('shoppingcart'));
     // GET USER INFORMATION
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.auth.getUser();
 
     // HTTP CLASS ATRIBUTTES
     this.endpointUrl = projectUrls.GetAllAddressPaginated;

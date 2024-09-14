@@ -18,12 +18,15 @@ import { FormsComponent } from './pages/forms/forms.component';
 import { TypographyComponent } from './pages/typography/typography.component';
 import { MapsComponent } from './pages/maps/maps.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
 import { ConfirmService } from './components/confirm/confirm.service';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
+import { AuthService } from './services/auth.service';
+import { AuthInterceptor } from './security/Interceptor/auth-interceptor';
+import { HttpCommonService } from './services/app-http-service';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,11 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
   ],
   providers: [
     ConfirmService,
-    BsModalRef
+    BsModalRef,
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    HttpCommonService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   entryComponents: [
     AlertModalComponent

@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenApiModel } from '../models/token-api-model';
+import { AuthenticatedUser } from '../security/user/login/authenticated.user';
+import { CommonService } from './common.service';
+import { UserGroupEnum } from '../Enums/user-group.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -10,13 +13,12 @@ import { TokenApiModel } from '../models/token-api-model';
 
 export class AuthService {
     // ATRIBUTTES
-    // private baseUrl: string = "https://localhost:7052/api/User/";
-    // private baseUrl: string =  "https://localhost:7031/api/User/authenticate"
-    private baseUrl: string =  "http://localhost:5030/api/User/"
-
+    private baseUrl: string = "http://localhost:5030/api/User/"
     private userPayload: any;
+    private isAdmin: boolean = false;
 
     constructor(
+        private commonService: CommonService,
         private http: HttpClient,
         private router: Router) {
         this.userPayload = this.decodeToken();
@@ -30,11 +32,22 @@ export class AuthService {
     public login(loginObj: any) {
         return this.http.post<any>(`${this.baseUrl}authenticate`, loginObj)
     }
-    public signOut() {
-        localStorage.clear();
-        this.router.navigate(['login'])
+
+    public logOut() {
+        return this.http.post<any>(`${this.baseUrl}logout`, null)
     }
-    
+    public signOut() {
+        this.logOut()
+        .toPromise()
+        .then(() => {
+            localStorage.clear();
+            this.router.navigate(['login'])
+        })
+        .catch(c => {
+            this.commonService.ReturnModalMessagErrorSuccess("Houve um erro ao fazer o logout:" + c.message, false);
+        });
+    }
+
     public storeToken(tokenValue: string) {
         localStorage.setItem('token', tokenValue);
     }
@@ -43,8 +56,22 @@ export class AuthService {
         localStorage.setItem('refreshToken', tokenValue);
     }
 
+    public storeUser(authUser: any) {
+        localStorage.clear();
+        authUser.profileImage = this.returnImageProfile(authUser);
+        this.storeToken(authUser.accessToken);
+        this.storeRefreshToken(authUser.refreshToken);
+        var claim = this.decodeToken();
+        this.isSysAdmin(claim.groupsid);
+        localStorage.setItem('user', JSON.stringify(authUser));
+    }
+
     public getToken() {
         return localStorage.getItem('token');
+    }
+
+    public getUser(): AuthenticatedUser {
+        return JSON.parse(localStorage.getItem('user'));
     }
 
     public getRefreshToken() {
@@ -52,7 +79,11 @@ export class AuthService {
     }
 
     public isLoggedIn(): boolean {
-        return !!localStorage.getItem('token');
+        return !!localStorage.getItem('user');
+    }
+
+    public isAdminUser(): boolean {
+        return this.isAdmin;
     }
 
     public getFullNameFromToken() {
@@ -67,11 +98,10 @@ export class AuthService {
         return this.http.post<any>(`${this.baseUrl}refresh`, tokenApi)
     }
 
-    public decodeToken() {
+    private decodeToken() {
         const jwtHelper = new JwtHelperService();
         const token = this.getToken()!;
         console.log(jwtHelper.decodeToken(token));
-
         return jwtHelper.decodeToken(token);
     }
     /*
@@ -79,12 +109,22 @@ export class AuthService {
     */
 
 
-    
+
     /*
     * PRIVATE METHODS BEGIN
     */
+    private returnImageProfile(user) {
+        try {
+            return this.commonService.isNullOrUndefined(user.profileImage) ? './assets/img/user.jpg' : user.profileImage;
+        }
+        catch {
+            return './assets/img/user.jpg';
+        }
+    }
 
-
+    private isSysAdmin(groupId: string) {
+        this.isAdmin = groupId === new UserGroupEnum().Master ? true : false;
+    }
     /*
     * PRIVATE METHODS END
     */

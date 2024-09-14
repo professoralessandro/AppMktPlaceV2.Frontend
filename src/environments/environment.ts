@@ -4,9 +4,12 @@
 
 export const environment = {
   production: false,
-  cadastros_url: 'http://localhost:5050',
-  store_url: 'http://localhost:5010',
+  store_url: 'http://localhost:5020',
   security_url: 'http://localhost:5030',
+  storage_url: 'http://localhost:5040',
+  cadastros_url: 'http://localhost:5050',
+  notifications_url: 'http://localhost:5050',
+  start_url: 'http://localhost:5010',
 };
 
 /*
