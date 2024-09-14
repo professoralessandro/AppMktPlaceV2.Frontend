@@ -9,7 +9,11 @@ const routes: Routes = [
   { path: 'test', component: ProdutoComponent },
   { path: 'test/cadastro', component: InsertProdutoComponent },
   { path: 'test/cadastro/:id', component: InsertProdutoComponent },
-  { path: 'test/deletar/:id', component: DeleteProdutoComponent }
+  { path: 'test/deletar/:id', component: DeleteProdutoComponent },
+  { path: 'product', component: ProdutoComponent },
+  { path: 'product/cadastro', component: InsertProdutoComponent },
+  { path: 'product/cadastro/:id', component: InsertProdutoComponent },
+  { path: 'product/deletar/:id', component: DeleteProdutoComponent }
 ];
 
 @NgModule({

@@ -11,7 +11,7 @@ import { projectUrls } from 'src/environments/endpoints-environment';
 })
 export class GroupsComponent implements OnInit {
 
-  public title = 'Busca por grupos';
+  public title = 'Grupos de usuários';
   public gridTitle = 'Grupos';
   public model = 'Groups';
   public id: string;
@@ -45,7 +45,7 @@ export class GroupsComponent implements OnInit {
     this.loaderService.SetLoaderState(true);
 
     this.gridTitle = 'Grupos';
-    this.title = 'Busca de grupos';
+    this.title = 'Grupos de usuários';
     this.gridTitles = ['#', 'Descrição', 'Ativo'];
     this.gridElements = ['identifier', 'groupName', 'ativo'];
     this.apiUrl = 'cadastros_url';

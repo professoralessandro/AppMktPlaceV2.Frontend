@@ -53,7 +53,7 @@ export class AddressComponent implements OnInit {
     this.loaderService.SetLoaderState(true);
 
     this.gridTitle = 'Endereço';
-    this.title = 'Busca de address';
+    this.title = 'Endereços';
     this.gridTitles = ['Usuario', 'Tipo de endereço', 'Logradouro', 'Ativo'];
     this.gridElements = ['usuario', 'addressTypeEnum', 'logradouro', 'ativo'];
     this.apiUrl = 'cadastros_url';

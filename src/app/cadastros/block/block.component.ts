@@ -12,7 +12,7 @@ import { projectUrls } from 'src/environments/endpoints-environment';
   styleUrls: ['./block.component.scss']
 })
 export class BlockComponent implements OnInit {
-  public title = 'Busca por block';
+  public title = 'Bloqueios';
   public gridTitle = 'Bloqueio';
   public model = 'Block';
   public id: string;
@@ -52,7 +52,7 @@ export class BlockComponent implements OnInit {
     this.loaderService.SetLoaderState(true);
 
     this.gridTitle = 'Bloqueio';
-    this.title = 'Busca de block';
+    this.title = 'Bloqueios';
     this.gridTitles = ['Tipo de bloqueio', 'Descricao do item', 'Data inicio', 'Data fim'];
     this.gridElements = ['blockTypeEnum', 'blockdItemDescription', 'dataInicio', 'dataFim'];
     this.apiUrl = 'cadastros_url';

@@ -10,7 +10,7 @@ import { projectUrls } from 'src/environments/endpoints-environment';
   styleUrls: ['./delivery.component.scss']
 })
 export class DeliveryComponent implements OnInit {
-  public title = 'Busca por entrega';
+  public title = 'Entregas';
   public gridTitle = 'Delivery';
   public model = 'Delivery';
   public id: string;
@@ -49,7 +49,7 @@ export class DeliveryComponent implements OnInit {
     this.loaderService.SetLoaderState(true);
 
     this.gridTitle = 'Entregas';
-    this.title = 'Busca de entrega';
+    this.title = 'Entregas';
     this.gridTitles = ['Entregador', 'Destinatario', 'Tipo de entrega', 'Data Prevista', 'Data efetiva', 'Ativo'];
     this.gridElements = ['deliverymanDescription', 'receiverDescription', 'deliveryTypeEnum', 'dataPrevistaEntrega', 'dataEfetivaEnrega', 'ativo'];
     this.apiUrl = 'cadastros_url';

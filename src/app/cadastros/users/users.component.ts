@@ -12,7 +12,7 @@ import { projectUrls } from 'src/environments/endpoints-environment';
 })
 export class UsersComponent implements OnInit {
 
-  public title = 'Busca por usuarios';
+  public title = 'Usuários';
   public gridTitle = 'Usuarios';
   public model = 'Groups';
   public id: string;
@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
     this.loaderService.SetLoaderState(true);
 
     this.gridTitle = 'Usuarios';
-    this.title = 'Busca de usuarios';
+    this.title = 'Usuários';
     this.gridTitles = ['Nome', 'Nome de usuario', 'Email', 'Ativo'];
     this.gridElements = ['nome', 'userName', 'email', 'ativo'];
     this.apiUrl = 'cadastros_url';
