@@ -62,7 +62,6 @@ export class LoginComponent implements OnInit {
         .toPromise()
         .then(user => {
           if (user.isSuccess) {
-            debugger;
             this.email = null;
             this.password = null;
             let authUser = user.jsonObject;
@@ -74,7 +73,6 @@ export class LoginComponent implements OnInit {
             this.service.getAllNew('storage_url', 'storagefile/getall', this.parameters)
               .toPromise()
               .then(image => {
-                debugger;
                 let profileImage: any;
                 if (image.isSuccess) {
                   profileImage = image.jsonObject.find(c => c.description.toString().includes('PROFILE IMAGE'));
@@ -84,7 +82,6 @@ export class LoginComponent implements OnInit {
                 this.router.navigate([this.storeRoute]);
               })
               .catch(e => {
-                debugger;
                 this.loaderService.SetLoaderState(false);
                 this.commonService.ReturnModalMessagErrorSuccess("Houve um erro ao fazer o login.", false);
               });
