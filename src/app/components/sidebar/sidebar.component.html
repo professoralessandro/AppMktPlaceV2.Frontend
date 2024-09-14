@@ -10,7 +10,7 @@
         <div class="profile-details text-center pb-4">
             <!-- TODO: REMOVE IT -->
             <p class="mb-0 text-uppercase name">Bem vindo {{ this.auth.getUser().userName }}</p>
-            <small (click)="signOut()" class="text-uppercase role">Sair</small>
+            <small (click)="signOut()" appTooltip="LogOut" placement="bottom" [delay]="2000" class="text-uppercase role">Sair</small>
         </div>
     </div>
     <div class="sidebar-search pt-1 pb-1 pl-3 pr-3">
@@ -22,51 +22,51 @@
         </div>
         <ul class="menu-items">
             <li>
-                <a href="#" routerLink="/dashboard" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
+                <a href="#" routerLink="/dashboard" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Dashboard" placement="right">
                     <i class="fa fa-tv"></i>
                     <span>Dashboard</span>
                     <span class="badge badge-warning rounded-0 text-dark p-1">NEW</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/forms" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
+                <a href="#" routerLink="/forms" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Forms" placement="right">
                     <i class="fas fa-gem"></i>
                     <span>Forms</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/tables" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
+                <a href="#" routerLink="/tables" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Tables" placement="right">
                     <i class="fa fa-table"></i>
                     <span>Tables</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/typography" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
+                <a href="#" routerLink="/typography" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Typography" placement="right">
                     <i class="fa fa-align-center"></i>
                     <span>Typography</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/maps" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
+                <a href="#" routerLink="/maps" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Maps" placement="right">
                     <i class="fa fa-globe"></i>
                     <span>Maps</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/notifications" routerLinkActive="active" *ngIf="this.auth.isAdminUser()">
+                <a href="#" routerLink="/notifications" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Notifications" placement="right">
                     <i class="fas fa-bell"></i>
                     <span>Notifications</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/cadastros/test" routerLinkActive="active">
+                <a href="#" routerLink="/cadastros/test" routerLinkActive="active" appTooltip="Testes" placement="right">
                     <i class="fa fa-star"></i>
                     <span>Testes components</span>
                 </a>
             </li>
             <li>
                 <!-- LINHAS DE TESTE ROTA -->
-                <a href="#" routerLink="/store/test" routerLinkActive="active">
+                <a href="#" routerLink="/store/test" routerLinkActive="active" appTooltip="Testes store" placement="right">
                     <i class="fa fa-star"></i>
                     <span>Testes store components</span>
                 </a>

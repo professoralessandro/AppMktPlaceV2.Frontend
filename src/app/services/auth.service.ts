@@ -15,7 +15,6 @@ export class AuthService {
     // ATRIBUTTES
     private baseUrl: string = "http://localhost:5030/api/User/"
     private userPayload: any;
-    private isAdmin: boolean = false;
 
     constructor(
         private commonService: CommonService,
@@ -61,8 +60,6 @@ export class AuthService {
         authUser.profileImage = this.returnImageProfile(authUser);
         this.storeToken(authUser.accessToken);
         this.storeRefreshToken(authUser.refreshToken);
-        var claim = this.decodeToken();
-        this.isSysAdmin(claim.groupsid);
         localStorage.setItem('user', JSON.stringify(authUser));
     }
 
@@ -83,7 +80,15 @@ export class AuthService {
     }
 
     public isAdminUser(): boolean {
-        return this.isAdmin;
+        try
+        {
+            var claim = this.decodeToken();
+            return claim.groupsid === new UserGroupEnum().Master ? true : false;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     public getFullNameFromToken() {
@@ -109,7 +114,6 @@ export class AuthService {
     */
 
 
-
     /*
     * PRIVATE METHODS BEGIN
     */
@@ -120,10 +124,6 @@ export class AuthService {
         catch {
             return './assets/img/user.jpg';
         }
-    }
-
-    private isSysAdmin(groupId: string) {
-        this.isAdmin = groupId === new UserGroupEnum().Master ? true : false;
     }
     /*
     * PRIVATE METHODS END
