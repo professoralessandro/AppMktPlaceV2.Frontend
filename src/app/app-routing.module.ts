@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'typography', component: TypographyComponent},
   { path: 'maps', component: MapsComponent},
   { path: 'notifications', component: NotificationsComponent},
-  { path: 'reset-password/:b/:a', component: ResetPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'active-account', component: ActiveAccountComponent },
   { path: 'login', component: LoginComponent },
   { path: 'store', component: ProductComponent },

@@ -38,6 +38,9 @@ export class LoginComponent implements OnInit {
    * PUBLIC MEHTHOD BEGIN
    */
   ngOnInit(): void {
+    // IF IF LOGGED IN RETUN TO STORE
+    if(this.auth.isLoggedIn()) this.router.navigate([this.storeRoute]);
+
     this.loaderService.SetLoaderState(true);
     this.initComponent();
     this.loaderService.SetLoaderState(false);
@@ -49,7 +52,6 @@ export class LoginComponent implements OnInit {
     this.email = '';
     this.storeRoute = 'store';
     this.parameters = [];
-
     this.authUser = new AuthenticatedUser();
   }
 
@@ -60,6 +62,7 @@ export class LoginComponent implements OnInit {
         .toPromise()
         .then(user => {
           if (user.isSuccess) {
+            debugger;
             this.email = null;
             this.password = null;
             let authUser = user.jsonObject;
@@ -71,6 +74,7 @@ export class LoginComponent implements OnInit {
             this.service.getAllNew('storage_url', 'storagefile/getall', this.parameters)
               .toPromise()
               .then(image => {
+                debugger;
                 let profileImage: any;
                 if (image.isSuccess) {
                   profileImage = image.jsonObject.find(c => c.description.toString().includes('PROFILE IMAGE'));
@@ -80,6 +84,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate([this.storeRoute]);
               })
               .catch(e => {
+                debugger;
                 this.loaderService.SetLoaderState(false);
                 this.commonService.ReturnModalMessagErrorSuccess("Houve um erro ao fazer o login.", false);
               });

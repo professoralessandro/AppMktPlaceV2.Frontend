@@ -192,6 +192,13 @@ export class RegisterComponent implements OnInit {
   }
 
   private validateRegisterUserRequest(user: RegisterUserRequest): boolean {
+    
+    // VALIDATE IMAGE
+    if(this.commonService.isNullOrUndefined(this.selectedFile)) {
+      this.commonService.ReturnModalMessagErrorSuccess("A imagem de perfil deve ser selecionada.", false);
+      return false;
+    }
+
     // VALIDATE IF USER IS MORE OLDER THAN 120 YEARS
     if (this.commonService.returnYearsByDateString(user.dataNascimento) < 18 && this.commonService.returnYearsByDateString(user.dataNascimento) > 120) {
       this.commonService.ReturnModalMessagErrorSuccess("O usuário deve ter entre 18 e 120 anos.", false);

@@ -37,17 +37,13 @@ export class AuthService {
         return this.http.post<any>(`${this.baseUrl}logout`, null)
     }
     public signOut() {
-        debugger;
         this.logOut()
         .toPromise()
         .then(() => {
             localStorage.clear();
-            debugger;
             this.router.navigate(['login'])
-            debugger;
         })
         .catch(c => {
-            debugger;
             this.commonService.ReturnModalMessagErrorSuccess("Houve um erro ao fazer o logout:" + c.message, false);
         });
     }
