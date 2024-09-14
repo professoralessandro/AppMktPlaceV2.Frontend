@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+.ng-tooltip {
+    position: absolute;
+    border-radius: 5px;
+    padding: 10px;
+    color: #FFF;
+    background-color: #000;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.ng-tooltip-show {
+    opacity: 1;
+}
 
 // $fa-font-path:"~font-awesome/fonts";
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
