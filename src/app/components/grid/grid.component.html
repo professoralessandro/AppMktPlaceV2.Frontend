@@ -47,7 +47,7 @@
             <!-- MSG GRID IS EMPITY -->
             <!-- RENIVER COMENTARIO QUANDO PAGINATOR TIVER OK -->
             <!-- PAGINATOR -->
-            <nav aria-label="..." style="float: left;" *ngIf="this.gridService.isExistsData">
+            <nav aria-label="..." style="float: left;">
                 <ul class="pagination">
                     <li [ngClass]="this.previusPage === 0 ? 'page-item disabled' : 'page-item'">
                         <a class="btn btn-outline-lightning rounded-0 mb-2 page-link" (click)="paginate(this.currentPage - 1, 10)">{{previusLabel}}</a>

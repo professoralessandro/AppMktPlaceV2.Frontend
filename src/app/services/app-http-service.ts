@@ -22,6 +22,7 @@ export class HttpCommonService {
     }
 
     getSingle(api_url: string, endPoint: string, parameters?: QueryParameter[]) {
+      debugger;
       return this.http.get<any>
       (`${environment[api_url]}/api/${endPoint}${ !this.commonService.isNullOrUndefined(parameters) && parameters.length > 0 ?
         this.commonService.retornQuery(parameters) : ''}`);

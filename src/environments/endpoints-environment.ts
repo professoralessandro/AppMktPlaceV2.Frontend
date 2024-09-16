@@ -15,6 +15,8 @@ export const projectUrls = {
   GetAllBlockPaginated: 'block/paginated',
   GetAllAddress: 'address/getall',
   GetAllAddressPaginated: 'address/paginated',
+  RegisterAddressUrl: '/cadastros/address/cadastro/',
+  DeleteAddressUrl: '/cadastros/address/deletar/',
   GetAllDeliveryPaginated: 'delivery/paginated',
   GetAllProduct: 'product/getall',
   GetAllProductPaginated: 'product/paginated',
