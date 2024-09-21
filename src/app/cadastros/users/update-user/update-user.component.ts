@@ -43,7 +43,7 @@ export class UpdateUserComponent implements OnInit {
         this.parameters = [
           {parameter: 'userId', value: params.get('id')}
         ];
-        this.service.getSingle('cadastros_url', 'user/getbyid', this.parameters)
+        this.service.getSingle('security_url', 'user/getbyid', this.parameters)
           .toPromise()
           .then(c => {
             this.model = c;
@@ -76,7 +76,7 @@ export class UpdateUserComponent implements OnInit {
     this.sexoOptions = ['Masculino', 'Feminino', 'Outros'];
     this.estadoCivilOptions = ['Solteiro(a)', 'Casado(a)', 'Outros'];
     this.isNew = false;
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/user';
     this.parameters = [];
     this.title = '';
     this.model.ativo = true;
@@ -99,7 +99,7 @@ export class UpdateUserComponent implements OnInit {
       this.model.usuarioInclusaoId = new SystemParameterEnum().systemUser;
       this.model.dataInclusao = new Date();
       // this.model.dataUltimaAlteracao = new Date();
-      this.service.insert('cadastros_url', 'user', this.model)
+      this.service.insert('security_url', 'user', this.model)
         .toPromise()
         .then(c => {
           this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Usuário incluido com sucesso.', true);
@@ -110,7 +110,7 @@ export class UpdateUserComponent implements OnInit {
     } else {
       this.model.usuarioUltimaAlteracaoId = new SystemParameterEnum().systemUser;
       this.model.dataUltimaAlteracao = new Date();
-      this.service.edit('cadastros_url', 'user', this.model)
+      this.service.edit('security_url', 'user', this.model)
         .toPromise()
         .then(c => {
           this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Usuário editado com sucesso.', true);

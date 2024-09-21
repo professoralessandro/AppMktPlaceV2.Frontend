@@ -31,7 +31,7 @@ export class DeleteGroupsComponent implements OnInit {
         this.parameters = [
           { parameter: 'groupId', value: params.get('id') }
         ];
-        this.service.getSingle('cadastros_url', 'Group/GetById', this.parameters)
+        this.service.getSingle('security_url', 'Group/GetById', this.parameters)
           .toPromise()
           .then(c => {
             this.grupo = c;
@@ -51,7 +51,7 @@ export class DeleteGroupsComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar grupo';
     this.label = '';
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/groups';
     this.parameters = [];
     this.grupo = new Groups();
   }
@@ -65,7 +65,7 @@ export class DeleteGroupsComponent implements OnInit {
   }
 
   public deletar(): void {
-    this.service.delete('cadastros_url', 'Group', this.grupo.identifier)
+    this.service.delete('security_url', 'Group', this.grupo.identifier)
       .toPromise()
       .then(c => {
         this.commonService.responseActionWithNavigation

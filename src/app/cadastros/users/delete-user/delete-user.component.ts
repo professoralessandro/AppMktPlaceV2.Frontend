@@ -31,7 +31,7 @@ export class DeleteUserComponent implements OnInit {
         this.parameters = [
           { parameter: 'UserId', value: params.get('id') }
         ];
-        this.service.getSingle('cadastros_url', 'user/getbyid', this.parameters)
+        this.service.getSingle('security_url', 'user/getbyid', this.parameters)
           .toPromise()
           .then(c => {
             this.usuario = c;
@@ -51,7 +51,7 @@ export class DeleteUserComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar usuário';
     this.label = '';
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/user';
     this.parameters = [];
     this.usuario = new User();
   }
@@ -65,7 +65,7 @@ export class DeleteUserComponent implements OnInit {
   }
 
   public deletar(): void {
-    this.service.delete('cadastros_url', 'user', this.usuario.identifier)
+    this.service.delete('security_url', 'user', this.usuario.identifier)
       .toPromise()
       .then(c => {
         this.commonService.responseActionWithNavigation

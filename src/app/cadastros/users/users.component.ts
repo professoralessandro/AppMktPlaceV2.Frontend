@@ -52,7 +52,7 @@ export class UsersComponent implements OnInit {
     this.title = 'Usuários';
     this.gridTitles = ['Nome', 'Nome de usuario', 'Email', 'Ativo'];
     this.gridElements = ['nome', 'userName', 'email', 'ativo'];
-    this.apiUrl = 'cadastros_url';
+    this.apiUrl = 'security_url';
     this.endpointUrl = projectUrls.GetAllUsersPaginated;
     this.registerUrl = projectUrls.RegisterUserUrl;
     this.deleteUrl = projectUrls.DeleteUserUrl;

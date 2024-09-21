@@ -26,7 +26,6 @@ export class DeleteDeliveryComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initializeComponent();
-    debugger;
     this.router.paramMap.subscribe((params) => {
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.parameters = [
@@ -35,9 +34,7 @@ export class DeleteDeliveryComponent implements OnInit {
         this.service.getSingle('cadastros_url', 'delivery/getbyid', this.parameters)
           .toPromise()
           .then(c => {
-            debugger;
             this.delivery = c;
-            debugger;
             this.label = `Tem certerza que deseja deletar o item?`;
           })
           .catch(e => {
@@ -68,11 +65,9 @@ export class DeleteDeliveryComponent implements OnInit {
   }
 
   public deletar(): void {
-    debugger;
     this.service.delete('cadastros_url', 'delivery', this.delivery.identifier)
       .toPromise()
       .then(c => {
-        debugger;
         this.commonService.responseActionWithNavigation
           (this.rotaAnterior, `Item deletado com sucesso.`, true);
       })

@@ -48,7 +48,7 @@ export class GroupsComponent implements OnInit {
     this.title = 'Grupos de usuários';
     this.gridTitles = ['#', 'Descrição', 'Ativo'];
     this.gridElements = ['identifier', 'groupName', 'ativo'];
-    this.apiUrl = 'cadastros_url';
+    this.apiUrl = 'security_url';
     this.endpointUrl = projectUrls.GetAllGoupsPaginated;
     this.registerUrl = projectUrls.RegisterGroupUrl;
     this.deleteUrl = projectUrls.DeleteGroupUrl;
