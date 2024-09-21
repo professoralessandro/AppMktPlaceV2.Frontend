@@ -74,8 +74,8 @@ export class ProdutoComponent implements OnInit {
     this.gridElements = ['titulo', 'productTypeEnum', 'marca'];
     this.apiUrl = 'cadastros_url';
     this.endpointUrl = projectUrls.GetAllProductPaginated;
-    this.registerUrl = projectUrls.RegisterGroupUrl;
-    this.deleteUrl = projectUrls.DeleteGroupUrl;
+    this.registerUrl = projectUrls.RegisterProductUrl;
+    this.deleteUrl = projectUrls.DeleteProductUrl;
     //QUERY PARAMETERS
 
     this.parameters = [

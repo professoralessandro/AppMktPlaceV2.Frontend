@@ -54,8 +54,8 @@ export class DeliveryComponent implements OnInit {
     this.gridElements = ['deliverymanDescription', 'receiverDescription', 'deliveryTypeEnum', 'dataPrevistaEntrega', 'dataEfetivaEnrega', 'ativo'];
     this.apiUrl = 'cadastros_url';
     this.endpointUrl = projectUrls.GetAllDeliveryPaginated;
-    this.registerUrl = projectUrls.RegisterGroupUrl;
-    this.deleteUrl = projectUrls.DeleteGroupUrl;
+    this.registerUrl = projectUrls.RegisterDeliveryUrl;
+    this.deleteUrl = projectUrls.DeleteDeliveryUrl;
     //QUERY PARAMETERS
     this.parameters = [
       {parameter: 'id', value: this.id},

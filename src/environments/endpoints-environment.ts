@@ -20,8 +20,12 @@ export const projectUrls = {
   RegisterAddressUrl: '/cadastros/address/cadastro/',
   DeleteAddressUrl: '/cadastros/address/deletar/',
   GetAllDeliveryPaginated: 'delivery/paginated',
+  RegisterDeliveryUrl: '/cadastros/delivery/cadastro/',
+  DeleteDeliveryUrl: '/cadastros/delivery/deletar/',
   GetAllProduct: 'product/getall',
   GetAllProductPaginated: 'product/paginated',
+  RegisterProductUrl: '/cadastros/product/cadastro/',
+  DeleteProductUrl: '/cadastros/product/deletar/',
 };
 
 /*

@@ -26,6 +26,7 @@ export class DeleteDeliveryComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initializeComponent();
+    debugger;
     this.router.paramMap.subscribe((params) => {
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.parameters = [
@@ -34,8 +35,10 @@ export class DeleteDeliveryComponent implements OnInit {
         this.service.getSingle('cadastros_url', 'delivery/getbyid', this.parameters)
           .toPromise()
           .then(c => {
+            debugger;
             this.delivery = c;
-            this.label = `Tem certerza que deseja deletar o item ${this.delivery.nomeRecebedor} ?`;
+            debugger;
+            this.label = `Tem certerza que deseja deletar o item?`;
           })
           .catch(e => {
             this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o delivery.', false);
@@ -51,7 +54,7 @@ export class DeleteDeliveryComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar delivery';
     this.label = '';
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/delivery';
     this.parameters = [];
     this.delivery = new Delivery();
   }
@@ -65,11 +68,13 @@ export class DeleteDeliveryComponent implements OnInit {
   }
 
   public deletar(): void {
+    debugger;
     this.service.delete('cadastros_url', 'delivery', this.delivery.identifier)
       .toPromise()
       .then(c => {
+        debugger;
         this.commonService.responseActionWithNavigation
-          (this.rotaAnterior, `Item<br>${this.delivery.nomeRecebedor}<br>Deletado com sucesso.`, true);
+          (this.rotaAnterior, `Item deletado com sucesso.`, true);
       })
       .catch(e => {
         this.commonService.responseActionWithNavigation(this.rotaAnterior, e.error, false);
