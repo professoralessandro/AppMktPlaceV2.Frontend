@@ -13,7 +13,7 @@ import { projectUrls } from 'src/environments/endpoints-environment';
 })
 export class ProdutoComponent implements OnInit {
   // MODEL COMPONENT AREA
-  public title = 'Busca por Produto';
+  public title = 'Produtos';
   public gridTitle = 'Produto';
   public model = 'Produto';
   // MODEL COMPONENT AREA
@@ -69,13 +69,13 @@ export class ProdutoComponent implements OnInit {
     this.loaderService.SetLoaderState(true);
 
     this.gridTitle = 'Produtos';
-    this.title = 'Busca de Produto';
+    this.title = 'Produtos';
     this.gridTitles = ['Descrição', 'Tipo de produto', 'Marca'];
     this.gridElements = ['titulo', 'productTypeEnum', 'marca'];
     this.apiUrl = 'cadastros_url';
     this.endpointUrl = projectUrls.GetAllProductPaginated;
-    this.registerUrl = projectUrls.RegisterGroupUrl;
-    this.deleteUrl = projectUrls.DeleteGroupUrl;
+    this.registerUrl = projectUrls.RegisterProductUrl;
+    this.deleteUrl = projectUrls.DeleteProductUrl;
     //QUERY PARAMETERS
 
     this.parameters = [

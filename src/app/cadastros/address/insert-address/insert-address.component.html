@@ -4,12 +4,12 @@
         <div class="card-body">
             <form>
 
-                <div class="form-group" *ngIf="this.usersSelect.length > 0">
+                <div class="form-group" *ngIf="this.isAdminUser">
                     <label for="exampleInputUsuario">Usuário</label>
                     <select [(ngModel)]="this.model.usuarioId" [ngModelOptions]="{ standalone: true }"
                         class="custom-select" name="state_raw" id="state_raw" required>
-                        <option [value]="undefined" selected>Selecione...</option>
-                        <option [value]="user.key" *ngFor="let user of this.usersSelect"> {{ user.value }}
+                        <option [value]="this.userIdAdressEdit" selected>Selecione...</option>
+                        <option [value]="user.Key" *ngFor="let user of this.usersSelect"> {{ user.Parameter }}
                         </option>
                     </select>
                     <small id="BlockType" class="form-text text-muted">Informe o usuário para o

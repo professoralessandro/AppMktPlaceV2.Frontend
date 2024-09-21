@@ -51,7 +51,7 @@ export class DeleteProdutoComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar produto';
     this.label = '';
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/product';
     this.parameters = [];
     this.product = new Produto();
   }

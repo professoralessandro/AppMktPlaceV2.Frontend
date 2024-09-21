@@ -12,7 +12,7 @@ import { projectUrls } from 'src/environments/endpoints-environment';
   styleUrls: ['./block.component.scss']
 })
 export class BlockComponent implements OnInit {
-  public title = 'Busca por block';
+  public title = 'Bloqueios';
   public gridTitle = 'Bloqueio';
   public model = 'Block';
   public id: string;
@@ -52,13 +52,13 @@ export class BlockComponent implements OnInit {
     this.loaderService.SetLoaderState(true);
 
     this.gridTitle = 'Bloqueio';
-    this.title = 'Busca de block';
-    this.gridTitles = ['Tipo de bloqueio', 'Descricao do item', 'Data inicio', 'Data fim'];
-    this.gridElements = ['blockTypeEnum', 'blockdItemDescription', 'dataInicio', 'dataFim'];
+    this.title = 'Bloqueios';
+    this.gridTitles = ['Tipo de bloqueio', 'Descricao do bloqueio', 'Permanente', 'Data inicio', 'Data fim'];
+    this.gridElements = ['blockTypeEnum', 'nomeBloqueio', 'permanente', 'dataInicio', 'dataFim'];
     this.apiUrl = 'cadastros_url';
     this.endpointUrl = projectUrls.GetAllBlockPaginated;
-    this.registerUrl = projectUrls.RegisterGroupUrl;
-    this.deleteUrl = projectUrls.DeleteGroupUrl;
+    this.registerUrl = projectUrls.RegisterBlockUrl;
+    this.deleteUrl = projectUrls.DeleteBlockUrl;
     //QUERY PARAMETERS
     this.parameters = [
       {parameter: 'id', value: this.id},

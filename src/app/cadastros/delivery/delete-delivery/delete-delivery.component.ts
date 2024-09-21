@@ -35,7 +35,7 @@ export class DeleteDeliveryComponent implements OnInit {
           .toPromise()
           .then(c => {
             this.delivery = c;
-            this.label = `Tem certerza que deseja deletar o item ${this.delivery.nomeRecebedor} ?`;
+            this.label = `Tem certerza que deseja deletar o item?`;
           })
           .catch(e => {
             this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o delivery.', false);
@@ -51,7 +51,7 @@ export class DeleteDeliveryComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar delivery';
     this.label = '';
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/delivery';
     this.parameters = [];
     this.delivery = new Delivery();
   }
@@ -69,7 +69,7 @@ export class DeleteDeliveryComponent implements OnInit {
       .toPromise()
       .then(c => {
         this.commonService.responseActionWithNavigation
-          (this.rotaAnterior, `Item<br>${this.delivery.nomeRecebedor}<br>Deletado com sucesso.`, true);
+          (this.rotaAnterior, `Item deletado com sucesso.`, true);
       })
       .catch(e => {
         this.commonService.responseActionWithNavigation(this.rotaAnterior, e.error, false);

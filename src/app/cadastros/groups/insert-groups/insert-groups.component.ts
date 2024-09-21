@@ -35,7 +35,7 @@ export class InsertGroupsComponent implements OnInit {
         this.parameters = [
           {parameter: 'groupId', value: params.get('id')}
         ];
-        this.service.getSingle('cadastros_url', 'Group/GetById', this.parameters)
+        this.service.getSingle('security_url', 'Group/GetById', this.parameters)
           .toPromise()
           .then(c => {
             this.model = c;
@@ -60,7 +60,7 @@ export class InsertGroupsComponent implements OnInit {
   private initializeComponent(): void {
     this.model = new Groups();
     this.isNew = false;
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/groups';
     this.parameters = [];
     this.title = '';
   }
@@ -77,7 +77,7 @@ export class InsertGroupsComponent implements OnInit {
     if (this.isNew) {
       this.model.usuarioInclusaoId = new SystemParameterEnum().systemUser;
       this.model.dataInclusao = new Date();
-      this.service.insert('cadastros_url', 'group', this.model)
+      this.service.insert('security_url', 'group', this.model)
         .toPromise()
         .then(c => {
           this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Grupo incluido com sucesso.', true);
@@ -90,7 +90,7 @@ export class InsertGroupsComponent implements OnInit {
       this.model.usuarioUltimaAlteracaoId = new SystemParameterEnum().systemUser;
       // this.model.dataInclusao = new Date();
       this.model.dataUltimaAlteracao = new Date();
-      this.service.edit('cadastros_url', 'group', this.model)
+      this.service.edit('security_url', 'group', this.model)
         .toPromise()
         .then(c => {
           this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Grupo editado com sucesso.', true);

@@ -6,7 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { SystemParameterEnum } from 'src/app/Enums/system-parameters.enum';
 import { AddressTypeMapping } from 'src/app/Enums/address-type.enum';
-import { SelectParameter } from 'src/app/models/select-parameter';
+import { AuthService } from 'src/app/services/auth.service';
+import { SelectAddressParameter } from 'src/app/models/select-address-parameter';
 
 @Component({
   selector: 'app-insert-address',
@@ -21,15 +22,17 @@ export class InsertAddressComponent implements OnInit {
   public titleButton: string;
   public parameters: QueryParameter[];
   private rotaAnterior: string;
-  public usersSelect: SelectParameter[] = [];
+  public usersSelect: SelectAddressParameter[] = [];
   public userIdAdressEdit: string;
+  public isAdminUser: boolean;
 
   public addressTypes = Object.values(AddressTypeMapping).filter(c => typeof (c) == 'string');
 
   public constructor(
     private service: HttpCommonService,
     private router: ActivatedRoute,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private auth: AuthService
   ) { }
 
   public ngOnInit(): void {
@@ -57,7 +60,7 @@ export class InsertAddressComponent implements OnInit {
       }
       // EDIT USER ADRESS AREA
       else if (!this.commonService.isNullOrUndefined(params.get('userId')) && params.get('userId') !== '') {
-        this.userIdAdressEdit = params.get('userId');
+        this.userIdAdressEdit = this.auth.getUser().identifier;
         this.isNew = false;
         this.title = 'Editar endereço';
         this.titleButton = this.title.split(' ')[0];
@@ -69,8 +72,6 @@ export class InsertAddressComponent implements OnInit {
           .then(c => {
             if (c.length > 0) {
               this.model = c[0];
-              // this.LoadUsersToSelect();
-              this.rotaAnterior = '/store/purchase/details';
               this.model.addressTypeEnum = this.commonService.ReturnEnumObjectByName('addressTypeEnum', this.model.addressTypeEnum);
             } else {
               throw new Error();
@@ -98,7 +99,7 @@ export class InsertAddressComponent implements OnInit {
   private initializeComponent(): void {
     this.model = new Address();
     this.isNew = false;
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/address';
     this.parameters = [];
     this.title = '';
   }
@@ -109,13 +110,10 @@ export class InsertAddressComponent implements OnInit {
     this.rotaAnterior = null;
     this.parameters = null;
     this.title = null;
+    this.isAdminUser = false;
   }
 
   public async incluir() {
-    if (this.model.usuarioId === '00000000-0000-0000-0000-000000000000' || this.commonService.isNullOrUndefined(this.model.usuarioId)) {
-      this.commonService.ReturnModalMessagErrorSuccess('Item para ser bloqueado e invalido.', false);
-      return;
-    }
     this.model.addressTypeEnum = this.commonService.ReturnValueMyEnumDescription('addressTypeEnum', this.model.addressTypeEnum);
     if (this.isNew) {
       this.model.dataInclusao = new Date();
@@ -129,12 +127,7 @@ export class InsertAddressComponent implements OnInit {
           this.commonService.responseActionWithNavigation(this.rotaAnterior, e.error, false);
         });
     } else {
-      if (!this.commonService.isNullOrUndefined(this.userIdAdressEdit)) {
-        this.model.usuarioUltimaAlteracaoId = this.userIdAdressEdit;
-      } else {
-        this.model.usuarioUltimaAlteracaoId = new SystemParameterEnum().systemUser;
-      }
-      
+      this.model.usuarioUltimaAlteracaoId = this.userIdAdressEdit;
       this.model.dataUltimaAlteracao = new Date();
       this.service.edit('cadastros_url', 'address', this.model)
         .toPromise()
@@ -152,20 +145,37 @@ export class InsertAddressComponent implements OnInit {
   }
 
   private LoadUsersToSelect() {
-    this.service.getAll('cadastros_url', 'user/returnuserstoselect', this.parameters)
-      .toPromise()
-      .then(c => {
-        this.usersSelect = [];
-        if (c.length > 0) {
-          this.usersSelect = c;
-        } else {
-          this.usersSelect = [
-            { parameter: '00000000-0000-0000-0000-000000000000', value: 'Item Desconhecido' }
-          ];
-        }
-      })
-      .catch(e => {
-        this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o grupo.', false);
-      })
+
+    this.usersSelect = [
+      { Key: this.auth.getUser().identifier, Parameter: this.auth.getUser().nome, isUserAddress: true }
+    ];
+
+    // if(this.auth.isAdminUser()) {
+    //   this.service.getAllNew('security_url', 'user/returnuserstoselect', this.parameters)
+    //   .toPromise()
+    //   .then(c => {
+    //     this.usersSelect = [];
+    //     if (c.isSuccess) {
+    //       this.usersSelect = c.jsonObject;
+    //       this.usersSelect.forEach(x => {
+    //         if(x.Key === this.auth.getUser().identifier)
+    //         {
+    //           x.isUserAddress = true;
+    //         }
+    //       })
+    //     } else {
+    //       throw Error("Erro ao buscar informações do usuário");
+    //     }
+    //   })
+    //   .catch(e => {
+    //     this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o usuário.', false);
+    //   })
+    // }
+    // else
+    // {
+    //   this.usersSelect = [
+    //     { Key: this.auth.getUser().identifier, Parameter: this.auth.getUser().nome, isUserAddress: true }
+    //   ];
+    // }
   }
 }

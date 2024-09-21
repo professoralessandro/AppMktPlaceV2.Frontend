@@ -10,71 +10,136 @@
         <div class="profile-details text-center pb-4">
             <!-- TODO: REMOVE IT -->
             <p class="mb-0 text-uppercase name">Bem vindo {{ this.auth.getUser().userName }}</p>
-            <small (click)="signOut()" appTooltip="LogOut" placement="bottom" [delay]="2000" class="text-uppercase role">Sair</small>
+            <small (click)="signOut()" appTooltip="LogOut" placement="bottom" [delay]="2000"
+                class="text-uppercase role">Sair</small>
         </div>
     </div>
     <div class="sidebar-search pt-1 pb-1 pl-3 pr-3">
         <input type="search" class="form-control rounded-pill" name="search" placeholder="Search ...">
     </div>
     <nav class="sidebar-menu pt-3 pb-3">
+        <!-- MENU TESTE: SET DIV TEST = TRUE TO HIDDE TEST MENU -->
+        <test *ngIf="0 > 1">
+            <div class="menu-header mt-3 mb-2">
+                Components
+            </div>
+            <ul class="menu-items">
+                <li>
+                    <a href="#" routerLink="/dashboard" routerLinkActive="active" *ngIf="this.auth.isAdminUser()"
+                        appTooltip="Dashboard" placement="right">
+                        <i class="fa fa-tv"></i>
+                        <span>Dashboard</span>
+                        <span class="badge badge-warning rounded-0 text-dark p-1">NEW</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" routerLink="/forms" routerLinkActive="active" *ngIf="this.auth.isAdminUser()"
+                        appTooltip="Forms" placement="right">
+                        <i class="fas fa-gem"></i>
+                        <span>Forms</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" routerLink="/tables" routerLinkActive="active" *ngIf="this.auth.isAdminUser()"
+                        appTooltip="Tables" placement="right">
+                        <i class="fa fa-table"></i>
+                        <span>Tables</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" routerLink="/typography" routerLinkActive="active" *ngIf="this.auth.isAdminUser()"
+                        appTooltip="Typography" placement="right">
+                        <i class="fa fa-align-center"></i>
+                        <span>Typography</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" routerLink="/maps" routerLinkActive="active" *ngIf="this.auth.isAdminUser()"
+                        appTooltip="Maps" placement="right">
+                        <i class="fa fa-globe"></i>
+                        <span>Maps</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" routerLink="/notifications" routerLinkActive="active" *ngIf="this.auth.isAdminUser()"
+                        appTooltip="Notifications" placement="right">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" routerLink="/cadastros/test" routerLinkActive="active" appTooltip="Testes"
+                        placement="right">
+                        <i class="fa fa-star"></i>
+                        <span>Testes components</span>
+                    </a>
+                </li>
+                <li>
+                    <!-- LINHAS DE TESTE ROTA -->
+                    <a href="#" routerLink="/store/test" routerLinkActive="active" appTooltip="Testes store"
+                        placement="right">
+                        <i class="fa fa-star"></i>
+                        <span>Testes store components</span>
+                    </a>
+                </li>
+            </ul>
+        </test>
+
         <div class="menu-header mt-3 mb-2">
-            Components
+            cadastros
         </div>
         <ul class="menu-items">
+            <!-- TODO: INSERT HERE ALL APP ROUTES -->
+
+            <!-- REGISTER APP ROUTE -->
+
             <li>
-                <a href="#" routerLink="/dashboard" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Dashboard" placement="right">
-                    <i class="fa fa-tv"></i>
-                    <span>Dashboard</span>
-                    <span class="badge badge-warning rounded-0 text-dark p-1">NEW</span>
+                <a href="#" routerLink="/cadastros/address" routerLinkActive="active" appTooltip="Cadastro de Endereços"
+                    placement="right">
+                    <i class="fa fa-address-card"></i>
+                    <span>Enredeços</span>
+                </a>
+            </li>
+            <li *ngIf="this.auth.isAdminUser()">
+                <a href="#" routerLink="/cadastros/block" routerLinkActive="active" appTooltip="Cadastro de Bloqueios"
+                    placement="right">
+                    <i class="fa fa-lock"></i>
+                    <span>Bloqueios</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/forms" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Forms" placement="right">
-                    <i class="fas fa-gem"></i>
-                    <span>Forms</span>
+                <a href="#" routerLink="/cadastros/delivery" routerLinkActive="active" appTooltip="Cadastro de Entregas"
+                    placement="right">
+                    <i class="fa fa-shipping-fast"></i>
+                    <span>Entregas</span>
                 </a>
             </li>
             <li>
-                <a href="#" routerLink="/tables" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Tables" placement="right">
-                    <i class="fa fa-table"></i>
-                    <span>Tables</span>
+                <a href="#" routerLink="/cadastros/product" routerLinkActive="active" appTooltip="Cadastro de Produtos"
+                    placement="right">
+                    <i class="fa fa-gifts"></i>
+                    <span>Produtos</span>
                 </a>
             </li>
-            <li>
-                <a href="#" routerLink="/typography" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Typography" placement="right">
-                    <i class="fa fa-align-center"></i>
-                    <span>Typography</span>
+            <li *ngIf="this.auth.isAdminUser()">
+                <a href="#" routerLink="/cadastros/user" routerLinkActive="active" appTooltip="Cadastro de Usuários"
+                    placement="right">
+                    <i class="fa fa-user"></i>
+                    <span>Usuários</span>
                 </a>
             </li>
-            <li>
-                <a href="#" routerLink="/maps" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Maps" placement="right">
-                    <i class="fa fa-globe"></i>
-                    <span>Maps</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" routerLink="/notifications" routerLinkActive="active" *ngIf="this.auth.isAdminUser()" appTooltip="Notifications" placement="right">
-                    <i class="fas fa-bell"></i>
-                    <span>Notifications</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" routerLink="/cadastros/test" routerLinkActive="active" appTooltip="Testes" placement="right">
-                    <i class="fa fa-star"></i>
-                    <span>Testes components</span>
-                </a>
-            </li>
-            <li>
-                <!-- LINHAS DE TESTE ROTA -->
-                <a href="#" routerLink="/store/test" routerLinkActive="active" appTooltip="Testes store" placement="right">
-                    <i class="fa fa-star"></i>
-                    <span>Testes store components</span>
+            <li *ngIf="this.auth.isAdminUser()">
+                <a href="#" routerLink="/cadastros/groups" routerLinkActive="active" appTooltip="Cadastro de Grupos de usuários"
+                    placement="right">
+                    <i class="fa fa-users"></i>
+                    <span>Grupos de usuários</span>
                 </a>
             </li>
         </ul>
+
         <!-- TODO: REMOVE IT -->
         <!-- GIT HUB REPO -->
-<!-- 
+        <!-- 
         <div *ngIf="this.auth.isAdminUser()">
             <div class="menu-header mt-4 mb-4">
                 Github Repo

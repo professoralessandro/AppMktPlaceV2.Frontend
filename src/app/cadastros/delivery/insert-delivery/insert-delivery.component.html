@@ -5,7 +5,7 @@
             <form>
                 <div class="form-group">
                     <label for="InputDeliveryman">Entregador</label>
-                    <select [(ngModel)]="this.model.responsavelEntregaId" [ngModelOptions]="{ standalone: true }"
+                    <select [(ngModel)]="this.model.receiverDescription" [ngModelOptions]="{ standalone: true }"
                         class="custom-select" name="state_raw" id="state_raw" required>
                         <option [value]="undefined" selected>Selecione...</option>
                         <option [value]="userSelect.key" *ngFor="let userSelect of this.usersSelect"> {{
