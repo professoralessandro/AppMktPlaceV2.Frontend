@@ -46,8 +46,8 @@ export class InsertBlockComponent implements OnInit {
           .toPromise()
           .then(c => {
             this.model = c;
-            this.model.dataInicio = this.model.dataInicio.toString().split("T")[0];
-            this.model.dataFim = this.model.dataFim.toString().split("T")[0];
+            this.model.dataInicio = !this.commonService.isNullOrUndefined(this.model.dataInicio) ? this.model.dataInicio.toString().split("T")[0] : undefined;
+            this.model.dataFim = !this.commonService.isNullOrUndefined(this.model.dataFim) ? this.model.dataFim.toString().split("T")[0] : undefined;
             this.model.blockTypeEnum = this.commonService.ReturnEnumObjectByName('blockTypeEnum', this.model.blockTypeEnum);
             this.LoadItemToBlockOption();
           })
@@ -71,7 +71,7 @@ export class InsertBlockComponent implements OnInit {
   private initializeComponent(): void {
     this.model = new Block();
     this.isNew = false;
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/block';
     this.parameters = [];
     this.title = '';
   }
@@ -126,26 +126,8 @@ export class InsertBlockComponent implements OnInit {
   }
 
   private LoadItemToBlockOption() {
-    var item = this.commonService.ReturnValueMyEnumDescription('blockTypeEnum', this.model.blockTypeEnum);
-
-    this.parameters = [
-      { parameter: 'BlockTypeEnum', value: item }
+    this.itensToBlock = [
+      { parameter: '00000000-0000-0000-0000-000000000000', value: 'Item Desconhecido' }
     ];
-
-    this.service.getAll('cadastros_url', 'block/getitemtoblockbytype', this.parameters)
-      .toPromise()
-      .then(c => {
-        this.itensToBlock = [];
-        if (c.length > 0) {
-          this.itensToBlock = c;
-        } else {
-          this.itensToBlock = [
-            { parameter: '00000000-0000-0000-0000-000000000000', value: 'Item Desconhecido' }
-          ];
-        }
-      })
-      .catch(e => {
-        this.commonService.responseActionWithNavigation(this.rotaAnterior, 'Houve um erro buscar o grupo.', false);
-      })
   }
 }

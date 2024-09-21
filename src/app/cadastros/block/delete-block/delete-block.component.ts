@@ -51,7 +51,7 @@ export class DeleteBlockComponent implements OnInit {
   private initializeComponent(): void {
     this.title = 'Deletar block';
     this.label = '';
-    this.rotaAnterior = './cadastros/test';
+    this.rotaAnterior = './cadastros/block';
     this.parameters = [];
     this.block = new Block();
   }

@@ -51,17 +51,14 @@ export class AddressComponent implements OnInit {
   private initializeComponent(): void {
 
     this.loaderService.SetLoaderState(true);
-    debugger;
     this.gridTitle = 'Endereço';
     this.title = 'Endereços';
     this.gridTitles = ['Usuario', 'Tipo de endereço', 'Logradouro', 'Ativo'];
     this.gridElements = ['usuario', 'addressTypeEnum', 'logradouro', 'ativo'];
     this.apiUrl = 'cadastros_url';
-    debugger;
     this.endpointUrl = projectUrls.GetAllAddressPaginated;
     this.registerUrl = projectUrls.RegisterAddressUrl;
     this.deleteUrl = projectUrls.DeleteAddressUrl;
-    debugger;
     //QUERY PARAMETERS
     this.parameters = [
       {parameter: 'id', value: this.id},

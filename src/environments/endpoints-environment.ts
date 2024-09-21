@@ -13,6 +13,8 @@ export const projectUrls = {
   DeleteUserUrl: '/cadastros/test/deletar/',
   GetAllBlock: 'block/getall',
   GetAllBlockPaginated: 'block/paginated',
+  RegisterBlockUrl: '/cadastros/block/cadastro/',
+  DeleteBlockUrl: '/cadastros/block/deletar/',
   GetAllAddress: 'address/getall',
   GetAllAddressPaginated: 'address/paginated',
   RegisterAddressUrl: '/cadastros/address/cadastro/',

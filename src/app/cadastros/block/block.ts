@@ -5,7 +5,7 @@ export class Block {
   public blockTypeEnum: TipoBloqueioEnum | string;
   public itemBloqueadoId: string;
   public nomeBloqueio: string;
-  public isBloqueiaAcesso: boolean;
+  public permanente: boolean;
   public dataInicio?: string | Date ;
   public dataFim?: string | Date;
   public usuarioInclusaoId: string;
@@ -15,11 +15,11 @@ export class Block {
   public ativo: boolean;
   public blockdItemDescription: string;
 
-  public Block() {
+  public constructor() {
     this.identifier = '';
     this.itemBloqueadoId = '';
     this.nomeBloqueio = '';
-    this.isBloqueiaAcesso = false;
+    this.permanente = false;
     this.dataInicio = null;
     this.dataFim = null;
     this.usuarioInclusaoId = '';
