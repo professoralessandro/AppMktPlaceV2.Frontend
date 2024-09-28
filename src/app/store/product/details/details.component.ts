@@ -6,6 +6,7 @@ import { QueryParameter } from 'src/app/models/query-parameter';
 import { LoaderService } from 'src/app/components/loader/loader.service';
 import { HttpCommonService } from 'src/app/services/app-http-service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-details',
@@ -23,6 +24,7 @@ export class DetailsComponent implements OnInit {
   public imgError: string;
   public isBlockedToAddShopCart: boolean;
   public isShoppingCartVisualization: boolean;
+  public isShoppingCartEmpty: boolean;
   public paymentPurchaseRoute: string;
 
   public shoppingCartTitle: string;
@@ -49,6 +51,7 @@ export class DetailsComponent implements OnInit {
     private service: HttpCommonService,
     private router: ActivatedRoute,
     private route: Router,
+    private auth: AuthService
   ) { }
 
   /**
@@ -102,10 +105,11 @@ export class DetailsComponent implements OnInit {
       .then(c => {
         // SUCCESS MESSAGE
         this.loaderService.SetLoaderState(false);
-        this.product
+        // this.product
         // LOAD AGAIN THE SHOPPING CART
-        this.commonService.responseActionWithoutNavigation('success', 'O produto: ' + this.product.titulo + ' foi adocionado com sucesso.');
         this.loadShoopingCart();
+        this.commonService.responseActionWithNavigation('store', 'O produto: ' + this.product.titulo + ' foi adocionado com sucesso.', true);
+        
       })
       .catch(e => {
         // ERROR MESSAGE
@@ -185,34 +189,34 @@ export class DetailsComponent implements OnInit {
 
     // PRODUCT EMPTY INITIALIZED
     this.product = new Product();
+    this.productList = [];
 
     this.imgError = './assets/img/test/carregar-notificacao-de-erro-icone-de-sinal-de-aviso-ilustracao-vetorial-eps-10-imagem-stock_797523-2316.jpg';
     this.isBlockedToAddShopCart = false;
     this.isShoppingCartVisualization = false;
+    this.isShoppingCartEmpty = false;
 
     // TITLE
     this.title = 'Detalhes do produto ';
     this.shoppingCartTitle = 'Carrinho de compras ';
 
     // ROUTE
-    this.previusRoute = './store/test';
+    this.previusRoute = 'store';
 
     // GRID
     this.pageNumber = 1;
     this.rowspPage = 10;
 
-    // TODO: THEN REMOVE IT
-    this.userId = "D2A833DE-5BB4-4931-A3C2-133C8994072A".toLocaleLowerCase();
+    // USERID
+    this.userId = this.auth.getUser().identifier;
 
     this.paymentPurchaseRoute = '/store/purchase/details';
 
     this.router.paramMap.subscribe((params) => {
       if (!this.commonService.isNullOrUndefined(params.get('id')) && params.get('id') !== '') {
         this.productId = params.get('id');
-
         // INITIALIZE SHOPPING CART ATTRIB
         this.loadShoopingCart(this.productId);
-
         // INITIALIZE PRODUCT
         this.loadProduct(this.productId);
       } else {
@@ -255,7 +259,8 @@ export class DetailsComponent implements OnInit {
       .catch(e => {
         this.loaderService.SetLoaderState(false);
         const messageType = 'error';
-        const messageText = 'Houve um erro ao buscar os produtos.';
+        const messageText = e.error;
+        if(e.error === "No records found") this.isShoppingCartEmpty = true;
         this.commonService.responseActionWithoutNavigation(messageType, messageText);
         this.loaderService.SetLoaderState(false);
       });
@@ -287,7 +292,7 @@ export class DetailsComponent implements OnInit {
       if (productList.length > 0) {
         productList.forEach(c => {
           let product = new Product();
-          product.identifier = c.identifier;
+          product.identifier = c.productId;
           product.productTypeEnum = c.productTypeEnum;
           product.titulo = c.titulo;
           product.resumoDetalhes = c.resumoDetalhes;
@@ -295,17 +300,16 @@ export class DetailsComponent implements OnInit {
           product.codigoBarras = c.codigoBarras;
           product.marca = c.marca;
           product.mainImage = c.mainImage;
-          product.precoVenda = c.precoVenda;
+          product.precoVenda = c.preco;
           product.quantidade = c.quantidade;
           product.rating = c.rating;
-          product.shoppingCartId = c.shoppingCartId;
+          product.shoppingCartId = c.identifier;
           product.usuarioInclusaoId = c.usuarioInclusaoId;
           product.dataInclusao = c.dataInclusao;
           product.productQuantity = 0;
           products.push(product);
         })
       }
-
       return products;
     }
     catch {

@@ -1,60 +1,12 @@
-<!-- TITLE -->
 <h4 class="text-muted mb-4">{{ this.title }}</h4>
-<!-- PRODUCT DETAILS -->
-<div *ngIf="this.isShoppingCartVisualization === false" class="product-details">
-    <br>
-    <h2>{{ product.titulo }}</h2>
-    <br>
-
-    <img [src]="product.mainImage" alt="{{ product.titulo }}" (error)="handleMissingImage(product)" width="80%"
-        height="80%" />
-    <br>
-    <br>
-    <p *ngIf="isValueValid(product.detalhes)">Detalhes: {{ product.detalhes }}</p>
-    <p *ngIf="isValueValid(product.precoVenda)">Preço: {{ currencyFormatterBRL(product.precoVenda)}}</p>
-    <p *ngIf="isValueValid(product.marca)">Marca: {{ product.marca }}</p>
-    <p *ngIf="isValueValid(product.codigoBarras)">Código de Barras: {{ product.codigoBarras }}</p>
-    <p *ngIf="isValueValid(product.quantidade)">Quantidade disponível: {{ product.quantidade }}</p>
-    <p *ngIf="isValueValid(product.quantidade)">Quantidade: {{ product.quantidade }}</p>
-    <div class="form-group">
-        <label for="InputPurchaseProductQuantity">Quantidade:</label>
-        <input type="number" class="form-control rounded-0" placeholder="Informe a quantidade"
-            [disabled]="this.isInputBlocked === true" [(ngModel)]="product.productQuantity"
-            [ngModelOptions]="{ standalone: true }" />
-        <small id="InputPurchaseProductQuantity" class="form-text text-muted">Informe a quantidade.</small>
-        <div *ngIf="product.productQuantity < 0 || product.productQuantity > 10" class="text-danger">
-            A quantidade deve estar entre 0 e 10.
-        </div>
-    </div>
-    <p *ngIf="isValueValid(product.productTypeEnum)">Tipo de Produto: {{ product.productTypeEnum }}</p>
-    <p *ngIf="isValueValid(product.rating)">Pontuação: {{ product.rating }}</p>
-    <br>
-    <div class="form-group" *ngIf="isBlockedToAddShopCart === false">
-        <button (click)="addProductToShoppingcartProduct(product)"
-            class="btn btn-outline-info m-1 flex-fill rounded-0"><i class="fas fa-cart-plus"></i>
-            Adicionar ao carrinho</button>
-    </div>
-
-    <div class="form-group">
-        <button (click)="buyProduct(product)" class="btn btn-outline-success m-1 flex-fill rounded-0"><i
-                class="fas fa-dollar-sign"></i>
-            Comprar</button>
-    </div>
-</div>
-<br>
-
-<div *ngIf="productList.length > 0" class="product-details">
-    <h2>{{ this.shoppingCartTitle }}</h2>
-    <div class="form-group">
-        <button (click)="buyShoppingCartProduct(productList)" class="btn btn-outline-success m-1 flex-fill rounded-0"><i
-                class="fas fa-dollar-sign"></i>
-            Fechar pedido</button>
-    </div>
-    <div *ngFor="let product of productList">
-        <div class="product-card">
+<div class="card border-0 rounded-0">
+    <div class="col-md-12 col-lg-12 mb-12 align-items-stretch">
+        <!-- PRODUCT DETAILS -->
+        <div *ngIf="this.isShoppingCartVisualization === false" class="product-details">
             <br>
             <h2>{{ product.titulo }}</h2>
             <br>
+
             <img [src]="product.mainImage" alt="{{ product.titulo }}" (error)="handleMissingImage(product)" width="80%"
                 height="80%" />
             <br>
@@ -67,7 +19,7 @@
             <p *ngIf="isValueValid(product.quantidade)">Quantidade: {{ product.quantidade }}</p>
             <div class="form-group">
                 <label for="InputPurchaseProductQuantity">Quantidade:</label>
-                <input type="number" class="form-control rounded-0" placeholder="Informe a quantidade" (click)="validateProductQuantity(product.productQuantity)"
+                <input type="number" class="form-control rounded-0" placeholder="Informe a quantidade"
                     [disabled]="this.isInputBlocked === true" [(ngModel)]="product.productQuantity"
                     [ngModelOptions]="{ standalone: true }" />
                 <small id="InputPurchaseProductQuantity" class="form-text text-muted">Informe a quantidade.</small>
@@ -78,15 +30,68 @@
             <p *ngIf="isValueValid(product.productTypeEnum)">Tipo de Produto: {{ product.productTypeEnum }}</p>
             <p *ngIf="isValueValid(product.rating)">Pontuação: {{ product.rating }}</p>
             <br>
+            <div class="form-group" *ngIf="isBlockedToAddShopCart === false">
+                <button (click)="addProductToShoppingcartProduct(product)"
+                    class="btn btn-outline-info m-1 flex-fill rounded-0"><i class="fas fa-cart-plus"></i>
+                    Adicionar ao carrinho</button>
+            </div>
+
             <div class="form-group">
-                <button (click)="removeProductFromShoppingCart(product)"
-                    class="btn btn-outline-danger m-1 flex-fill rounded-0"><i class="far fa-trash-alt"></i>
-                    Remover do carrinho</button>
+                <button (click)="buyProduct(product)" class="btn btn-outline-success m-1 flex-fill rounded-0"><i
+                        class="fas fa-dollar-sign"></i>
+                    Comprar</button>
             </div>
         </div>
-        <hr>
-    </div>
-    <div *ngIf="productList.length === 0" class="product-details">
-        <h2>Seu carrinho de compras está vazio</h2>
+        <br>
+
+        <div *ngIf="productList.length > 0" class="product-details">
+            <h2>{{ this.shoppingCartTitle }}</h2>
+            <div class="form-group">
+                <button (click)="buyShoppingCartProduct(productList)"
+                    class="btn btn-outline-success m-1 flex-fill rounded-0"><i class="fas fa-dollar-sign"></i>
+                    Fechar pedido</button>
+            </div>
+            <div *ngFor="let product of productList">
+                <div class="product-card">
+                    <br>
+                    <h2>{{ product.titulo }}</h2>
+                    <br>
+                    <img [src]="product.mainImage" alt="{{ product.titulo }}" (error)="handleMissingImage(product)"
+                        width="80%" height="80%" />
+                    <br>
+                    <br>
+                    <p *ngIf="isValueValid(product.detalhes)">Detalhes: {{ product.detalhes }}</p>
+                    <p *ngIf="isValueValid(product.precoVenda)">Preço: {{ currencyFormatterBRL(product.precoVenda)}}</p>
+                    <p *ngIf="isValueValid(product.marca)">Marca: {{ product.marca }}</p>
+                    <p *ngIf="isValueValid(product.codigoBarras)">Código de Barras: {{ product.codigoBarras }}</p>
+                    <p *ngIf="isValueValid(product.quantidade)">Quantidade disponível: {{ product.quantidade }}</p>
+                    <p *ngIf="isValueValid(product.quantidade)">Quantidade: {{ product.quantidade }}</p>
+                    <div class="form-group">
+                        <label for="InputPurchaseProductQuantity">Quantidade:</label>
+                        <input type="number" class="form-control rounded-0" placeholder="Informe a quantidade"
+                            (click)="validateProductQuantity(product.productQuantity)"
+                            [disabled]="this.isInputBlocked === true" [(ngModel)]="product.productQuantity"
+                            [ngModelOptions]="{ standalone: true }" />
+                        <small id="InputPurchaseProductQuantity" class="form-text text-muted">Informe a
+                            quantidade.</small>
+                        <div *ngIf="product.productQuantity < 0 || product.productQuantity > 10" class="text-danger">
+                            A quantidade deve estar entre 0 e 10.
+                        </div>
+                    </div>
+                    <p *ngIf="isValueValid(product.productTypeEnum)">Tipo de Produto: {{ product.productTypeEnum }}</p>
+                    <p *ngIf="isValueValid(product.rating)">Pontuação: {{ product.rating }}</p>
+                    <br>
+                    <div class="form-group">
+                        <button (click)="removeProductFromShoppingCart(product)"
+                            class="btn btn-outline-danger m-1 flex-fill rounded-0"><i class="far fa-trash-alt"></i>
+                            Remover do carrinho</button>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div *ngIf="productList.length === 0" class="product-details">
+                <h2>Seu carrinho de compras está vazio</h2>
+            </div>
+        </div>
     </div>
 </div>

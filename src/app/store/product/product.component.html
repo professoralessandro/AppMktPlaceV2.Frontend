@@ -28,7 +28,7 @@
           <p>{{ product.resumoDetalhes }}</p>
           <p>{{ currencyFormatterBRL(product.precoVenda) }}</p>
           <div class="form-group">
-            <button [routerLink]="['details',product.identifier]" class="btn btn-outline-success m-1 flex-fill rounded-0"><i class="fa fa-shopping-cart"></i>
+            <button [routerLink]="['/store/product/details',product.identifier]" class="btn btn-outline-success m-1 flex-fill rounded-0"><i class="fa fa-shopping-cart"></i>
               Comprar</button>
           </div>
         </div>

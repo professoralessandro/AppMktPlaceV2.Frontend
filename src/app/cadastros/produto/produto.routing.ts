@@ -6,10 +6,6 @@ import { DeleteProdutoComponent } from './delete-produto/delete-produto.componen
 import { InsertProdutoComponent } from './insert-produto/insert-produto.component';
 
 const routes: Routes = [
-  { path: 'test', component: ProdutoComponent },
-  { path: 'test/cadastro', component: InsertProdutoComponent },
-  { path: 'test/cadastro/:id', component: InsertProdutoComponent },
-  { path: 'test/deletar/:id', component: DeleteProdutoComponent },
   { path: 'product', component: ProdutoComponent },
   { path: 'product/cadastro', component: InsertProdutoComponent },
   { path: 'product/cadastro/:id', component: InsertProdutoComponent },
