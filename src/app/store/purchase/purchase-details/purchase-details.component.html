@@ -29,8 +29,8 @@
                     <br>
                     <h2>{{ product.titulo }}</h2>
                     <br>
-                    <img [src]="product.mainImage" alt="{{ product.titulo }}" (error)="handleMissingImage(product)" width="80%"
-                        height="80%" />
+                    <img [src]="product.mainImage" alt="{{ product.titulo }}" (error)="handleMissingImage(product)"
+                        width="80%" height="80%" />
                     <br>
                     <br>
                     <p *ngIf="isValueValid(product.detalhes)">Detalhes: {{ product.detalhes }}</p>
@@ -40,29 +40,38 @@
                 </div>
                 <hr>
             </div>
-            <h3>Confirmação do endereço:</h3>
+            <div *ngIf="this.inHandDelivery === false">
+                <h3>Frete:</h3>
+                <!-- PRAZO DE ENTREGA -->
+                <p>Prazo de entrega: {{ this.totalDeliveryCalculateDayValue }} dias
+                    <br>Valor: {{ currencyFormatterBRL(this.totalDeliveryCalculateValue) }}
+                </p>
+                <hr>
+                <h3>Confirmação do endereço:</h3>
                 <!-- INFORMACOES SOBRE O ENDERECO -->
                 <p>Tipo: {{ this.tipoEndereco }}
-                <br>Endereço de entrega: {{ this.endereco }}
-                <br>Ponto de Referência: {{ this.pontoReferencia }}
-                <br>
-                <button [routerLink]="['/cadastros/address/user/',user.identifier]" class="btn btn-outline-info m-1 flex-fill rounded-0"><i
-                    class="far fa-edit"></i>
-                    Alterar
-                </button>
-            </p>
-            <hr>
-            <h3>Frete:</h3>
-            <!-- PRAZO DE ENTREGA -->
-            <p>Prazo de entrega: {{ this.totalDeliveryCalculateDayValue }} dias
-            <br>Valor: {{ currencyFormatterBRL(this.totalDeliveryCalculateDayValue) }}
-            </p>
+                    <br>Endereço de entrega: {{ this.endereco }}
+                    <br>Ponto de Referência: {{ this.pontoReferencia }}
+                    <br>
+                    <button [routerLink]="['/cadastros/address/user/',user.identifier]"
+                        class="btn btn-outline-info m-1 flex-fill rounded-0"><i class="far fa-edit"></i>
+                        Alterar
+                    </button>
+                </p>
+            </div>
+            <div class="custom-control custom-checkbox my-1 mr-sm-2 mb-3">
+                <input type="checkbox" class="custom-control-input" id="customControlInline"
+                (click)="calculateFreteInHandDeliveryValue()"
+                    [(ngModel)]="this.inHandDelivery" [ngModelOptions]="{ standalone: true }" />
+                <label class="custom-control-label" for="customControlInline">Entrega em mãos.</label>
+            </div>
             <hr>
             <h3>Confirmação forma de pagamento:</h3>
-             <!-- VALOR TOTAL DA COMPRA, CALCULO FINAL -->
+            <!-- VALOR TOTAL DA COMPRA, CALCULO FINAL -->
             <p>Valor total da compra: {{ currencyFormatterBRL(this.totalShoppingCartValue) }}
-             <!-- FORMA DE PAGAMENTO -->
-            <br>Forma de pagamento: {{ formaPagamento }}</p>
+                <!-- FORMA DE PAGAMENTO -->
+                <br>Forma de pagamento: {{ formaPagamento }}
+            </p>
 
             <!-- TODO: CRIAR METODO DE PAGAMENTO NO MERCADO PAGO -->
             <!-- <button (click)="goToPaymentMethod()">Comprar</button> -->

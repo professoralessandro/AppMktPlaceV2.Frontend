@@ -149,23 +149,35 @@ export class InsertDeliveryComponent implements OnInit {
 
   private ReturnTipoEntrega(value) : TipoEntregaEnum {
     if (value === 'Retirada em Mãos') {
-      return TipoEntregaEnum.EmMaos;
+      return TipoEntregaEnum.HandDelivery;
     }
-    else if (value === 'Correios') {
-      return TipoEntregaEnum.Correios;
+    else if (value === 'Correios PAC') {
+      return TipoEntregaEnum.CorreiosPac;
+    }
+    else if (value === 'Correios Sedex') {
+      return TipoEntregaEnum.CorreiosSedex;
+    }
+    else if (value === 'Correios Sedex') {
+      return TipoEntregaEnum.CorreiosSedex;
+    } else if (value === 'Terceiro') {
+      return TipoEntregaEnum.ThirdPartyDelivery;
     }
     else {
-      return TipoEntregaEnum.Terceiro;
+      return TipoEntregaEnum.MktPlaceDelivery;
     }
   }
 
   private ReturnDeliveryTypeDescription(value) : string {
-    if (value == TipoEntregaEnum.EmMaos) {
+    if (value == TipoEntregaEnum.HandDelivery) {
       return "Retirada em Mãos";
-    } else if (value == TipoEntregaEnum.Correios) {
-      return "Correios";
-    } else if (value == TipoEntregaEnum.Terceiro) {
+    } else if (value == TipoEntregaEnum.CorreiosPac) {
+      return "Correios PAC";
+    } else if (value == TipoEntregaEnum.CorreiosSedex) {
+      return "Correios Sedex";
+    } else if (value == TipoEntregaEnum.ThirdPartyDelivery) {
       return "Terceiros";
+    } else {
+      return "App Mkt Place";
     }
   }
 }

@@ -8,6 +8,11 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class PurchaseFlowComponent implements OnInit {
   /**
+   * CRIAR UM FLOW DE COMPRA COM GRID PARA CHECAR AS INFORMAÇÕES DA COMPRA
+   * CRIAR OUTRO FLOW DE COMPRAS QUE VAI RECEBER O ID DA COMPRA E CHECAR O STATUS DELA
+   */
+
+  /**
    * CLASS ATRIBUTTES
    */
   public isOpinate: boolean;
