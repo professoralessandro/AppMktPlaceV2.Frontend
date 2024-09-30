@@ -14,6 +14,8 @@ import { PurchaseFlowComponent } from './purchase/purchase-details/purchase-flow
 import { PurchaseRoutingModule } from './purchase/purchase-details/purchase.routing';
 import { StarRatingComponent } from '../components/star-rating/star-rating.component';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { OrderComponent } from './order/order.component';
+import { OrderDetailsComponent } from './order/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     PurchaseDetailsComponent,
     PurchaseFlowComponent,
     StarRatingComponent,
+    OrderComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     CommonModule,
