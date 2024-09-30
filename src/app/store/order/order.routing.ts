@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
-import { PurchaseDetailsComponent } from './purchase-details.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { ProductComponent } from '../product/product.component';
 
 const routes: Routes = [
-  { path: 'purchase/details', component: PurchaseDetailsComponent },
+  { path: 'order', component: ProductComponent },
+  { path: 'order/details/:id', component: OrderDetailsComponent },
 ];
 
 @NgModule({
@@ -15,4 +17,4 @@ const routes: Routes = [
   ]
 })
 
-export class PurchaseRoutingModule { }
+export class OrderRoutingModule { }

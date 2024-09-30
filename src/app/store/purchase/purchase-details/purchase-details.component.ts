@@ -98,7 +98,6 @@ export class PurchaseDetailsComponent implements OnInit {
         .then(c => {
           debugger;
           const alertMessage: string = 'Voce sera redirecionado para o metodo de pagamento: ' + this.formaPagamento;
-
           const routePaymentNavigation: string = this.routePaymentNavigation.replace('{id}', c.jsonObject.purchaseId);
           debugger;
           window.open(c.jsonObject.externalPaymentLink, '_blank');
@@ -216,7 +215,7 @@ export class PurchaseDetailsComponent implements OnInit {
     // SUM DELIVERY VALUE TO TOTAL VALUE
     this.totalShoppingCartValue += this.totalDeliveryCalculateDayValue;
     // ROUTE
-    this.routePaymentNavigation = '/store/purchase/details/flow/{id}';
+    this.routePaymentNavigation = '/store/order/details/{id}';
 
     // CHECKOUT REQUEST
     this.checkoutRequest = new CheckoutRequest();
