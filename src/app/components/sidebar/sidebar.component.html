@@ -8,7 +8,6 @@
             </div>
         </div>
         <div class="profile-details text-center pb-4">
-            <!-- TODO: REMOVE IT -->
             <p class="mb-0 text-uppercase name">Bem vindo {{ this.auth.getUser().userName }}</p>
             <small (click)="signOut()" appTooltip="LogOut" placement="bottom" [delay]="2000"
                 class="text-uppercase role">Sair</small>
@@ -19,7 +18,7 @@
     </div>
     <nav class="sidebar-menu pt-3 pb-3">
         <!-- MENU TESTE: SET DIV TEST = TRUE TO HIDDE TEST MENU -->
-        <test *ngIf="0 > 1">
+        <test *ngIf="this.auth.isAdminUser()">
             <div class="menu-header mt-3 mb-2">
                 Components
             </div>

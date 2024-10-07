@@ -83,7 +83,6 @@ export class PurchaseDetailsComponent implements OnInit {
   }
 
   public goToPaymentMethod() {
-    debugger;
     try {
       this.loaderService.SetLoaderState(true);
       this.checkoutRequest = {
@@ -92,27 +91,21 @@ export class PurchaseDetailsComponent implements OnInit {
         typeOfDelivery: this.inHandDelivery ? TipoEntregaEnum.HandDelivery : TipoEntregaEnum.MktPlaceDelivery,
         item: this.convertProductListToPurchaseItem(this.productList),
       };
-      debugger;
       this.service.insert('cadastros_url', 'checkoutintegration/mercado-pago-checkout', this.checkoutRequest)
         .toPromise()
         .then(c => {
-          debugger;
           const alertMessage: string = 'Voce sera redirecionado para o metodo de pagamento: ' + this.formaPagamento;
           const routePaymentNavigation: string = this.routePaymentNavigation.replace('{id}', c.jsonObject.purchaseId);
-          debugger;
           window.open(c.jsonObject.externalPaymentLink, '_blank');
-          debugger;
           this.commonService.responseActionWithNavigation(routePaymentNavigation, alertMessage, true);
         })
         .catch(e => {
-          debugger;
           const messageType = 'error';
           const messageText = 'Houve um erro ao fazer o checkout: ' + e.error;
           this.commonService.responseActionWithoutNavigation(messageType, messageText);
         });
     }
     catch (ex) {
-      debugger;
       this.loaderService.SetLoaderState(false);
       const alertType: string = 'error';
       const errorMessage: string = 'Houve um erro ao tentar efetivar o pagamento: \n' + ex.error;
