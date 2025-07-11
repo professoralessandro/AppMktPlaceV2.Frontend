@@ -13,7 +13,7 @@ import { UserGroupEnum } from '../Enums/user-group.enum';
 
 export class AuthService {
     // ATRIBUTTES
-    private baseUrl: string = "http://localhost:5030/api/User/"
+    private baseUrl: string = "http://localhost:5020/api/User/"
     private userPayload: any;
 
     constructor(
